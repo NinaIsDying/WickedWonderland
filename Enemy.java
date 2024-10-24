@@ -1,14 +1,13 @@
 
-
 public abstract class Enemy {
     protected String name;
     protected int health;
-    protected int attackDamage;
+    private int attackPower;
 
     public Enemy(String name, int health, int attackDamage) {
         this.name = name;
         this.health = health;
-        this.attackDamage = attackDamage;
+        this.attackPower = attackDamage;
     }
 
     public abstract void attack(Character player);
@@ -27,6 +26,10 @@ public abstract class Enemy {
 
     public boolean isAlive() {
         return health > 0;
+    }
+    
+    public int getAttackPower() {
+        return attackPower;
     }
 }
 

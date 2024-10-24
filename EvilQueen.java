@@ -1,16 +1,14 @@
 
-
-
-
 public class EvilQueen extends Enemy {
+    
     public EvilQueen() {
-        super("Evil Queen", 100, 20);
+        super("Evil Queen", 40, 15);
     }
 
     @Override
     public void attack(Character player) {
-        System.out.println(name + " casts a dark spell!");
+        System.out.println(Text.centerText(name + " casts a dark spell!"));
+        int attackDamage = 20;
         player.receiveDamage(attackDamage);
     }
 }
-

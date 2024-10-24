@@ -1,11 +1,11 @@
 
-
 public abstract class Character {
     protected String name;
-    protected int health;
-    protected int mana;
+    protected int health;;
     private int maxHealth;
     private int maxMana;
+    private int gold = 0;
+    private int mana = 0;
 
     public Character(String name, int health, int mana) {
         this.name = name;
@@ -133,29 +133,48 @@ public abstract class Character {
         adjustMana(amount);
     }
 
+    public void gainPowerfulSpell() {
+        // Logic to grant a powerful spell or item
+        System.out.println(Text.centerText("You gained a powerful spell!"));
+    }
+    
     public void heal(int amount) {
         health += amount;
-        System.out.println(Text.centerText(name + " has been healed by " + amount + " points."));
     }
 
-    // Method to take damage
     public void takeDamage(int amount) {
         health -= amount;
-        if (health < 0) {
-            health = 0; // Ensure health does not go below 0
+    }
+    
+    public int getGold() {
+        return gold;
+    }
+    
+    public void decreaseGold(int amount) {
+        if (amount <= gold) {
+            gold -= amount;
+        } else {
+            System.out.println("Not enough gold to complete the transaction.");
         }
-        System.out.println(Text.centerText(name + " has taken " + amount + " damage."));
+    }
+    
+    public void addGold(int amount) {
+        gold += amount;
     }
 
-    // Method to gain mana
+    public void gainLife() {
+        lives++;
+    }
+
     public void gainMana(int amount) {
         mana += amount;
-        System.out.println(Text.centerText(name + " has gained " + amount + " mana points."));
     }
 
+    public void missTurn() {
+        System.out.println("You miss your turn.");
+    }
+    
+    public void increaseAttack(int amount) {
+        attackPower += amount;
+    }
 }
-
-
-
-
-
