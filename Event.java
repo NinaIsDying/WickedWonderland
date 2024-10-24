@@ -1,5 +1,4 @@
 
-
 // Event class to encapsulate event data
 class Event {
     private String description;

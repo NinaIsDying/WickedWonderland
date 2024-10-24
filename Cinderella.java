@@ -1,5 +1,4 @@
 
-
 public class Cinderella extends Character {
     public Cinderella() {
         super("Cinderella", 200, 100);

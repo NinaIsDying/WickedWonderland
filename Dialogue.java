@@ -1,5 +1,4 @@
 
-
 public class Dialogue {
 
     static String[] gameIntro = {
@@ -15,20 +14,33 @@ public class Dialogue {
     };
 
     static String[] introCinderella = {
-        "Cinderella enters the Shattered Palace.\nDarkness stretches before you, twisting what was once a place of beauty into a prison of shadows.", 
-        "An eerie call echoes throughout the palace, reverberating throughout the gilded walls.\n\n",
+        "Cinderella enters the Shattered Palace.\nDarkness stretches before you, twisting what was once a place of beauty into a prison of shadows."
+        + "\n~~Please enter any key to continue~~",
     };
+    
+    static String[] introCinderellaContinue = {
+        "An eerie call echoes throughout the palace, reverberating throughout the gilded walls."
+        + "\n~~Please enter any key to continue~~",
+    };
+    
 
     static final String CINDERELLA_ATTACKS = 
     "1. Glass Shard Strike [Mana cost: 0] [Damage: 10]\n2. Enchanted Resilience [Mana cost: 30] [Health +20] [Damage: 20] \n3. Illusionary Escape Enchanted Resilience [Mana cost: 50]";
 
-
     static String[] introSnowWhite = {
         "Snow White stands at the edge of the Enchanted Forest.\nThe once vibrant trees are now blackened, their twisted branches like claws reaching out for her."
+         + "\n~~Please enter any key to continue~~",
+    };
+    
+    static String[] introAlice = {
+        "Alice finds herself in the heart of Mad Wonderland.\nThe colors around her swirl in a chaotic dance, and peculiar creatures scurry about, \nwhispering secrets"
+        + "A mischievous grin appears on her face as she grips her curiosity \ntightly, ready to embrace the madness that lies ahead."
+        + "\n~~Please enter any key to continue~~",
     };
 
     static String[] battleStart = {
-        "A shadowy figure appears!\nPrepare for battle!",
+        "A shadowy figure appears!\nPrepare for battle!"
+         + "\n~~Please enter any key to continue~~",
     };
 
     static String[] chooseWorlds = {
@@ -42,4 +54,3 @@ public class Dialogue {
     }
 
 }
-
