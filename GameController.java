@@ -27,6 +27,7 @@ public class GameController extends Dialogue implements GameInterface {
     public void showIntro() {
         for (String line : gameIntro) {
             System.out.println(Text.centerBox(line));
+            System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input to proceed
         }
     }
@@ -36,6 +37,7 @@ public class GameController extends Dialogue implements GameInterface {
         // Check if the player is replaying the game
         if (isReplay) {
             System.out.println(Text.centerText("Skip intro? (Y/N)"));
+            System.out.print("                                                                  ->");
             char option = scanner.next().charAt(0);
             scanner.nextLine();  // Consume newline
 
@@ -62,6 +64,7 @@ public class GameController extends Dialogue implements GameInterface {
         while (!validChoice) {
             try {
                 System.out.println(Text.centerText("WELCOME TO WICKED WONDERLAND!\n1. Start Game\n2. Exit\nChoose an option: "));
+                System.out.print("                                                                  ->");
                 int choice = scanner.nextInt();
                 scanner.nextLine();  // Consume newline
                 
@@ -93,6 +96,7 @@ public class GameController extends Dialogue implements GameInterface {
         while (!validWorldChoice) {
             try {
                 System.out.println(Text.centerText("Choose Your World:\n1. Cinderella: The Shattered Palace\n2. Mad Wonderland\n3. Snow White: Not So White"));
+                System.out.print("                                                                  ->");
                 int worldChoice = scanner.nextInt();
                 scanner.nextLine();  // Consume newline
 
@@ -134,21 +138,26 @@ public class GameController extends Dialogue implements GameInterface {
             roundCounter = 0;
             enemy = new Minion();  // Fight a minion first
             System.out.println(Text.centerBox("Entering Cinderella: The Shattered Palace..."));
+            System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input before proceeding
 
             // Display Pre-Battle Narration
             randomEvent.displayPreBattleNarration("Cinderella");
+            System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input before proceeding
             
             displayDialogue(introCinderella);
+            System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input before proceeding
             displayDialogue(introCinderellaContinue);
+            System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input before proceeding
             continueAdventure = battleSequence(CINDERELLA_ATTACKS);  // Use Cinderella's attack options
 
             if (continueAdventure) {
                 // Display Pre-Battle Narration
                 randomEvent.displayPreBattleNarration("Cinderella");
+                System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
                 
                 shop.purchaseItem(player);
@@ -157,6 +166,7 @@ public class GameController extends Dialogue implements GameInterface {
                 
                 // Display Pre-Battle Narration
                 randomEvent.displayPreBattleNarration("Cinderella");
+                System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
 
                 enemy = new EnemyMinion();  // Example of an intermediate enemy
@@ -165,8 +175,9 @@ public class GameController extends Dialogue implements GameInterface {
 
             if (continueAdventure) {
                
-                shop.purchaseItem(player);
                 
+                shop.purchaseItem(player);
+             
                 System.out.println(Text.centerText("Now face the final challenge... Prince Henry awaits!"));
                 enemy = new PrinceHenry();  // Boss fight
                 continueAdventure = battleSequence(CINDERELLA_ATTACKS);  // Boss battle
@@ -175,10 +186,12 @@ public class GameController extends Dialogue implements GameInterface {
             if (continueAdventure) {
                 // Display Post-Battle Narration after boss fight
                 randomEvent.displayPostBattleNarration(currentWorld);
+                System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
 
                 System.out.println(Text.centerText("Congratulations! You have defeated Prince Henry and completed Cinderella's story."));
                 System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
+                System.out.print("                                                                  ->");
                 int choice = scanner.nextInt();
                 scanner.nextLine();
 
@@ -208,15 +221,18 @@ public class GameController extends Dialogue implements GameInterface {
 
             // Display Pre-Battle Narration
             randomEvent.displayPreBattleNarration("Alice");
+            System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input before proceeding
 
             displayDialogue(introAlice);  // Display Alice's intro dialogue
+            System.out.print("                                                                  ->");
             scanner.nextLine(); // Wait for input before proceeding
             continueAdventure = battleSequence(Alice.ALICE_ATTACKS);  // Pass Alice's attacks
 
             if (continueAdventure) {
                 // Display Post-Battle Narration after minion defeat
                 randomEvent.displayPostBattleNarration(currentWorld);
+                System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
 
                 shop.purchaseItem(player);
@@ -225,6 +241,7 @@ public class GameController extends Dialogue implements GameInterface {
 
                 // Display Pre-Battle Narration
                 randomEvent.displayPreBattleNarration("Alice");
+                System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
 
                 enemy = new EnemyMinion();  // Example minion for Alice's world
@@ -243,6 +260,7 @@ public class GameController extends Dialogue implements GameInterface {
             if (continueAdventure) {
                 // Display Post-Battle Narration after boss fight
                 randomEvent.displayPostBattleNarration(currentWorld);
+                System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
 
                 System.out.println(Text.centerText("Congratulations! You have defeated the Queen of Hearts and completed Alice's story."));
@@ -276,16 +294,19 @@ public class GameController extends Dialogue implements GameInterface {
 
             // Display Pre-Battle Narration
             randomEvent.displayPreBattleNarration("SnowWhite");
+            System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input before proceeding
 
             displayDialogue(introSnowWhite);  // Assuming you have a dialogue for Snow White
+            System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input before proceeding
 
-            continueAdventure = battleSequence(SnowWhite.SNOW_WHITE_ATTACKS);  // Use Snow White's attack options
+            continueAdventure = battleSequence(SNOW_WHITE_ATTACKS);  // Use Snow White's attack options
 
             if (continueAdventure) {
                 // Display Pre-Battle Narration
                 randomEvent.displayPreBattleNarration("SnowWhite");
+                System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
 
                 shop.purchaseItem(player);  // Allow player to purchase items
@@ -294,10 +315,11 @@ public class GameController extends Dialogue implements GameInterface {
 
                 // Display Pre-Battle Narration
                 randomEvent.displayPreBattleNarration("SnowWhite");
+                System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
 
                 enemy = new EnemyMinion();  // Intermediate enemy
-                continueAdventure = battleSequence(SnowWhite.SNOW_WHITE_ATTACKS);  // Use Snow White's attack options
+                continueAdventure = battleSequence(SNOW_WHITE_ATTACKS);  // Use Snow White's attack options
             }
 
             if (continueAdventure) {
@@ -305,16 +327,18 @@ public class GameController extends Dialogue implements GameInterface {
 
                 System.out.println(Text.centerText("Now face the final challenge... The Evil Queen awaits!"));
                 enemy = new EvilQueen();  // Boss fight
-                continueAdventure = battleSequence(SnowWhite.SNOW_WHITE_ATTACKS);  // Boss battle
+                continueAdventure = battleSequence(SNOW_WHITE_ATTACKS);  // Boss battle
             }
 
             if (continueAdventure) {
                 // Display Post-Battle Narration after boss fight
                 randomEvent.displayPostBattleNarration(currentWorld);
+                System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
 
                 System.out.println(Text.centerText("Congratulations! You have defeated the Evil Queen and completed Snow White's story."));
                 System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
+                System.out.print("                                                                  ->");
                 int choice = scanner.nextInt();
                 scanner.nextLine();
 
@@ -337,20 +361,25 @@ public class GameController extends Dialogue implements GameInterface {
     // Battle sequence method with customizable attack options
     public boolean battleSequence(String attackOptions) {
         boolean firstLineDisplayed = false;
-        roundCounter = 1;
+        roundCounter = 0;
 
         while (player.getHealth() > 0 && enemy.getHealth() > 0) {
-            roundCounter++;  // Increment the round counter each turn
+             // Increment the round counter each 
+        
 
             System.out.println();
             if (!firstLineDisplayed) {
                 displayDialogue(battleStart);
+                System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
                 firstLineDisplayed = true;
             }
 
             // Center the input box with dynamic attack options
-            System.out.println(Text.centerText("CHOOSE YOUR ATTACK:\n" + attackOptions + "\nChoose your action: "));
+            displayRound();
+
+            System.out.println(Text.centerText("CHOOSE YOUR ATTACK:\n" + attackOptions ));
+            System.out.print("                                                                  ->");
             int action = scanner.nextInt();
             scanner.nextLine();
 
@@ -369,15 +398,16 @@ public class GameController extends Dialogue implements GameInterface {
                 }
             }
 
-            displayPlayerStatus();
+          
             displayEnemyStatus();
 
             if (enemy.isAlive()) {
                 enemy.attack(player);
-                displayPlayerStatus();
+            displayPlayerStatus();
             }
 
             if (!player.isAlive()) {
+
                 System.out.println(Text.centerText(player.getName() + " has been defeated..."));
                 return false;
             }
@@ -386,6 +416,7 @@ public class GameController extends Dialogue implements GameInterface {
                 System.out.println(Text.centerText(enemy.getName() + " has been defeated!\nYou can continue your adventure!"));
                 player.addGold(75); // Award 75 gold for winning
                 System.out.println(Text.centerBox("You received 75 gold"));
+                System.out.print("                                                                  ->");
                 scanner.nextLine();
                 return true;
             }
@@ -401,10 +432,18 @@ public class GameController extends Dialogue implements GameInterface {
     private void displayPlayerStatus() {
         // Include round counter in the player status display
         System.out.println(Text.centerText(60, "Player Status: \nHealth: " + player.getHealth() +
-                                           "\nMana: " + player.getMana() + "\nRound: " + roundCounter));
+                                           "\nMana: " + player.getMana()));
+    }
+    
+    private void displayRound(){
+        roundCounter++;
+        System.out.println(Text.centerText("Round: " + roundCounter));
     }
 
     private void displayEnemyStatus() {
         System.out.println(Text.centerText(60, "Enemy Status: \nHealth: " + enemy.getHealth()));
     }
+    
 }
+
+

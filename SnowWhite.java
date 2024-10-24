@@ -4,9 +4,7 @@ public class SnowWhite extends Character {
         super("Snow White", 200, 100);
     }
     
-    public static final String SNOW_WHITE_ATTACKS = 
-    "1. Poisoned Apple Strike [Mana cost: 0] [Damage: 10]\n2. Enchanted Healing [Mana cost: 30] [Health +20] [Damage: 20] \n3. Forest's Aid [Mana cost: 50]";
-
+   
     @Override
     public void specialSkill1(Enemy enemy) {
         System.out.println(Text.centerText("Snow White uses Poisoned Apple Strike!"));

@@ -6,6 +6,8 @@ public abstract class Character {
     private int maxMana;
     private int gold = 0;
     private int mana = 0;
+    private int attackPower = 0;
+    private boolean invisible;
 
     public Character(String name, int health, int mana) {
         this.name = name;
@@ -14,6 +16,8 @@ public abstract class Character {
         this.maxHealth = health; 
         this.maxMana = mana;    
     }
+
+    
 
     // Abstract methods to be implemented by subclasses for character-specific skills
     public abstract void specialSkill1(Enemy enemy);
@@ -177,4 +181,14 @@ public abstract class Character {
     public void increaseAttack(int amount) {
         attackPower += amount;
     }
+
+
+    public boolean isInvisible() {
+        return invisible;
+    }
+
+    public void setInvisible(boolean invisible) {
+        this.invisible = invisible;
+    }
+
 }

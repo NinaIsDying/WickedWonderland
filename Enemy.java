@@ -16,7 +16,11 @@ public abstract class Enemy {
         return name;
     }
 
+
     public int getHealth() {
+        if(health < 0){
+            return 0;
+        }
         return health;
     }
 
