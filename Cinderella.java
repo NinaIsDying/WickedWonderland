@@ -1,7 +1,26 @@
 
 public class Cinderella extends Character {
+    private int attackPower;
+    private boolean invisible;
+
     public Cinderella() {
         super("Cinderella", 200, 100);
+        this.invisible = false;
+    }
+
+    @Override
+    public boolean isInvisible() {
+        return invisible;
+    }
+
+    @Override
+    public void setInvisible(boolean invisible) {
+        this.invisible = invisible;
+    }
+
+    @Override
+    public void increaseAttack(int amount) {
+        attackPower += amount;
     }
 
 
@@ -9,7 +28,7 @@ public class Cinderella extends Character {
     public void specialSkill1(Enemy enemy) {
         System.out.println(Text.centerText(name + " uses Glass Shard Strike!"));
         useMana(10);
-        enemy.receiveDamage(10);
+        enemy.receiveDamage(10 + attackPower);
 
     }
 
@@ -25,9 +44,7 @@ public class Cinderella extends Character {
     public void specialSkill3(Enemy enemy) {
         System.out.println(Text.centerText(name + " uses Illusionary Escape!"));
         useMana(15);
-        enemy.receiveDamage(20);
-
-
+        setInvisible(true);
     }
 
     @Override

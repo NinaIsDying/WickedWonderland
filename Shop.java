@@ -51,7 +51,8 @@ public class Shop {
         while (continueShopping) {
             if (firstTime) {
                 // First time: Ask "Would you like to buy something?"
-                System.out.println(Text.centerText("Would you like to buy something? (Y/N)"));
+                System.out.println(Text.centerText("As you venture out into the world, a sparkle in the distance catches your eye.\nUpon closer inspection, there is a little house with the words 'Shop' painted onto the door.\nWould you like to come in? (Y/N)"));
+                System.out.print("                                                                  ->");
                 String confirmation = scanner.nextLine().trim().toUpperCase();
 
                 if (confirmation.equals("Y")) {
@@ -85,6 +86,7 @@ public class Shop {
 
         while (!validItemChoice) {
             try {
+                System.out.print("                                                                  ->");
                 int choice = scanner.nextInt(); // Get the choice directly after displaying the shop
                 scanner.nextLine(); // Consume newline
 
@@ -116,6 +118,7 @@ public class Shop {
     private boolean askContinueShopping() {
         while (true) {
             System.out.println(Text.centerText("Would you like to purchase something else? (Y/N)"));
+            System.out.print("                                                                  ->");
             String choice = scanner.nextLine().trim().toUpperCase();
             if (choice.equals("Y")) {
                 return true;  // Continue shopping
