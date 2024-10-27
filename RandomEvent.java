@@ -1,3 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author loqui
+ */
 
 import java.util.Random;
 import java.util.Scanner;
@@ -275,12 +284,10 @@ public class RandomEvent {
             "RANDOM EVENT: You encounter an enchanted mirror.\nIt tells you a secret that helps you in your next encounter.",
             "RANDOM EVENT: You discover a hidden stash of coins!\nGain 50 gold coins.",
             "RANDOM EVENT: You find an ancient artifact.\nThis grants you an extra life.",
-            "RANDOM EVENT: A wise old sage asks you a riddle.\nAnswering correctly grants you a powerful spell or item."
+            " A wise old sage asks you a riddle.\nAnswering correctly grants you a powerful spell or item."
         };
 
         int index = random.nextInt(events.length); // Pick a random event
-        System.out.println(Text.centerText("RANDOM EVENT: " + events[index]));
-
         // Trigger specific effects for certain events
         switch (index) {
             case 0 -> // Mysterious stranger's offer
@@ -299,7 +306,7 @@ public class RandomEvent {
             }
             case 4 -> {
                 player.gainMana(10); // Gain 10 mana points (assuming a method exists)
-                System.out.println("You gained 10 mana points!");
+                System.out.println(Text.centerText("You gained 10 mana points!"));
             }
             case 5 -> {
                 // Handle ambush (you can add your own battle logic here)
@@ -331,11 +338,7 @@ public class RandomEvent {
                 player.addGold(50); // Gain 50 gold coins
                 System.out.println(Text.centerText("You discovered a hidden stash of coins! You gain 50 gold coins!"));
             }
-            case 13 -> {
-                player.gainLife(); // Grant an extra life
-                System.out.println(Text.centerText("You found an ancient artifact! You gain an extra life!"));
-            }
-            default -> System.out.println(Text.centerText("No specific effects triggered for this event."));
+            default -> System.out.println(Text.centerText("As you venture out into the depths, there's a gnawing in the feeling in the back of your mind.\n You must be very unlucky today.\n Venture on, and you might just find something interesting happen to you."));
         }
     }
 
@@ -361,3 +364,4 @@ public class RandomEvent {
         }
     }
 }
+

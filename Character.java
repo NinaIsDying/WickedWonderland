@@ -1,3 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author loqui
+ */
 
 public abstract class Character {
     protected String name;
@@ -6,8 +15,9 @@ public abstract class Character {
     private int maxMana;
     private int gold = 0;
     private int mana = 0;
-    private int attackPower = 0;
+    private int attackPower;
     private boolean invisible;
+    private int lives = 1;
 
     public Character(String name, int health, int mana) {
         this.name = name;
@@ -166,10 +176,6 @@ public abstract class Character {
         gold += amount;
     }
 
-    public void gainLife() {
-        lives++;
-    }
-
     public void gainMana(int amount) {
         mana += amount;
     }
@@ -191,4 +197,12 @@ public abstract class Character {
         this.invisible = invisible;
     }
 
+    public void gainLife() {
+        lives+=10;
+    }
+
+    public int getSkillDamage(int num){
+        return 0;
+    }
+   
 }

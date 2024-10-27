@@ -1,3 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author loqui
+ */
 
 public class Alice extends Character {
     
@@ -29,3 +38,4 @@ public class Alice extends Character {
         enemy.receiveDamage(30);  // Damage for skill 3
     }
 }
+
