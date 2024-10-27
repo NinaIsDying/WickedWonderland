@@ -1,3 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author loqui
+ */
 
 import java.util.*;
 
@@ -28,7 +37,13 @@ public class GameController extends Dialogue implements GameInterface {
         for (String line : gameIntro) {
             System.out.println(Text.centerBox(line));
             System.out.print("                                                                  ->");
-            scanner.nextLine();  // Wait for input to proceed
+            String op = scanner.nextLine();  // Wait for input to proceed
+    
+            // Programmer shortcut to skip to choose world
+            if(op.equals("Skip") || op.equals("skip") ) {
+                chooseWorld();
+                break;
+            }
         }
     }
 
@@ -51,9 +66,11 @@ public class GameController extends Dialogue implements GameInterface {
                 showMenu();  // Retry if invalid input
             }
         } else {
+   
             // First-time players see the full intro
             showIntro();
             chooseWorld();
+             
         }
     }
 
@@ -152,6 +169,7 @@ public class GameController extends Dialogue implements GameInterface {
             displayDialogue(introCinderellaContinue);
             System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input before proceeding
+            System.out.println(Text.centerText(DARK_CREATURE_ENTRANCE));
             continueAdventure = battleSequence(CINDERELLA_ATTACKS);  // Use Cinderella's attack options
 
             if (continueAdventure) {
@@ -160,8 +178,7 @@ public class GameController extends Dialogue implements GameInterface {
                 System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
                 
-                shop.purchaseItem(player);
-                
+                shop.purchaseItem(player);     
                 randomEvent.displayRandomEvent(player);  // After defeating minion, trigger random event
                 
                 // Display Pre-Battle Narration
@@ -169,7 +186,8 @@ public class GameController extends Dialogue implements GameInterface {
                 System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
 
-                enemy = new EnemyMinion();  // Example of an intermediate enemy
+                enemy = new Marionnette();
+                System.out.println(Text.centerText(MARIONETTE_KNIGHT_ENTRANCE));
                 continueAdventure = battleSequence(CINDERELLA_ATTACKS);
             }
 
@@ -244,7 +262,7 @@ public class GameController extends Dialogue implements GameInterface {
                 System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
 
-                enemy = new EnemyMinion();  // Example minion for Alice's world
+                enemy = new Minion();  // Example minion for Alice's world
                 continueAdventure = battleSequence(Alice.ALICE_ATTACKS);
             }
 
@@ -318,7 +336,7 @@ public class GameController extends Dialogue implements GameInterface {
                 System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
 
-                enemy = new EnemyMinion();  // Intermediate enemy
+                enemy = new Minion();  // Intermediate enemy
                 continueAdventure = battleSequence(SNOW_WHITE_ATTACKS);  // Use Snow White's attack options
             }
 
@@ -363,6 +381,8 @@ public class GameController extends Dialogue implements GameInterface {
         boolean firstLineDisplayed = false;
         roundCounter = 0;
 
+      
+        //display character health status before and after each round.
         while (player.getHealth() > 0 && enemy.getHealth() > 0) {
              // Increment the round counter each 
         
@@ -377,7 +397,8 @@ public class GameController extends Dialogue implements GameInterface {
 
             // Center the input box with dynamic attack options
             displayRound();
-
+            displayPlayerStatus();
+            displayEnemyStatus();
             System.out.println(Text.centerText("CHOOSE YOUR ATTACK:\n" + attackOptions ));
             System.out.print("                                                                  ->");
             int action = scanner.nextInt();
@@ -389,21 +410,22 @@ public class GameController extends Dialogue implements GameInterface {
             }
 
             switch (action) {
-                case 1 -> player.specialSkill1(enemy);
-                case 2 -> player.specialSkill2(enemy);
-                case 3 -> player.specialSkill3(enemy);
-                default -> {
+                case 1 -> {player.specialSkill1(enemy);
+                System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[0] + "\n" + player.getName() + " deals " + player.getSkillDamage(1) +  " damage to " + enemy.getName() + "! "));}
+                case 2 -> {player.specialSkill2(enemy);
+                System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[1] + "\n" + player.getName() + " deals " + player.getSkillDamage(2) +  " damage to " + enemy.getName() + "! "));}
+                    case 3 -> {player.specialSkill3(enemy);
+                System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[2] + "\n" + player.getName() + " cannot be attacked for one turn!"));}
+                        default -> {
                     System.out.println(Text.centerText("Invalid action!"));
                     continue;
                 }
             }
 
           
-            displayEnemyStatus();
 
             if (enemy.isAlive()) {
                 enemy.attack(player);
-            displayPlayerStatus();
             }
 
             if (!player.isAlive()) {
@@ -413,6 +435,7 @@ public class GameController extends Dialogue implements GameInterface {
             }
 
             if (!enemy.isAlive()) {
+                clearScreen(); 
                 System.out.println(Text.centerText(enemy.getName() + " has been defeated!\nYou can continue your adventure!"));
                 player.addGold(75); // Award 75 gold for winning
                 System.out.println(Text.centerBox("You received 75 gold"));
@@ -441,9 +464,18 @@ public class GameController extends Dialogue implements GameInterface {
     }
 
     private void displayEnemyStatus() {
-        System.out.println(Text.centerText(60, "Enemy Status: \nHealth: " + enemy.getHealth()));
+        System.out.println(Text.centerText(60, enemy.getName() + "\n Status: \nHealth: " + enemy.getHealth()));
     }
+
+    //clear screen stuff
+    public static void clearScreen() {
+            for (int i = 0; i < 50; i++) {
+                System.out.println();
+            }
+        }
+        
     
 }
+
 
 

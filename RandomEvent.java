@@ -1,3 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author loqui
+ */
 
 import java.util.Random;
 import java.util.Scanner;
@@ -331,10 +340,6 @@ public class RandomEvent {
                 player.addGold(50); // Gain 50 gold coins
                 System.out.println(Text.centerText("You discovered a hidden stash of coins! You gain 50 gold coins!"));
             }
-            case 13 -> {
-                player.gainLife(); // Grant an extra life
-                System.out.println(Text.centerText("You found an ancient artifact! You gain an extra life!"));
-            }
             default -> System.out.println(Text.centerText("No specific effects triggered for this event."));
         }
     }
@@ -361,3 +366,4 @@ public class RandomEvent {
         }
     }
 }
+

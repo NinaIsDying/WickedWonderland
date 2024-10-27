@@ -1,3 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author loqui
+ */
 
 public class Dialogue {
 
@@ -26,7 +35,13 @@ public class Dialogue {
 
     static final String CINDERELLA_ATTACKS = 
     "1. Glass Shard Strike [Mana cost: 0] [Damage: 10]\n2. Enchanted Resilience [Mana cost: 30] [Health +20] [Damage: 20] \n3. Illusionary Escape Enchanted Resilience [Mana cost: 50] [Damage: 0]\n [Allows invisibility for one turn]";
-
+    static final String cinderellaSkills[] = { 
+        "Glass Shard Strike",
+        "Enchanted Resilience",
+        "llusionary Escape"
+        };
+       
+   
     static String[] introSnowWhite = {
         "Snow White stands at the edge of the Enchanted Forest.\nThe once vibrant trees are now blackened, their twisted branches like claws reaching out for her."
          + "\n~~Please enter any key to continue~~",
@@ -34,6 +49,11 @@ public class Dialogue {
     
     static final String SNOW_WHITE_ATTACKS = 
     "1. Poisoned Apple Strike [Mana cost: 0] [Damage: 10]\n2. Enchanted Healing [Mana cost: 30] [Health +20] [Damage: 20] \n3. Forest's Aid [Mana cost: 50]";
+    static final String snowWhiteSkills[] =  {
+    "Poisoned Apple Strike",
+    "Enchanted Healing",
+    "Forest's Aid" 
+    };
 
 
     static String[] introAlice = {
@@ -43,13 +63,22 @@ public class Dialogue {
     };
 
     static String[] battleStart = {
-        "A shadowy figure appears!\nPrepare for battle!"
-         + "\n~~Please enter any key to continue~~",
+        "Prepare for battle!"
     };
 
     static String[] chooseWorlds = {
         "C H O O S E - Y O U R -  C H A R A C T E R\nWORLD ONE [EASY]: Cinderella: The Shattered Palace\nWORLD TWO: Mad Wonderland\nWORLD THREE: Snow White: Not So White"
     };
+
+        // Entrance dialogue for The Marionette Knight
+    static final String MARIONETTE_KNIGHT_ENTRANCE = 
+    "From the shadows, a figure lurches forward, strings glistening with dark magic...\n" +
+    "\"You dare to step into the cursed halls? The prince’s darkness binds me, and I cannot let you pass.\"";
+
+    // Entrance dialogue for a Dark Creature
+    static final String DARK_CREATURE_ENTRANCE = 
+    "A ghastly creature emerges from the darkness, its eyes gleaming with malice...\n" +
+    "\"Intruder... your fate is sealed within these shadowed walls. Only despair awaits.\"";
 
     public void displayDialogue(String[] dialogue) {
         for (String line : dialogue) {
@@ -58,3 +87,4 @@ public class Dialogue {
     }
 
 }
+

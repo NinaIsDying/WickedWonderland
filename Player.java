@@ -1,3 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author loqui
+ */
+
 
 public class Player extends Character {
     private int gold;
@@ -54,4 +64,11 @@ public class Player extends Character {
         System.out.println(Text.centerText("Using special skill 3 on " + enemy.getName()));
         enemy.receiveDamage(50);  // Another example, customize as needed
     }
+
 }
+
+
+
+
+
+

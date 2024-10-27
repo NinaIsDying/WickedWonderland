@@ -1,40 +1,42 @@
-
 public class Cinderella extends Character {
-    private int attackPower;
+    private int attackPower = 0;
     private boolean invisible;
+    private int health = 200;
+    private final int maxHealth = 200;
 
     public Cinderella() {
         super("Cinderella", 200, 100);
-        this.invisible = false;
+        this.invisible = false;        
     }
 
-    @Override
-    public boolean isInvisible() {
-        return invisible;
+    public void restoreHealth(int amount) {
+        if (health >= maxHealth) {
+            System.out.println("Health is already full.");
+        } else {
+            health += amount;
+            if (health > maxHealth) {
+                health = maxHealth; // Cap health at maxHealth
+            }
+            System.out.println("Health restored by " + amount + ". Current health: " + health);
+        }
     }
 
-    @Override
-    public void setInvisible(boolean invisible) {
-        this.invisible = invisible;
+    public int getSkillDamage(int num) {
+        switch(num) {
+            case 1: return 10;
+            case 2: return 20;
+            default: return 0; 
+        }
     }
-
-    @Override
-    public void increaseAttack(int amount) {
-        attackPower += amount;
-    }
-
-
+    
     @Override
     public void specialSkill1(Enemy enemy) {
-        System.out.println(Text.centerText(name + " uses Glass Shard Strike!"));
         useMana(10);
         enemy.receiveDamage(10 + attackPower);
-
     }
 
     @Override
     public void specialSkill2(Enemy enemy) {
-        System.out.println(Text.centerText(name + " uses Enchanted Resilience!"));
         restoreHealth(20);
         useMana(20);
         enemy.receiveDamage(20);
@@ -42,22 +44,27 @@ public class Cinderella extends Character {
 
     @Override
     public void specialSkill3(Enemy enemy) {
-        System.out.println(Text.centerText(name + " uses Illusionary Escape!"));
         useMana(15);
         setInvisible(true);
+        System.out.println("Cinderella is now invisible for one turn.");
     }
 
-    @Override
-    public void setHealth(int health) {
-        this.health = health;
-
-    }
-
-    @Override
+    // Check if the character is alive
     public boolean isAlive() {
         return health > 0;
     }
-    
 
+    public boolean isInvisible() {
+        return invisible;
+    }
+
+    public void setInvisible(boolean invisible) {
+        this.invisible = invisible;
+    }
+
+    // Method to be called at the end of each turn to reset invisibility
+    public void endTurn() {
+        setInvisible(false);
+        System.out.println("Cinderella is no longer invisible.");
+    }
 }
-

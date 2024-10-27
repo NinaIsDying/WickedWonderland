@@ -1,3 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
+
+/**
+ *
+ * @author loqui
+ */
 
 public interface GameInterface {
     void startGame();
@@ -7,3 +16,4 @@ public interface GameInterface {
     void chooseWorld();
 
 }
+
