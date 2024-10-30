@@ -1,13 +1,19 @@
-
-public abstract class Enemy {
+public abstract class Enemy{
     protected String name;
-    protected int health;
-    private int attackPower;
+    protected int maxHealth;
+    protected int currentHealth;
+    protected int attackPower;
 
-    public Enemy(String name, int health, int attackDamage) {
+    public Enemy(String name, int maxHealth, int attackPower) {
         this.name = name;
-        this.health = health;
-        this.attackPower = attackDamage;
+        this.maxHealth = maxHealth;
+        this.currentHealth = maxHealth; // Initialize currentHealth to maxHealth
+        this.attackPower = attackPower;
+    }
+
+    public void heal(int healAmount) {
+        currentHealth = Math.min(currentHealth + healAmount, maxHealth);
+        System.out.println(Text.centerText(80, name + " heals for " + healAmount + " HP! Current HP: " + currentHealth + "/" + maxHealth));
     }
 
     public abstract void attack(Character player);
@@ -16,24 +22,20 @@ public abstract class Enemy {
         return name;
     }
 
-
     public int getHealth() {
-        if(health < 0){
-            return 0;
-        }
-        return health;
+        return Math.max(currentHealth, 0); // Ensure it returns 0 if health goes below
     }
 
     public void receiveDamage(int damage) {
-        health -= damage;
+        currentHealth -= damage;
+        currentHealth = Math.max(currentHealth, 0); // Ensure health does not go below zero
     }
 
     public boolean isAlive() {
-        return health > 0;
+        return currentHealth > 0;
     }
-    
+
     public int getAttackPower() {
         return attackPower;
     }
 }
-

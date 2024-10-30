@@ -1,11 +1,64 @@
-
 public class Cinderella extends Character {
-    private int attackPower;
+    private int attackPower = 0;
     private boolean invisible;
+    private final int maxHealth = 400;
+
 
     public Cinderella() {
-        super("Cinderella", 200, 100);
-        this.invisible = false;
+        super("Cinderella", 400, 200);
+        this.invisible = false;        
+    }
+
+    public void restoreHealth(int amount) {
+        int currentHealth = getHealth(); // Get the current health
+        if (currentHealth >= maxHealth) {
+            System.out.println(Text.centerText("Health is already full.")); // No restoration needed
+        } else {
+            // Increase health by the amount
+            currentHealth += amount; 
+            if (currentHealth > maxHealth) {
+                currentHealth = maxHealth; // Cap health at maxHealth
+                System.out.println(Text.centerText("Health restored to full. Current health: " + currentHealth));
+            } else {
+                System.out.println(Text.centerText("Health restored by " + amount + ". Current health: " + currentHealth));
+            }
+            setHealth(currentHealth); // Update the character's health
+        }
+    }
+    
+
+    public int getSkillDamage(int num) {
+        switch(num) {
+            case 1: return 30;
+            case 2: return 50;
+            default: return 0; 
+        }
+    }
+    
+    @Override
+    public void specialSkill1(Enemy enemy) {
+        useMana(0);
+        enemy.receiveDamage(100 + attackPower);
+    }
+
+    @Override
+    public void specialSkill2(Enemy enemy) {
+        restoreHealth(20);
+        useMana(20);
+        enemy.receiveDamage(50 +attackPower);
+    }
+
+    @Override
+    public void specialSkill3(Enemy enemy) {
+        useMana(30);
+        setInvisible(true);
+    }
+
+    // Check if the character is alive
+    
+    @Override
+    public boolean isAlive() {
+        return health > 0;
     }
 
     @Override
@@ -18,46 +71,23 @@ public class Cinderella extends Character {
         this.invisible = invisible;
     }
 
-    @Override
-    public void increaseAttack(int amount) {
-        attackPower += amount;
-    }
-
-
-    @Override
-    public void specialSkill1(Enemy enemy) {
-        System.out.println(Text.centerText(name + " uses Glass Shard Strike!"));
-        useMana(10);
-        enemy.receiveDamage(10 + attackPower);
-
+    // Method to be called at the end of each turn to reset invisibility
+    public void endTurn() {
+        setInvisible(false);
     }
 
     @Override
-    public void specialSkill2(Enemy enemy) {
-        System.out.println(Text.centerText(name + " uses Enchanted Resilience!"));
-        restoreHealth(20);
-        useMana(20);
-        enemy.receiveDamage(20);
+    public int getAttackPower() {
+        return attackPower;
     }
 
     @Override
-    public void specialSkill3(Enemy enemy) {
-        System.out.println(Text.centerText(name + " uses Illusionary Escape!"));
-        useMana(15);
-        setInvisible(true);
+    public void setAttackPower(int attackPower) {
+        this.attackPower = attackPower;
     }
 
     @Override
-    public void setHealth(int health) {
-        this.health = health;
-
+    public int getMaxHealth() {
+        return maxHealth;
     }
-
-    @Override
-    public boolean isAlive() {
-        return health > 0;
-    }
-    
-
 }
-
