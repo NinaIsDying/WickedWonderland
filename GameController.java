@@ -163,7 +163,7 @@ public class GameController extends Dialogue implements GameInterface {
             scanner.nextLine();  // Wait for input before proceeding
             
             System.out.println(Text.centerBox(DARK_CREATURE_ENTRANCE));
-                            System.out.print("                                                                  ->");
+            System.out.print("                                                                  ->");
                 scanner.nextLine();
             continueAdventure = battleSequence(CINDERELLA_ATTACKS);  // Use Cinderella's attack options
 
@@ -172,16 +172,16 @@ public class GameController extends Dialogue implements GameInterface {
                 System.out.println(Text.centerBox(DARK_CREATURE_EXIT));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
-
+                System.out.println(Text.centerBox(VICTORY_TEXT_1));
+                System.out.print("                                                                  ->");
+                scanner.nextLine();
     
                 shop.purchaseItem(player);     
                 randomEvent.displayRandomEvent(player);  // After defeating minion, trigger random event
      
 
                 enemy = new FairyGodMother();
-                System.out.println(Text.centerBox(VICTORY_TEXT_1));
-                System.out.print("                                                                  ->");
-                scanner.nextLine();
+              
                 System.out.println(Text.centerBox(ENTRANCE_TEXT_1));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
@@ -196,18 +196,21 @@ public class GameController extends Dialogue implements GameInterface {
                 System.out.println(Text.centerBox(FAIRY_GODMOTHER_EXIT));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
-                
-                shop.purchaseItem(player);
-             
-                System.out.println(Text.centerBox("Now face the final challenge... Prince Henry awaits!"));
-                enemy = new PrinceHenry();  // Boss fight
-
+              
                 System.out.println(Text.centerBox(VICTORY_TEXT_2));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
                 System.out.println(Text.centerBox(ENTRANCE_TEXT_2));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
+                
+
+                shop.purchaseItem(player);
+             
+                System.out.println(Text.centerBox("Now face the final challenge... Prince Henry awaits!"));
+                enemy = new PrinceHenry();  // Boss fight
+
+              
                 System.out.println(Text.centerBox(PRINCE_HENRY_ENTRANCE));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
