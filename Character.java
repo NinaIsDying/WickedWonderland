@@ -1,13 +1,23 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 
-public abstract class Character {
+/**
+ *
+ * @author loqui
+ */
+
+ public abstract class Character {
     protected String name;
-    protected int health;;
-    private int maxHealth;
-    private int maxMana;
-    private int gold = 0;
-    private int mana = 0;
-    private int attackPower = 0;
-    private boolean invisible;
+    protected int health;
+    protected int mana;
+    protected int maxHealth;
+    protected int maxMana;
+    protected int gold = 0;
+    protected int attackPower;
+    protected boolean invisible;
+    protected int lives = 1;
 
     public Character(String name, int health, int mana) {
         this.name = name;
@@ -16,8 +26,6 @@ public abstract class Character {
         this.maxHealth = health; 
         this.maxMana = mana;    
     }
-
-    
 
     // Abstract methods to be implemented by subclasses for character-specific skills
     public abstract void specialSkill1(Enemy enemy);
@@ -37,37 +45,36 @@ public abstract class Character {
         return mana;
     }
 
-    // Setters for health and mana (with validation)
     public void setHealth(int health) {
-        this.health = Math.min(health, maxHealth); // Ensure health does not exceed maxHealth
+        this.health = Math.max(0, health); // Prevent health from going below zero
     }
 
     public void setMana(int mana) {
-        this.mana = Math.min(mana, maxMana); // Ensure mana does not exceed maxMana
+        this.mana = Math.max(0, mana); // Prevent mana from going below zero
     }
 
-    // Receive damage and reduce health
     public void receiveDamage(int damage) {
-        health -= damage;
-        if (health < 0) {
-            health = 0; // Prevent health from going below zero
-        }
+        setHealth(health - damage);
     }
 
     // Restore health but don't exceed maxHealth
     public void restoreHealth(int amount) {
-        health += amount;
-        if (health > maxHealth) {
-            health = maxHealth; // Ensure health doesn't go over max
+        if (health >= maxHealth) {
+            System.out.println(Text.centerText("Health is already full.")); // No restoration needed
+        } else {
+            health += amount; 
+            if (health > maxHealth) {
+                health = maxHealth; // Cap health at maxHealth
+                System.out.println(Text.centerText("Health restored to full. Current health: " + health));
+            } else {
+                System.out.println(Text.centerText("Health restored by " + amount + ". Current health: " + health));
+            }
         }
     }
 
     // Use mana and reduce it
     public void useMana(int amount) {
-        mana -= amount;
-        if (mana < 0) {
-            mana = 0; // Prevent mana from going below zero
-        }
+        setMana(mana - amount);
     }
 
     // Check if the character is alive
@@ -75,24 +82,13 @@ public abstract class Character {
         return health > 0;
     }
 
-    // Adjust health by a specified amount
+    // Adjust health and mana by a specified amount
     public void adjustHealth(int amount) {
-        health += amount; 
-        if (health < 0) {
-            health = 0; // Prevent health from going below zero
-        } else if (health > maxHealth) {
-            health = maxHealth; // Ensure health doesn't exceed maxHealth
-        }
+        setHealth(health + amount);
     }
 
-    // Adjust mana by a specified amount
     public void adjustMana(int amount) {
-        mana += amount; 
-        if (mana < 0) {
-            mana = 0; // Prevent mana from going below zero
-        } else if (mana > maxMana) {
-            mana = maxMana; // Ensure mana doesn't exceed maxMana
-        }
+        setMana(mana + amount); 
     }
 
     // Getter methods for max health and mana
@@ -113,75 +109,39 @@ public abstract class Character {
         mana = maxMana;
     }
 
-    // Methods to increase max health and max mana
+    // Increase max health and max mana
     public void increaseMaxHealth(int amount) {
         maxHealth += amount;
-        health = maxHealth; // Optional: Adjust current health to match new max
+        health = Math.min(health, maxHealth); // Ensure current health doesn't exceed new max
     }
 
     public void increaseMaxMana(int amount) {
         maxMana += amount;
-        mana = maxMana; // Optional: Adjust current mana to match new max
+        mana = Math.min(mana, maxMana); // Ensure current mana doesn't exceed new max
     }
 
-    // Implement the missing methods based on GameController's need
-    public void increaseHealth(int amount) {
-        adjustHealth(amount);
+    public void gainLife() {
+        lives += 1; // Increment lives by 1
     }
 
-    public void decreaseHealth(int amount) {
-        adjustHealth(-amount);
-    }
-
-    public void increaseMana(int amount) {
-        adjustMana(amount);
-    }
-
-    public void gainPowerfulSpell() {
-        // Logic to grant a powerful spell or item
-        System.out.println(Text.centerText("You gained a powerful spell!"));
-    }
-    
-    public void heal(int amount) {
-        health += amount;
-    }
-
-    public void takeDamage(int amount) {
-        health -= amount;
-    }
-    
     public int getGold() {
         return gold;
     }
     
-    public void decreaseGold(int amount) {
-        if (amount <= gold) {
-            gold -= amount;
-        } else {
-            System.out.println("Not enough gold to complete the transaction.");
+    public void adjustGold(int amount) {
+        gold += amount;
+        if (gold < 0) {
+            gold = 0; // Prevent gold from going below zero
         }
     }
-    
-    public void addGold(int amount) {
-        gold += amount;
+
+    public int getAttackPower() {
+        return attackPower;
     }
 
-    public void gainLife() {
-        lives++;
+    public void setAttackPower(int attackPower) {
+        this.attackPower = attackPower;
     }
-
-    public void gainMana(int amount) {
-        mana += amount;
-    }
-
-    public void missTurn() {
-        System.out.println("You miss your turn.");
-    }
-    
-    public void increaseAttack(int amount) {
-        attackPower += amount;
-    }
-
 
     public boolean isInvisible() {
         return invisible;
@@ -191,4 +151,32 @@ public abstract class Character {
         this.invisible = invisible;
     }
 
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+    
+    // Setters for name, max health, max mana, and gold
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public void setMaxMana(int maxMana) {
+        this.maxMana = maxMana;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    public int getSkillDamage(int skill){
+        return 0;
+    }
 }

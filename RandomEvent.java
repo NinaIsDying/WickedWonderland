@@ -1,3 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author loqui
+ */
 
 import java.util.Random;
 import java.util.Scanner;
@@ -12,40 +21,6 @@ public class RandomEvent {
         random = new Random(); // Initialize Random object
     }
 
-    // Pre-Battle Narrations for Cinderella's World
-    private final String[] cinderellaPreBattleNarrations = {
-        wrapText("The grand ballroom, once filled with laughter and music, is now a silent graveyard of shattered dreams. "
-            + "Each step Cinderella takes echoes against the crumbling walls, the crunch of glass beneath her slipper a "
-            + "painful reminder of the life she left behind. The ghost of the ball whispers in the distance, a haunting melody "
-            + "that reminds her of happier times. As she ventures deeper, shadows of doubt creep into her heart, but she steels "
-            + "herself; she must confront the darkness that has consumed her world.")
-            + "\n~~Please enter any key to continue~~",
-        
-        wrapText("As Cinderella walks through the decaying halls, memories swirl around her like the dust in the air. The laughter "
-            + "of her step-sisters fills the empty space, a mocking reminder of her past. This palace, once a symbol of her "
-            + "dreams, now stands as a monument to her pain. But Cinderella is no longer the naive girl confined to servitude; "
-            + "she is a warrior, prepared to reclaim her throne. Every step forward strengthens her resolve, igniting a fire "
-            + "within her heart.")
-            + "\n~~Please enter any key to continue~~",
-        
-        wrapText("The air grows thick with tension as Cinderella approaches the throne room, her heart pounding with every step. "
-            + "The palace, once filled with warmth and joy, now stands as a decaying ruin. Her grip tightens around her wand, "
-            + "its warmth a reminder of the magic she possesses. Somewhere deep within the palace, the remnants of her prince "
-            + "linger, but she is determined to face him, to break the chains of darkness that bind them.")
-            + "\n~~Please enter any key to continue~~",
-        
-        wrapText("Pausing at the entrance to the ballroom, Cinderella feels the weight of her past wash over her. The glass slipper, "
-            + "glowing faintly in the dim light, serves as a reminder of the love and hope that once defined her life. But today, "
-            + "it is a symbol of the battle she must face. With a deep breath, she prepares to step into the darkness, knowing "
-            + "that there is no turning back only the fight ahead.")
-            + "\n~~Please enter any key to continue~~",
-        
-        wrapText("The flickering candlelight casts eerie shadows on the marbled floor as Cinderella ascends the grand staircase. "
-            + "Each step reverberates with the weight of her determination. At the top, she catches a glimpse of a figure a dark "
-            + "silhouette that sends chills down her spine. It is Prince Henry, the man she once loved, now twisted by the curse "
-            + "that has engulfed her kingdom. Cinderella knows that to save her home, she must confront the monster he has become.")
-            + "\n~~Please enter any key to continue~~",
-    };
 
     // Post-Battle Narrations for Cinderella's World
     private final String[] cinderellaPostBattleNarrations = {
@@ -79,38 +54,7 @@ public class RandomEvent {
             + "\n~~Please enter any key to continue~~",
     };
 
-    // Pre-Battle Narrations for Alice's World
-    private final String[] alicePreBattleNarrations = {
-        wrapText("The once whimsical Wonderland has morphed into a twisted nightmare, an unsettling reflection of Alice's memories. "
-            + "As she stands at the entrance, vibrant flowers wither in despair, and the sky bleeds a haunting red. The Cheshire "
-            + "Cat's grin, once playful, now harbors sinister secrets, a taunting reminder of the dangers that await her. With her "
-            + "heart racing, Alice grips her blade tightly, knowing that trust is a luxury she can no longer afford.")
-            + "\n~~Please enter any key to continue~~",
-        
-        wrapText("Peering down the rabbit hole, Alice feels a pang of nostalgia. The allure of curiosity has faded, replaced by an "
-            + "ominous sense of foreboding. As she steps forward, the world shifts beneath her feet, threatening to swallow her "
-            + "whole. Memories of her innocence flicker in her mind, yet she understands that Wonderland has changed irreversibly, "
-            + "just as she has. The Queen of Hearts awaits, her reign of terror echoing through the chaotic landscape.")
-            + "\n~~Please enter any key to continue~~",
-        
-        wrapText("The twisted trees of Wonderland stretch out before Alice, their branches clawing at the air like hungry beasts. She "
-            + "feels the weight of the forest's shadows pressing against her, reminding her of the perils that lurk in every corner. "
-            + "The White Rabbit scurries past her, eyes glazed and lost, a prisoner of the madness that now grips this world. "
-            + "Despite the foreboding aura, Alice presses onward, her determination burning bright against the encroaching chaos.")
-            + "\n~~Please enter any key to continue~~",
-        
-        wrapText("Standing on the shifting checkerboard path, Alice feels the ground shift beneath her feet, pulling her in different "
-            + "directions. The castle of the Red Queen looms in the distance, a dark fortress that symbolizes the madness reigning "
-            + "over Wonderland. Tightening her grip on her sword, she prepares to face whatever awaits her within those walls. "
-            + "The air is thick with anticipation, and she knows that her past experiences will be put to the test.")
-            + "\n~~Please enter any key to continue~~",
-        
-        wrapText("The atmosphere is electric with tension as Alice approaches the forest, her senses heightened by the whispers of danger. "
-            + "The Mad Hatter's voice echoes in her mind, a twisted invitation to a deadly tea party. She walks forward, every step "
-            + "a reminder of the trials she has faced before. This time, however, she is no longer the curious girl who fell into "
-            + "madness—she is a warrior, ready to conquer the chaos.")
-            + "\n~~Please enter any key to continue~~",
-    };
+
 
     // Post-Battle Narrations for Alice's World
     private final String[] alicePostBattleNarrations = {
@@ -144,39 +88,7 @@ public class RandomEvent {
             + "\n~~Please enter any key to continue~~",
     };
 
-    // Pre-Battle Narrations for Snow White's World
-    private final String[] snowWhitePreBattleNarrations = {
-        wrapText("The once pristine forest now lies in ruins, a shadow of its former glory. As Snow White wanders through the "
-            + "overgrown paths, the whispers of the woodland creatures echo in her ears—a warning of the darkness that has seeped "
-            + "into every corner of her world. The Evil Queen's power looms large, a palpable threat that hangs over her like a "
-            + "storm cloud. With every step, she prepares to confront the shadows of her past.")
-            + "\n~~Please enter any key to continue~~",
-        
-        wrapText("Amidst the chaos of her kingdom, Snow White stands alone, the weight of her crown heavy upon her brow. The forest, "
-            + "once vibrant with life, now echoes with the chilling silence of despair. The Evil Queen's curse spreads like a contagion, "
-            + "twisting the hearts of those she once trusted. But Snow White, with the heart of a warrior, will not allow fear to "
-            + "dictate her fate. She must gather her courage and face the darkness head-on.")
-            + "\n~~Please enter any key to continue~~",
-        
-        wrapText("The sun sets behind the twisted trees as Snow White ventures deeper into the cursed woods. Shadows dance at the "
-            + "edges of her vision, a reminder that danger lurks around every corner. Her heart beats fiercely in her chest, yet "
-            + "she knows she must press on. The fate of her kingdom rests upon her shoulders, and she cannot afford to falter. "
-            + "With each step, she steels her resolve, determined to reclaim her rightful place.")
-            + "\n~~Please enter any key to continue~~",
-        
-        wrapText("As the moon rises high in the night sky, Snow White stands before the entrance to the Evil Queen's lair, a dark "
-            + "fortress shrouded in shadows. The air is thick with the scent of magic and malevolence. She takes a moment to breathe, "
-            + "summoning the strength within her. This is not just a battle for her kingdom; it is a battle for her very soul. "
-            + "With unwavering determination, she prepares to face the queen and break the curse that binds her.")
-            + "\n~~Please enter any key to continue~~",
-        
-        wrapText("The chilling wind whispers through the trees as Snow White approaches the clearing, where the Queen's dark magic "
-            + "converges. She can feel the weight of countless eyes upon her—the woodland creatures who have witnessed her journey. "
-            + "Drawing upon their strength, she vows to protect her home, to restore the light that has been consumed by darkness. "
-            + "With each heartbeat, she feels the fire of determination igniting within her.")
-            + "\n~~Please enter any key to continue~~",
-    };
-
+ 
     // Post-Battle Narrations for Snow White's World
     private final String[] snowWhitePostBattleNarrations = {
         wrapText("As the sun rises over the enchanted forest, Snow White stands victorious, the remnants of the Evil Queen’s magic "
@@ -230,19 +142,6 @@ public class RandomEvent {
         return wrappedText.toString();
     }
 
-    // Display Pre-Battle Narration
-    public void displayPreBattleNarration(String world) {
-        String[] narrations = switch (world) {
-            case "Cinderella" -> cinderellaPreBattleNarrations;
-            case "Alice" -> alicePreBattleNarrations;
-            case "SnowWhite" -> snowWhitePreBattleNarrations;
-            default -> null;
-        };
-
-        if (narrations != null) {
-            System.out.println(Text.centerText(narrations[random.nextInt(narrations.length)]));
-        }
-    }
 
     // Display Post-Battle Narration
     public void displayPostBattleNarration(String world) {
@@ -275,38 +174,36 @@ public class RandomEvent {
             "RANDOM EVENT: You encounter an enchanted mirror.\nIt tells you a secret that helps you in your next encounter.",
             "RANDOM EVENT: You discover a hidden stash of coins!\nGain 50 gold coins.",
             "RANDOM EVENT: You find an ancient artifact.\nThis grants you an extra life.",
-            "RANDOM EVENT: A wise old sage asks you a riddle.\nAnswering correctly grants you a powerful spell or item."
+            " A wise old sage asks you a riddle.\nAnswering correctly grants you a powerful spell or item."
         };
 
         int index = random.nextInt(events.length); // Pick a random event
-        System.out.println(Text.centerText("RANDOM EVENT: " + events[index]));
-
         // Trigger specific effects for certain events
         switch (index) {
             case 0 -> // Mysterious stranger's offer
                 handleDecisionEvent(player);
             case 1 -> {
-                player.heal(20); // Restores 20 health points
+                player.restoreHealth(20); // Restores 20 health points
                 System.out.println(Text.centerText("You restored 20 health points!"));
             }
             case 2 -> {
-                player.takeDamage(10); // Lose 10 health points
+                player.receiveDamage(10); // Lose 10 health points
                 System.out.println(Text.centerText("You lost 10 health points!"));
             }
             case 3 -> {
-                player.addGold(50); // Gain 50 gold coins
+                player.adjustGold(50); // Gain 50 gold coins
                 System.out.println(Text.centerText("You found a treasure chest and gained 50 gold coins!"));
             }
             case 4 -> {
-                player.gainMana(10); // Gain 10 mana points (assuming a method exists)
-                System.out.println("You gained 10 mana points!");
+                player.adjustMana(10); // Gain 10 mana points (assuming a method exists)
+                System.out.println(Text.centerText("You gained 10 mana points!"));
             }
             case 5 -> {
                 // Handle ambush (you can add your own battle logic here)
                 System.out.println(Text.centerText("You are ambushed by a group of enemies! Prepare for battle!"));
             }
             case 6 -> {
-                player.takeDamage(5); // Lose 5 health points each turn until removed
+                player.receiveDamage(5); // Lose 5 health points each turn until removed
                 System.out.println(Text.centerText("You picked up a cursed item! You lose 5 health points each\n turn until you find a way to remove the curse."));
             }
             case 7 -> {
@@ -314,13 +211,10 @@ public class RandomEvent {
                 System.out.println(Text.centerText("A fairy offers to help you in your battle. You gain a bonus\n to your attack power for the next battle!"));
             }
             case 8 -> {
-                player.takeDamage(5); // Lose 5 health points each turn until escaped
+                player.receiveDamage(5); // Lose 5 health points each turn until escaped
                 System.out.println(Text.centerText("You are surrounded by a thick fog! You lose 5 health points each turn until you escape."));
             }
             case 9 -> {
-                // Miss a turn logic
-                player.missTurn();
-                System.out.println(Text.centerText("You lose your way and wander for a while. You miss a turn while trying to find your way back."));
             }
             case 10 -> {
                 // Gain knowledge
@@ -328,14 +222,10 @@ public class RandomEvent {
             }
             case 11 -> handleRiddleEvent(player); // Riddle event
             case 12 -> {
-                player.addGold(50); // Gain 50 gold coins
+                player.adjustGold(50); // Gain 50 gold coins
                 System.out.println(Text.centerText("You discovered a hidden stash of coins! You gain 50 gold coins!"));
             }
-            case 13 -> {
-                player.gainLife(); // Grant an extra life
-                System.out.println(Text.centerText("You found an ancient artifact! You gain an extra life!"));
-            }
-            default -> System.out.println(Text.centerText("No specific effects triggered for this event."));
+            default -> System.out.println(Text.centerText("As you venture out into the depths, there's a gnawing in the feeling in the back of your mind.\n You must be very unlucky today.\n Venture on, and you might just find something interesting happen to you."));
         }
     }
 
@@ -354,10 +244,11 @@ public class RandomEvent {
         System.out.println(Text.centerText("What has keys but can't open locks?")); // Example riddle
         String answer = scanner.nextLine().trim().toLowerCase();
         if (answer.equals("piano")) { // Check if the answer is correct
-            player.gainPowerfulSpell(); // Grants a powerful spell or item if answered correctly
+         //   player.gainPowerfulSpell(); // Grants a powerful spell or item if answered correctly
             System.out.println(Text.centerText("Correct! You gained a powerful spell."));
         } else {
             System.out.println(Text.centerText("Incorrect! You do not gain the spell."));
         }
     }
 }
+

@@ -10,6 +10,8 @@ public class GameController extends Dialogue implements GameInterface {
     private int roundCounter;
     private String currentWorld;  // To track which world the player is in
     private final Shop shop;
+    private static final Random random = new Random();
+
 
     // Constructor
     public GameController() {
@@ -26,9 +28,16 @@ public class GameController extends Dialogue implements GameInterface {
     @Override
     public void showIntro() {
         for (String line : gameIntro) {
+            
             System.out.println(Text.centerBox(line));
             System.out.print("                                                                  ->");
-            scanner.nextLine();  // Wait for input to proceed
+            String op = scanner.nextLine();  // Wait for input to proceed
+    
+            // Programmer shortcut to skip to choose world
+            if(op.equals("Skip") || op.equals("skip") ) {
+                chooseWorld();
+                break;
+            }
         }
     }
 
@@ -51,9 +60,11 @@ public class GameController extends Dialogue implements GameInterface {
                 showMenu();  // Retry if invalid input
             }
         } else {
+   
             // First-time players see the full intro
             showIntro();
             chooseWorld();
+             
         }
     }
 
@@ -95,7 +106,7 @@ public class GameController extends Dialogue implements GameInterface {
 
         while (!validWorldChoice) {
             try {
-                System.out.println(Text.centerText("Choose Your World:\n1. Cinderella: The Shattered Palace\n2. Mad Wonderland\n3. Snow White: Not So White"));
+                System.out.println(Text.centerText(chooseWorlds));
                 System.out.print("                                                                  ->");
                 int worldChoice = scanner.nextInt();
                 scanner.nextLine();  // Consume newline
@@ -141,50 +152,73 @@ public class GameController extends Dialogue implements GameInterface {
             System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input before proceeding
 
-            // Display Pre-Battle Narration
-            randomEvent.displayPreBattleNarration("Cinderella");
-            System.out.print("                                                                  ->");
-            scanner.nextLine();  // Wait for input before proceeding
-            
+
+                     
             displayDialogue(introCinderella);
             System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input before proceeding
+            
             displayDialogue(introCinderellaContinue);
             System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input before proceeding
+            
+            System.out.println(Text.centerBox(DARK_CREATURE_ENTRANCE));
+                            System.out.print("                                                                  ->");
+                scanner.nextLine();
             continueAdventure = battleSequence(CINDERELLA_ATTACKS);  // Use Cinderella's attack options
 
             if (continueAdventure) {
                 // Display Pre-Battle Narration
-                randomEvent.displayPreBattleNarration("Cinderella");
+                System.out.println(Text.centerBox(DARK_CREATURE_EXIT));
                 System.out.print("                                                                  ->");
-                scanner.nextLine();  // Wait for input before proceeding
-                
-                shop.purchaseItem(player);
-                
-                randomEvent.displayRandomEvent(player);  // After defeating minion, trigger random event
-                
-                // Display Pre-Battle Narration
-                randomEvent.displayPreBattleNarration("Cinderella");
-                System.out.print("                                                                  ->");
-                scanner.nextLine();  // Wait for input before proceeding
+                scanner.nextLine();
 
-                enemy = new EnemyMinion();  // Example of an intermediate enemy
+    
+                shop.purchaseItem(player);     
+                randomEvent.displayRandomEvent(player);  // After defeating minion, trigger random event
+     
+
+                enemy = new FairyGodMother();
+                System.out.println(Text.centerBox(VICTORY_TEXT_1));
+                System.out.print("                                                                  ->");
+                scanner.nextLine();
+                System.out.println(Text.centerBox(ENTRANCE_TEXT_1));
+                System.out.print("                                                                  ->");
+                scanner.nextLine();
+                System.out.println(Text.centerBox(FAIRY_GODMOTHER_ENTRANCE));
+                System.out.print("                                                                  ->");
+                scanner.nextLine();
                 continueAdventure = battleSequence(CINDERELLA_ATTACKS);
+
             }
 
             if (continueAdventure) {
-               
+                System.out.println(Text.centerBox(FAIRY_GODMOTHER_EXIT));
+                System.out.print("                                                                  ->");
+                scanner.nextLine();
                 
                 shop.purchaseItem(player);
              
-                System.out.println(Text.centerText("Now face the final challenge... Prince Henry awaits!"));
+                System.out.println(Text.centerBox("Now face the final challenge... Prince Henry awaits!"));
                 enemy = new PrinceHenry();  // Boss fight
+
+                System.out.println(Text.centerBox(VICTORY_TEXT_2));
+                System.out.print("                                                                  ->");
+                scanner.nextLine();
+                System.out.println(Text.centerBox(ENTRANCE_TEXT_2));
+                System.out.print("                                                                  ->");
+                scanner.nextLine();
+                System.out.println(Text.centerBox(PRINCE_HENRY_ENTRANCE));
+                System.out.print("                                                                  ->");
+                scanner.nextLine();
                 continueAdventure = battleSequence(CINDERELLA_ATTACKS);  // Boss battle
             }
 
             if (continueAdventure) {
                 // Display Post-Battle Narration after boss fight
+                System.out.println(Text.centerBox(PRINCE_HENRY_EXIT));
+                System.out.print("                                                                  ->");
+                scanner.nextLine();
                 randomEvent.displayPostBattleNarration(currentWorld);
                 System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
@@ -211,6 +245,7 @@ public class GameController extends Dialogue implements GameInterface {
     }
 
     // World Two - Placeholder for Alice's world
+    @Override
     public void worldTwo() {
         boolean continueAdventure = true;
 
@@ -220,14 +255,12 @@ public class GameController extends Dialogue implements GameInterface {
             System.out.println(Text.centerBox("Entering Alice: Mad Wonderland..."));
 
             // Display Pre-Battle Narration
-            randomEvent.displayPreBattleNarration("Alice");
-            System.out.print("                                                                  ->");
-            scanner.nextLine();  // Wait for input before proceeding
+   
 
             displayDialogue(introAlice);  // Display Alice's intro dialogue
             System.out.print("                                                                  ->");
             scanner.nextLine(); // Wait for input before proceeding
-            continueAdventure = battleSequence(Alice.ALICE_ATTACKS);  // Pass Alice's attacks
+            continueAdventure = battleSequence(ALICE_ATTACKS);  // Pass Alice's attacks
 
             if (continueAdventure) {
                 // Display Post-Battle Narration after minion defeat
@@ -239,13 +272,9 @@ public class GameController extends Dialogue implements GameInterface {
 
                 randomEvent.displayRandomEvent(player);
 
-                // Display Pre-Battle Narration
-                randomEvent.displayPreBattleNarration("Alice");
-                System.out.print("                                                                  ->");
-                scanner.nextLine();  // Wait for input before proceeding
 
-                enemy = new EnemyMinion();  // Example minion for Alice's world
-                continueAdventure = battleSequence(Alice.ALICE_ATTACKS);
+                enemy = new Minion();  // Example minion for Alice's world
+                continueAdventure = battleSequence(ALICE_ATTACKS);
             }
 
             if (continueAdventure) {
@@ -254,7 +283,7 @@ public class GameController extends Dialogue implements GameInterface {
 
                 System.out.println(Text.centerText("Now face the final challenge... The Queen of Hearts awaits!"));
                 enemy = new MadHatter();  // Boss fight
-                continueAdventure = battleSequence(Alice.ALICE_ATTACKS);  // Boss battle
+                continueAdventure = battleSequence(ALICE_ATTACKS);  // Boss battle
             }
 
             if (continueAdventure) {
@@ -284,6 +313,7 @@ public class GameController extends Dialogue implements GameInterface {
 
     
     // World Three - Snow White's storyline
+    @Override
     public void worldThree() {
         boolean continueAdventure = true;
 
@@ -291,11 +321,6 @@ public class GameController extends Dialogue implements GameInterface {
             roundCounter = 0;
             enemy = new Minion();  // Fight a minion first
             System.out.println(Text.centerBox("Entering Snow White: The Enchanted Forest..."));
-
-            // Display Pre-Battle Narration
-            randomEvent.displayPreBattleNarration("SnowWhite");
-            System.out.print("                                                                  ->");
-            scanner.nextLine();  // Wait for input before proceeding
 
             displayDialogue(introSnowWhite);  // Assuming you have a dialogue for Snow White
             System.out.print("                                                                  ->");
@@ -305,20 +330,13 @@ public class GameController extends Dialogue implements GameInterface {
 
             if (continueAdventure) {
                 // Display Pre-Battle Narration
-                randomEvent.displayPreBattleNarration("SnowWhite");
-                System.out.print("                                                                  ->");
-                scanner.nextLine();  // Wait for input before proceeding
 
                 shop.purchaseItem(player);  // Allow player to purchase items
-
                 randomEvent.displayRandomEvent(player);  // After defeating minion, trigger random event
 
-                // Display Pre-Battle Narration
-                randomEvent.displayPreBattleNarration("SnowWhite");
-                System.out.print("                                                                  ->");
-                scanner.nextLine();  // Wait for input before proceeding
+                // Display Pre-Battle Narrati
 
-                enemy = new EnemyMinion();  // Intermediate enemy
+                enemy = new Minion();  // Intermediate enemy
                 continueAdventure = battleSequence(SNOW_WHITE_ATTACKS);  // Use Snow White's attack options
             }
 
@@ -358,71 +376,135 @@ public class GameController extends Dialogue implements GameInterface {
     }
 
     
+    //randomizer for random gold amount after every battle
+    public static int generateRandomGold(int min, int max) {
+        return random.nextInt(max - min + 1) + min; 
+    }
+
     // Battle sequence method with customizable attack options
-    public boolean battleSequence(String attackOptions) {
+    @Override
+    public boolean battleSequence(String attackOptions) {        
         boolean firstLineDisplayed = false;
-        roundCounter = 0;
-
+        int goldAmount = generateRandomGold(50, 150);
+        roundCounter = 1;
+        boolean usedInvisibilityLastTurn = false; // Track if invisibility was used last turn
+    
         while (player.getHealth() > 0 && enemy.getHealth() > 0) {
-             // Increment the round counter each 
-        
-
             System.out.println();
             if (!firstLineDisplayed) {
                 displayDialogue(battleStart);
-                System.out.print("                                                                  ->");
-                scanner.nextLine();  // Wait for input before proceeding
                 firstLineDisplayed = true;
             }
-
-            // Center the input box with dynamic attack options
-            displayRound();
-
-            System.out.println(Text.centerText("CHOOSE YOUR ATTACK:\n" + attackOptions ));
-            System.out.print("                                                                  ->");
-            int action = scanner.nextInt();
+            
             scanner.nextLine();
-
+            //pause para di ma shock!
+            clearScreen(); // Clear screen before every round
+            displayRound();            
+            displayEnemyStatus();
+            displayPlayerStatus(); 
+    
+            System.out.println(Text.centerText("CHOOSE YOUR ATTACK:\n" + attackOptions));
+            System.out.print("                                                            Choose Attack->");
+            int action = scanner.nextInt();
+            System.err.println();
+                
             if (player.getMana() <= 0 && action != 1) {
                 System.out.println(Text.centerText("You don't have enough mana. You can only use basic attack!"));
                 action = 1;
             }
 
+            // Show the skill description
+            String skillDescription = SkillBoxes.getSkillDescription(currentWorld, action);
+            System.out.println(Text.centerText(skillDescription));
+
+            System.out.println(Text.centerText("1. Confirm Attack | 2. Go Back"));
+            System.out.print("                                                            Choose Option-> ");
+            int confirmChoice = scanner.nextInt();
+                        
+        if (confirmChoice == 2) {
+                 // Gees back to attack selection
+                continue;
+        } else if (confirmChoice == 1) {   
+        
             switch (action) {
-                case 1 -> player.specialSkill1(enemy);
-                case 2 -> player.specialSkill2(enemy);
-                case 3 -> player.specialSkill3(enemy);
+                case 1 -> {
+                    player.specialSkill1(enemy);
+                    System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[0] + "\n" +
+                            player.getName() + " deals " + player.getSkillDamage(1) + " damage to " + enemy.getName() + "! "));
+                    usedInvisibilityLastTurn = false; // Reset invisibility usage
+                }
+                case 2 -> {
+                    player.specialSkill2(enemy);
+                    System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[1] + "\n" +
+                            player.getName() + " deals " + player.getSkillDamage(2) + " damage to " + enemy.getName() + "! "));
+                    usedInvisibilityLastTurn = false; // Reset invisibility usage
+                }
+                case 3 -> {
+                    player.specialSkill3(enemy);
+                    System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[2] + "\n" +
+                            player.getName() + " cannot be attacked for one turn!"));
+                    usedInvisibilityLastTurn = true; // Set invisibility usage
+                }
                 default -> {
                     System.out.println(Text.centerText("Invalid action!"));
-                    continue;
+                    continue; // Skip the rest of the loop
                 }
             }
-
-          
+        }
+    
             displayEnemyStatus();
+            displayPlayerStatus(); 
+            delay();
 
+            // Handle enemy attack if Cinderella is not invisible
             if (enemy.isAlive()) {
-                enemy.attack(player);
-            displayPlayerStatus();
+                if (!(player instanceof Cinderella && ((Cinderella) player).isInvisible())) {
+                    enemy.attack(player);
+                } else {
+                    System.out.println(Text.centerText(enemy.getName() + " attempts to attack but " + player.getName() + " is invisible!"));
+                }
+                displayEnemyStatus();
+                displayPlayerStatus(); 
+             
             }
-
+            //updates round counter after enemy attacks.
+            roundCounter++;
+    
+            // Check player health status after enemy attack
             if (!player.isAlive()) {
-
                 System.out.println(Text.centerText(player.getName() + " has been defeated..."));
                 return false;
             }
-
+    
+            // Check enemy health status after player attack
             if (!enemy.isAlive()) {
                 System.out.println(Text.centerText(enemy.getName() + " has been defeated!\nYou can continue your adventure!"));
-                player.addGold(75); // Award 75 gold for winning
-                System.out.println(Text.centerBox("You received 75 gold"));
+                player.adjustGold(goldAmount); // Award rand gold amt for winning
+                System.out.println(Text.centerBox("You received " + goldAmount + " gold for defeating " + enemy.getName() + "! "));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
+                scanner.nextLine();
+
                 return true;
             }
+    
+            // At the end of the round, reset invisibility
+            if (player instanceof Cinderella) {
+                if (usedInvisibilityLastTurn) {
+                    System.out.println(Text.centerText(player.getName() + "'s invisibility wore off..."));
+                }
+                ((Cinderella) player).endTurn(); // Reset invisibility status
+            }
         }
+
+        //dont let program immediately go to next round
+        System.out.println(Text.centerText("Press Enter"));
+        scanner.nextLine();
+
         return true;
     }
+    
+    
     
     @Override
     public boolean journey() {
@@ -431,19 +513,40 @@ public class GameController extends Dialogue implements GameInterface {
 
     private void displayPlayerStatus() {
         // Include round counter in the player status display
-        System.out.println(Text.centerText(60, "Player Status: \nHealth: " + player.getHealth() +
+        System.out.println(Text.centerText(60, 160, player.getName() + " Status: \nHealth: " + player.getHealth() +
                                            "\nMana: " + player.getMana()));
+
+
     }
-    
+
     private void displayRound(){
-        roundCounter++;
         System.out.println(Text.centerText("Round: " + roundCounter));
     }
 
     private void displayEnemyStatus() {
-        System.out.println(Text.centerText(60, "Enemy Status: \nHealth: " + enemy.getHealth()));
+        System.out.println(Text.centerText(60, 240, enemy.getName() + " Status: \nHealth: " + enemy.getHealth()));
     }
+
+    //clear screen stuff
+    public static void clearScreen() {
+            for (int i = 0; i < 50; i++) {
+                System.out.println();
+            }
+        }
+
+    //delay method para di kaau overwhelming si beshiewep
+    public static void delay() {
+        try {
+            Thread.sleep(1000); // Delay for 1 second
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Restore the interrupted status
+            System.out.println("Thread was interrupted");
+        }
+    }
+
+    
     
 }
+
 
 

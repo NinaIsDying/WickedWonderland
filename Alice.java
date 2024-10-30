@@ -1,31 +1,69 @@
 
 public class Alice extends Character {
-    
+    private int attackPower = 0;
+    private final int maxHealth = 400;
+
     public Alice() {
         super("Alice", 100, 100);  // Set name, health, and mana
     }
+    
+    public void restoreHealth(int amount) {
+            int currentHealth = getHealth(); // Get the current health
+            if (currentHealth >= maxHealth) {
+                System.out.println(Text.centerText("Health is already full.")); // No restoration needed
+            } else {
+                // Increase health by the amount
+                currentHealth += amount; 
+                if (currentHealth > maxHealth) {
+                    currentHealth = maxHealth; // Cap health at maxHealth
+                    System.out.println(Text.centerText("Health restored to full. Current health: " + currentHealth));
+                } else {
+                    System.out.println(Text.centerText("Health restored by " + amount + ". Current health: " + currentHealth));
+                }
+                setHealth(currentHealth); // Update the character's health
+            }
+        }
+        
+    
+    public int getSkillDamage(int num) {
+            switch(num) {
+                case 1: return 30;
+                case 2: return 50;
+                default: return 0; 
+            }
+        }
+        
 
-    public static final String ALICE_ATTACKS = 
-    "1. Curious Jab\n2. Mad Hat Trick\n3. Wonderland Whirl";
 
     @Override
     public void specialSkill1(Enemy enemy) {
-        System.out.println(Text.centerText("Alice performs a Curious Jab!"));
-        useMana(10);
-        enemy.receiveDamage(20);  // Damage for skill 1
-    }
-
+            useMana(15);
+            enemy.receiveDamage(30 + attackPower);
+        }
+    
     @Override
     public void specialSkill2(Enemy enemy) {
-        System.out.println(Text.centerText("Alice executes a Mad Hat Trick!"));
-        useMana(20);
-        enemy.receiveDamage(25);  // Damage for skill 2
-    }
 
+            useMana(20);
+            enemy.receiveDamage(50);
+        }
+    
     @Override
     public void specialSkill3(Enemy enemy) {
-        System.out.println(Text.centerText("Alice spins in a Wonderland Whirl!"));
-        useMana(15);
-        enemy.receiveDamage(30);  // Damage for skill 3
+            useMana(30);
+            restoreHealth(20);
+    }
+
+    public int getAttackPower() {
+        return attackPower;
+    }
+
+    public void setAttackPower(int attackPower) {
+        this.attackPower = attackPower;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
     }
 }
+    

@@ -1,4 +1,3 @@
-
 public class Player extends Character {
     private int gold;
 
@@ -54,4 +53,11 @@ public class Player extends Character {
         System.out.println(Text.centerText("Using special skill 3 on " + enemy.getName()));
         enemy.receiveDamage(50);  // Another example, customize as needed
     }
+
 }
+
+
+
+
+
+
