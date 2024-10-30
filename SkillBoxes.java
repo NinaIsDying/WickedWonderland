@@ -3,7 +3,7 @@ public class SkillBoxes extends Dialogue {
     public static String getSkillDescription(String currentWorld, int skillNumber) {
         return switch (currentWorld) {
             case "Cinderella" -> switch (skillNumber) {
-                case 1 -> wrapText("GLASS SHARD STRIKE:\nA powerful attack using shards from her broken glass slipper, dealing [30damage] to enemies.", 120);
+                case 1 -> wrapText("GLASS SHARD STRIKE:\nA powerful attack using shards from her broken glass slipper, dealing [30 damage] to enemies.", 120);
                 case 2 -> wrapText("ENCHANTED RESILIENCE:\nCinderella gathers her courage for her next attack, healing herself for [20 health points] and dealing [50 damage] to enemies.", 120);
                 case 3 -> wrapText("MIDNIGHT ESCAPE:\nGrants temporary invisibility, making her untargetable for one turn; does not deal damage.", 120);
                 default -> wrapText("Invalid skill choice for Cinderella!");
