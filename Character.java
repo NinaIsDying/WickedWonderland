@@ -9,6 +9,19 @@
     protected int attackPower;
     protected boolean invisible;
     protected int lives = 1;
+    private boolean isConfused;
+
+    public Character() {
+        this.isConfused = false; 
+    }
+
+    public boolean isConfused() {
+        return isConfused;
+    }
+
+    public void setConfused(boolean confused) {
+        this.isConfused = confused;
+    }
 
     public Character(String name, int health, int mana) {
         this.name = name;
@@ -127,7 +140,7 @@
     }
 
     public int getAttackPower() {
-        return attackPower;
+        return (attackPower);
     }
 
     public void setAttackPower(int attackPower) {
@@ -170,4 +183,17 @@
     public int getSkillDamage(int skill){
         return 0;
     }
+
+    private int lastSkillDamage; 
+
+
+    public int getLastSkillDamage() {
+        return lastSkillDamage;
+    }
+
+    public void setLastSkillDamage(int damage) {
+        this.lastSkillDamage = damage;
+    }
+
+
 }

@@ -49,6 +49,7 @@ public class PrinceHenry extends Enemy {
             isInvincible = true;
             invincibilityDuration = 1; // Invincible for one turn
             mana -= 15; // Deduct mana
+            setMana(mana);
             System.out.println(Text.centerText(80, name + " uses Princely Shield! He cannot take damage for two turns."));
         } else {
             System.out.println(Text.centerText(80, name + " does not have enough mana to use invincibility!"));
@@ -77,6 +78,7 @@ public class PrinceHenry extends Enemy {
         System.out.println(Text.centerText(80, name + " attacks with Shattered Vow!\n" + name + " deals " + (getAttackPower() + 30) + " damage to " + player.getName()));
         player.receiveDamage(getAttackPower() + 20);
         mana -= 0;
+        setMana(mana);
     }
 
     private void useSecondSkill(Character player) {
@@ -84,6 +86,7 @@ public class PrinceHenry extends Enemy {
             System.out.println(Text.centerText(80, name + " uses Royal Dust!\n" + name + " deals " + (getAttackPower() + 45) + " damage to " + player.getName()));
             player.receiveDamage(getAttackPower() + 45); // More damage
             mana -= 20;
+            setMana(mana);
         } else {
             useFirstSkill(player); // Default to first skill if no mana
         }
@@ -94,6 +97,7 @@ public class PrinceHenry extends Enemy {
             System.out.println(Text.centerText(80, name + " uses Madman's Kiss!\n" + name + " deals " + (getAttackPower() + 90) + " damage to " + player.getName()));
             player.receiveDamage(getAttackPower() + 90); // Even more damage
             mana -= 30;
+            setMana(mana);
         } else {
             useSecondSkill(player); // Default to second skill if not enough mana
         }

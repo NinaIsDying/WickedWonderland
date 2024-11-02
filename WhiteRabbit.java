@@ -44,7 +44,8 @@ public class WhiteRabbit extends Enemy {
             System.out.println(Text.centerText(name + " dodges swiftly, evading attacks and countering!"));
             int counterAttackDamage = 25; // Damage for Tempered Dash counter-attack
             player.receiveDamage(counterAttackDamage);
-            mana -= 30; // Reduce mana for using this attack
+            mana -= 30;
+            setMana(mana); // Reduce mana for using this attack
             System.out.println(Text.centerText(name + " counters with " + counterAttackDamage + " damage using Tempered Dash!"));
         } else {
             useFirstSkill(player); // Default to first skill if no mana
@@ -56,7 +57,9 @@ public class WhiteRabbit extends Enemy {
         System.out.println(Text.centerText(name + " reverses time, recovering health!"));
         int healAmount = 20; // Amount of health recovered
         heal(healAmount);
-        System.out.println(Text.centerText(name + " restores " + healAmount + " health with Time Loop!"));
+        System.out.println(Text.centerText(name + " restores " + healAmount + " health with Time Loop!")); 
+        mana-=40;
+        setMana(mana);
     }
 
     public int getMana() {

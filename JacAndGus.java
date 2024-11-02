@@ -37,6 +37,7 @@ public class JacAndGus extends Enemy {
             System.out.println(Text.centerText(80, name + " throws a flurry of tiny tools!\n" + name + " deals " + (getAttackPower() + 5) + " damage to " + player.getName()));
             player.receiveDamage(getAttackPower() + 15); // More damage
             mana -= 5;
+            setMana(mana);
         } else {
             useFirstSkill(player); // Default to first skill if no mana
         }
@@ -47,6 +48,7 @@ public class JacAndGus extends Enemy {
             System.out.println(Text.centerText(80, name + " sets a trap!\n" + name + " deals " + (getAttackPower() + 10) + " damage to " + player.getName()));
             player.receiveDamage(getAttackPower() + 20); // Even more damage
             mana -= 10;
+            setMana(mana);
         } else {
             useSecondSkill(player); // Default to second skill if not enough mana
         }

@@ -3,6 +3,8 @@ public abstract class Enemy{
     protected int maxHealth;
     protected int currentHealth;
     protected int attackPower;
+    protected int mana;
+
 
     public Enemy(String name, int maxHealth, int attackPower) {
         this.name = name;
@@ -36,5 +38,37 @@ public abstract class Enemy{
 
     public int getAttackPower() {
         return attackPower;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
+
+    public void setAttackPower(int attackPower) {
+        this.attackPower = attackPower;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
     }
 }

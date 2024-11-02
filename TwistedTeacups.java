@@ -39,6 +39,7 @@ public class TwistedTeacups extends Enemy {
             System.out.println(Text.centerText(80, name + " unleashes a torrent of scalding tea!\n" + name + " deals " + (getAttackPower() + 15) + " damage to " + player.getName()));
             player.receiveDamage(getAttackPower() + 15); // More damage
             mana -= 30; // Reduce mana for using this attack
+            setMana(mana);
         } else {
             useFirstSkill(player); // Default to first skill if no mana
         }
@@ -49,6 +50,7 @@ public class TwistedTeacups extends Enemy {
             System.out.println(Text.centerText(80, name + " throws a wave of enchanted teacups!\n" + name + " deals " + (getAttackPower() + 25) + " damage to " + player.getName()));
             player.receiveDamage(getAttackPower() + 25); // Even more damage
             mana -= 50; // Reduce mana for using this attack
+            setMana(mana);
         } else {
             useSecondSkill(player); // Default to second skill if not enough mana
         }

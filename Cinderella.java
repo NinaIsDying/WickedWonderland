@@ -43,6 +43,10 @@ public class Cinderella extends Character {
 
     @Override
     public void specialSkill2(Enemy enemy) {
+        if(getMana() <=0){
+            System.out.println(Text.centerText(name + " has no more mana!"));
+            return;
+        }
         restoreHealth(20);
         useMana(20);
         enemy.receiveDamage(getSkillDamage(2));
@@ -50,6 +54,10 @@ public class Cinderella extends Character {
 
     @Override
     public void specialSkill3(Enemy enemy) {
+        if(getMana() <=0){
+            System.out.println(Text.centerText(name + " has no more mana!"));
+            return;
+        }
         useMana(30);
         setInvisible(true);
     }

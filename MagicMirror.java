@@ -1,18 +1,18 @@
 import java.util.Random;
 
-public class FairyGodMother extends Enemy {
+public class MagicMirror extends Enemy {
     private int mana;
-    private static final int MAX_MANA = 150;
+    private static final int MAX_MANA = 200;
 
-    public FairyGodMother() {
-        super("Fairy Godmother", 150, 20);
+    public MagicMirror() {
+        super("Magic Mirror", 200, 25);
         this.mana = MAX_MANA;
     }
 
     @Override
     public void attack(Character player) {
         if (player.isInvisible()) { // Check if invisible
-            return; 
+            return;
         }
 
         Random random = new Random();
@@ -24,16 +24,15 @@ public class FairyGodMother extends Enemy {
             switch (skillChoice) {
                 case 0 -> useFirstSkill(player);
                 case 1 -> useSecondSkill();
-                case 2 -> useThirdSkill(player);
+                case 2 -> useThirdSkill(player, player.getLastSkillDamage()); // Reflective glare using last skill damage
             }
         }
     }
 
     private void useFirstSkill(Character player) {
-        System.out.println(Text.centerText(80, name + " uses Bewitching Wand!\n" + name + " deals " + getAttackPower() + " damage to " + player.getName()));
-        player.receiveDamage(getAttackPower() +20);
-        mana-=0;
-        setMana(mana);
+        System.out.println(Text.centerText(80, name + " uses Reflective Glare!\n" + name + " reflects " + player.getLastSkillDamage() + " damage back to " + player.getName()));
+        player.receiveDamage(player.getLastSkillDamage()); // Reflecting damage based on last skill used
+        mana -= 20; // Cost of using the skill
     }
 
     private void useSecondSkill() {
@@ -42,20 +41,18 @@ public class FairyGodMother extends Enemy {
             System.out.println(Text.centerText(80, name + " uses Cursed Blessing and heals for " + healAmount + " HP!"));
             heal(healAmount); // Assuming the Enemy class has a heal method
             mana -= 10;
-            setMana(mana);
         } else {
             useFirstSkill(null); // Default to first skill if not enough mana
         }
     }
 
-    // Skill 3: Mirror of Deception - Makes the player attack itself
-    private void useThirdSkill(Character player) {
+    // Skill 3: Mirror of Deception - Makes the player attack themselves
+    private void useThirdSkill(Character player, int lastSkillDamage) {
         if (mana >= 20) {
-            int selfDamage = (player.getSkillDamage(1) + player.getSkillDamage(2))/ 2; // Half the player's attack power which is the sum of all its attack damage
+            int selfDamage = lastSkillDamage; // Use the last skill damage for self-damage
             System.out.println(Text.centerText(100, name + " uses Mirror of Deception!\n" + player.getName() + " is forced to attack themselves, dealing " + selfDamage + " damage!"));
             player.receiveDamage(selfDamage);
-            mana -= 20;
-            setMana(mana);
+            mana -= 20; // Cost of using the skill
         } else {
             useFirstSkill(player); // Default to first skill if not enough mana
         }

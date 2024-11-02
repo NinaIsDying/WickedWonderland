@@ -39,6 +39,7 @@ public class MadHatter extends Enemy {
             System.out.println(Text.centerText(80, name + " uses Hatter's Healing and recovers 20 HP!"));
             heal(20); // Assuming the Enemy class has a heal method
             mana -= 10;
+            setMana(mana);
         } else {
             useFirstSkill(player); // Default to first skill if not enough mana
         }
@@ -49,6 +50,7 @@ public class MadHatter extends Enemy {
             System.out.println(Text.centerText(80, name + " uses Madness Inducer!\n" + name + " confuses you, dealing " + (getAttackPower() + 40) + " damage!"));
             player.receiveDamage(getAttackPower() + 40);
             mana -= 20;
+            setMana(mana);
         } else {
             useSecondSkill(player); // Default to second skill if not enough mana
         }
