@@ -8,7 +8,7 @@ public class PrinceHenry extends Enemy {
     private int shieldHealth; // Second health bar (shield)
 
     public PrinceHenry() {
-        super("Prince Henry", 350, 50);
+        super("Prince Henry", 350, 20);
         this.mana = MAX_MANA;
         this.isInvincible = false; // Initially not invincible
         this.invincibilityDuration = 0; // No invincibility at start
@@ -17,6 +17,10 @@ public class PrinceHenry extends Enemy {
 
     @Override
     public void attack(Character player) {
+        if (player.isInvisible()) { // Check if invisible
+            return; 
+        }
+
         Random random = new Random();
         int skillChoice = random.nextInt(4); // Updated to include the invincibility skill
 
@@ -71,25 +75,25 @@ public class PrinceHenry extends Enemy {
 
     private void useFirstSkill(Character player) {
         System.out.println(Text.centerText(80, name + " attacks with Shattered Vow!\n" + name + " deals " + (getAttackPower() + 30) + " damage to " + player.getName()));
-        player.receiveDamage(getAttackPower() + 30);
-        mana -= 5;
+        player.receiveDamage(getAttackPower() + 20);
+        mana -= 0;
     }
 
     private void useSecondSkill(Character player) {
-        if (mana >= 5) {
+        if (mana >= 20) {
             System.out.println(Text.centerText(80, name + " uses Royal Dust!\n" + name + " deals " + (getAttackPower() + 45) + " damage to " + player.getName()));
             player.receiveDamage(getAttackPower() + 45); // More damage
-            mana -= 5;
+            mana -= 20;
         } else {
             useFirstSkill(player); // Default to first skill if no mana
         }
     }
 
     private void useThirdSkill(Character player) {
-        if (mana >= 10) {
+        if (mana >= 30) {
             System.out.println(Text.centerText(80, name + " uses Madman's Kiss!\n" + name + " deals " + (getAttackPower() + 90) + " damage to " + player.getName()));
             player.receiveDamage(getAttackPower() + 90); // Even more damage
-            mana -= 10;
+            mana -= 30;
         } else {
             useSecondSkill(player); // Default to second skill if not enough mana
         }

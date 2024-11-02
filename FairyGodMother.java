@@ -11,6 +11,10 @@ public class FairyGodMother extends Enemy {
 
     @Override
     public void attack(Character player) {
+        if (player.isInvisible()) { // Check if invisible
+            return; 
+        }
+
         Random random = new Random();
         int skillChoice = random.nextInt(3);
 

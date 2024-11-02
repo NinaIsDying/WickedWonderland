@@ -13,7 +13,6 @@ public abstract class Enemy{
 
     public void heal(int healAmount) {
         currentHealth = Math.min(currentHealth + healAmount, maxHealth);
-        System.out.println(Text.centerText(80, name + " heals for " + healAmount + " HP! Current HP: " + currentHealth + "/" + maxHealth));
     }
 
     public abstract void attack(Character player);

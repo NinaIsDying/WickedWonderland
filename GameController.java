@@ -74,9 +74,19 @@ public class GameController extends Dialogue implements GameInterface {
         
         while (!validChoice) {
             try {
-                System.out.println(Text.centerText(40,WELCOME_TEXT));
-                System.out.print("                                                                                      ->");
-                int choice = scanner.nextInt();
+                int choice = -1; // Initialize choice to an invalid value
+                while (true) {
+                    try {
+                        System.out.println(Text.centerText(40, WELCOME_TEXT));
+                        System.out.print("                                                                                      ->");
+                        choice = scanner.nextInt();
+                        break;
+                         } catch (InputMismatchException e) {
+                        System.out.println("Invalid input! Please enter a valid world choice.");
+                        scanner.next(); // Clear the invalid input
+                    }
+                }
+                
                 scanner.nextLine();  // Consume newline
                 
                 switch (choice) {
@@ -106,9 +116,19 @@ public class GameController extends Dialogue implements GameInterface {
 
         while (!validWorldChoice) {
             try {
-                System.out.println(Text.centerText(chooseWorlds));
-                System.out.print("                                                                  ->");
-                int worldChoice = scanner.nextInt();
+
+                int worldChoice = 0;
+                while (true) {
+                    try {
+                        System.out.println(Text.centerText(chooseWorlds));
+                        System.out.print("                                                                  ->");
+                        worldChoice = scanner.nextInt();
+                        break;
+                         } catch (InputMismatchException e) {
+                        System.out.println("Invalid input! Please enter a valid world choice.");
+                        scanner.next(); // Clear the invalid input
+                    }
+                }
                 scanner.nextLine();  // Consume newline
 
                 switch (worldChoice) {
@@ -147,7 +167,7 @@ public class GameController extends Dialogue implements GameInterface {
 
         while (continueAdventure) {
             roundCounter = 0;
-            enemy = new Minion();  // Fight a minion first
+            enemy = new JacAndGus();  // Fight a minion first
             System.out.println(Text.centerBox("Entering Cinderella: The Shattered Palace..."));
             System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input before proceeding
@@ -172,7 +192,7 @@ public class GameController extends Dialogue implements GameInterface {
                 System.out.println(Text.centerBox(JAQ_AND_GUS_EXIT));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
-                System.out.println(Text.centerBox(VICTORY_TEXT_1));
+                System.out.println(Text.centerBox(CINDERELLA_VICTORY_TEXT_1));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
     
@@ -182,7 +202,7 @@ public class GameController extends Dialogue implements GameInterface {
 
                 enemy = new FairyGodMother();
               
-                System.out.println(Text.centerBox(ENTRANCE_TEXT_1));
+                System.out.println(Text.centerBox(CINDERELLA_ENTRANCE_TEXT_1));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
                 System.out.println(Text.centerBox(FAIRY_GODMOTHER_ENTRANCE));
@@ -197,13 +217,13 @@ public class GameController extends Dialogue implements GameInterface {
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
               
-                System.out.println(Text.centerBox(VICTORY_TEXT_2));
+                System.out.println(Text.centerBox(CINDERELLA_VICTORY_TEXT_2));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
 
                 shop.purchaseItem(player);
              
-                System.out.println(Text.centerBox(ENTRANCE_TEXT_2));
+                System.out.println(Text.centerBox(CINDERELLA_ENTRANCE_TEXT_2));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
                 
@@ -222,17 +242,32 @@ public class GameController extends Dialogue implements GameInterface {
                 System.out.println(Text.centerBox(PRINCE_HENRY_EXIT));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
-                randomEvent.displayPostBattleNarration(currentWorld);
-                System.out.print("                                                                  ->");
-                scanner.nextLine();  // Wait for input before proceeding
 
                 System.out.println(Text.centerText(120, CINDERELLA_ENDING));
                 System.out.println(Text.centerBox("You've completed Cinderella's story and broke the curse!\n"));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
-                System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
-                System.out.print("                                                                  ->");
-                int choice = scanner.nextInt();
+                int choice = -1; // Initialize choice to an invalid value
+                boolean validInput = false; // Flag to track valid input
+                
+                while (!validInput) {
+                    try {
+                        System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
+                        System.out.print("                                                                  ->");
+                        choice = scanner.nextInt();
+                
+                        if (choice == 1 || choice == 2) { // Check if choice is valid (1 or 2)
+                            validInput = true; // Exit loop if input is valid
+                        } else {
+                            System.out.println("Invalid input! Please enter 1 or 2."); // Prompt for valid input
+                        }
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input! Please enter a valid integer."); // Prompt for valid input
+                        scanner.next(); // Clear the invalid input
+                    }
+                }
+                
+                
                 if (choice == 1) {
                     isReplay = true;
                     showMenu();  // Return to main menu
@@ -241,9 +276,26 @@ public class GameController extends Dialogue implements GameInterface {
                     System.exit(0);
                 }
             } else {
-                System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
-                System.out.print("                                                                  ->");
-                int choice = scanner.nextInt();
+                int choice = -1; // Initialize choice to an invalid value
+                boolean validInput = false; // Flag to track valid input
+                
+                while (!validInput) {
+                    try {
+                        System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
+                        System.out.print("                                                                  ->");
+                        choice = scanner.nextInt();
+                
+                        if (choice == 1 || choice == 2) { // Check if choice is valid (1 or 2)
+                            validInput = true; // Exit loop if input is valid
+                        } else {
+                            System.out.println("Invalid input! Please enter 1 or 2."); // Prompt for valid input
+                        }
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input! Please enter a valid integer."); // Prompt for valid input
+                        scanner.next(); // Clear the invalid input
+                    }
+                }
+                
                 if (choice == 1) {
                     isReplay = true;
                     showMenu();  // Return to main menu
@@ -262,7 +314,7 @@ public void worldTwo() {
 
     while (continueAdventure) {
         roundCounter = 0;
-        enemy = new CardSoldier();  // Initial enemy for Alice's world
+        enemy = new TwistedTeacups();  // Initial enemy for Alice's world
         System.out.println(Text.centerBox("Entering Alice: Mad Wonderland..."));
         System.out.print("                                                                  ->");
         scanner.nextLine();  // Wait for input before proceeding
@@ -273,20 +325,28 @@ public void worldTwo() {
         scanner.nextLine();  // Wait for input before proceeding
 
         displayDialogue(introAliceContinue);
-        System.out.print("                                                                  ->");
-        scanner.nextLine();  // Wait for input before proceeding
 
-        System.out.println(Text.centerBox(WHITE_RABBIT_ENTRANCE));
+        System.out.println(Text.centerText(40,"Do you want to drink from the teacups?\n[Yes /  No]"));
+        System.out.print("                                                                  ->");
+        scanner.nextLine();
+
+        // Regardless of the choice, the teacups turn sentient and attack
+        System.out.println(Text.centerText("The teacups become sentient and attack!"));
+
+        continueAdventure = battleSequence(ALICE_ATTACKS);  // Use Alice's attack options
+
+
+        System.out.println(Text.centerBox(TWISTED_TEACUPS_ENTRANCE));
         System.out.print("                                                                  ->");
         scanner.nextLine();
         continueAdventure = battleSequence(ALICE_ATTACKS);  // Use Alice's attack options
 
         if (continueAdventure) {
-            // Pre-Battle Narration for Second Fight
-            System.out.println(Text.centerBox(WHITE_RABBIT_EXIT));
+            // Post-Battle Narration for Second Fight
+            System.out.println(Text.centerBox(TWISTED_TEACUPS_EXIT));
             System.out.print("                                                                  ->");
             scanner.nextLine();
-            System.out.println(Text.centerBox(VICTORY_TEXT_1));
+            System.out.println(Text.centerBox(ALICE_VICTORY_TEXT_1));
             System.out.print("                                                                  ->");
             scanner.nextLine();
 
@@ -294,8 +354,12 @@ public void worldTwo() {
             randomEvent.displayRandomEvent(player);  // After defeating Card Soldier, trigger random event
 
             // Battle with the Cheshire Cat
-            enemy = new CheshireCat();
-            System.out.println(Text.centerBox(CHESHIRE_CAT_ENTRANCE));
+            enemy = new MadHatter();
+              
+            System.out.println(Text.centerBox(ALICE_ENTRANCE_TEXT_1));
+            System.out.print("                                                                  ->");
+            scanner.nextLine();
+            System.out.println(Text.centerBox(MAD_HATTER_ENTRANCE));
             System.out.print("                                                                  ->");
             scanner.nextLine();
             continueAdventure = battleSequence(ALICE_ATTACKS);
@@ -304,22 +368,26 @@ public void worldTwo() {
 
         if (continueAdventure) {
             // Pre-Boss Narration
-            System.out.println(Text.centerBox(CHESHIRE_CAT_EXIT));
+            System.out.println(Text.centerBox(MAD_HATTER_EXIT));
             System.out.print("                                                                  ->");
             scanner.nextLine();
 
-            System.out.println(Text.centerBox(VICTORY_TEXT_2));
+            System.out.println(Text.centerBox(ALICE_VICTORY_TEXT_2));
             System.out.print("                                                                  ->");
             scanner.nextLine();
 
             shop.purchaseItem(player);
 
             // Alice's Final Battle with the Queen of Hearts
+              
+            System.out.println(Text.centerBox(ALICE_ENTRANCE_TEXT_2));
+            System.out.print("                                                                  ->");
+            scanner.nextLine();
             System.out.println(Text.centerBox(WHITE_RABBIT_ENTRANCE));
             System.out.print("                                                                  ->");
             scanner.nextLine();
 
-            System.out.println(Text.centerBox("Now face the final challenge... The Queen of Hearts awaits!"));
+            System.out.println(Text.centerBox("Now face the final challenge... The White Rabbit awaits!"));
             enemy = new WhiteRabbit();  // Boss fight for Alice's world
 
             continueAdventure = battleSequence(ALICE_ATTACKS);  // Boss battle with Alice's skills
@@ -330,17 +398,32 @@ public void worldTwo() {
             System.out.println(Text.centerBox(WHITE_RABBIT_EXIT));
             System.out.print("                                                                  ->");
             scanner.nextLine();
-            randomEvent.displayPostBattleNarration(currentWorld);
-            System.out.print("                                                                  ->");
-            scanner.nextLine();  // Wait for input before proceeding
+
 
             System.out.println(Text.centerText(120, ALICE_ENDING));
             System.out.println(Text.centerBox("You've completed Alice's story and freed Wonderland!\n"));
             System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input before proceeding
-            System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
-            System.out.print("                                                                  ->");
-            int choice = scanner.nextInt();
+            int choice = -1; // Initialize choice to an invalid value
+            boolean validInput = false; // Flag to track valid input
+            
+            while (!validInput) {
+                try {
+                    System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
+                    System.out.print("                                                                  ->");
+                    choice = scanner.nextInt();
+            
+                    if (choice == 1 || choice == 2) { // Check if choice is valid (1 or 2)
+                        validInput = true; // Exit loop if input is valid
+                    } else {
+                        System.out.println("Invalid input! Please enter 1 or 2."); // Prompt for valid input
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input! Please enter a valid integer."); // Prompt for valid input
+                    scanner.next(); // Clear the invalid input
+                }
+            }
+            
             if (choice == 1) {
                 isReplay = true;
                 showMenu();  // Return to main menu
@@ -349,9 +432,26 @@ public void worldTwo() {
                 System.exit(0);
             }
         } else {
-            System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
-            System.out.print("                                                                  ->");
-            int choice = scanner.nextInt();
+            int choice = -1; // Initialize choice to an invalid value
+            boolean validInput = false; // Flag to track valid input
+            
+            while (!validInput) {
+                try {
+                    System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
+                    System.out.print("                                                                  ->");
+                    choice = scanner.nextInt();
+            
+                    if (choice == 1 || choice == 2) { // Check if choice is valid (1 or 2)
+                        validInput = true; // Exit loop if input is valid
+                    } else {
+                        System.out.println("Invalid input! Please enter 1 or 2."); // Prompt for valid input
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input! Please enter a valid integer."); // Prompt for valid input
+                    scanner.next(); // Clear the invalid input
+                }
+            }
+            
             if (choice == 1) {
                 isReplay = true;
                 showMenu();  // Return to main menu
@@ -372,7 +472,7 @@ public void worldTwo() {
 
         while (continueAdventure) {
             roundCounter = 0;
-            enemy = new Minion();  // Fight a minion first
+            enemy = new JacAndGus();  // Fight a minion first
             System.out.println(Text.centerBox("Entering Snow White: The Enchanted Forest..."));
 
             displayDialogue(introSnowWhite);  // Assuming you have a dialogue for Snow White
@@ -389,7 +489,7 @@ public void worldTwo() {
 
                 // Display Pre-Battle Narrati
 
-                enemy = new Minion();  // Intermediate enemy
+                enemy = new JacAndGus();  // Intermediate enemy
                 continueAdventure = battleSequence(SNOW_WHITE_ATTACKS);  // Use Snow White's attack options
             }
 
@@ -403,14 +503,29 @@ public void worldTwo() {
 
             if (continueAdventure) {
                 // Display Post-Battle Narration after boss fight
-                randomEvent.displayPostBattleNarration(currentWorld);
-                System.out.print("                                                                  ->");
-                scanner.nextLine();  // Wait for input before proceeding
+   
 
                 System.out.println(Text.centerText("Congratulations! You have defeated the Evil Queen and completed Snow White's story."));
-                System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
-                System.out.print("                                                                  ->");
-                int choice = scanner.nextInt();
+                int choice = -1; // Initialize choice to an invalid value
+                boolean validInput = false; // Flag to track valid input
+                
+                while (!validInput) {
+                    try {
+                        System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
+                        System.out.print("                                                                  ->");
+                        choice = scanner.nextInt();
+                
+                        if (choice == 1 || choice == 2) { // Check if choice is valid (1 or 2)
+                            validInput = true; // Exit loop if input is valid
+                        } else {
+                            System.out.println("Invalid input! Please enter 1 or 2."); // Prompt for valid input
+                        }
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input! Please enter a valid integer."); // Prompt for valid input
+                        scanner.next(); // Clear the invalid input
+                    }
+                }
+                
                 scanner.nextLine();
 
                 if (choice == 1) {
@@ -457,8 +572,26 @@ public void worldTwo() {
             displayPlayerStatus(); 
     
             System.out.println(Text.centerText(60,"CHOOSE YOUR ATTACK:\n" + attackOptions));
-            System.out.print("                                                                      Choose Attack->");
-            int action = scanner.nextInt();
+            int action = -1; // Initialize action to an invalid value
+            boolean validInput = false; // Flag to track valid input
+            
+            while (!validInput) {
+                try {
+                    System.out.print("                                                                      Choose Attack->");
+                    action = scanner.nextInt();
+            
+                    // Check if action is either 1, 2, or 3
+                    if (action >= 1 && action <= 3) {
+                        validInput = true; // Exit loop if input is valid
+                    } else {
+                        System.out.println("Invalid input! Please enter 1, 2, or 3."); // Prompt for valid input
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input! Please enter a valid integer (1, 2, or 3)."); // Prompt for valid input
+                    scanner.next(); // Clear the invalid input
+                }
+            }
+            
             System.err.println();
                 
             if (player.getMana() <= 0 && action != 1) {
@@ -470,9 +603,28 @@ public void worldTwo() {
             String skillDescription = SkillBoxes.getSkillDescription(currentWorld, action);
             System.out.println(Text.centerText(skillDescription));
 
-            System.out.println(Text.centerText(40,"1. Confirm Attack | 2. Go Back"));
-            System.out.print("                                                                                Choose Option-> ");
-            int confirmChoice = scanner.nextInt();
+       
+            int confirmChoice = 0;
+            validInput = false;
+
+            while (!validInput) {
+                try {
+                    System.out.println(Text.centerText(40, "1. Confirm Attack | 2. Go Back"));
+                    System.out.print("                                                                                Choose Option-> ");
+                    confirmChoice = scanner.nextInt();
+                    
+                    if (confirmChoice == 1 || confirmChoice == 2) {
+                        validInput = true; // Exit loop if input is valid
+                    } else {
+                        System.out.println("Invalid input! Please enter 1 or 2.");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input! Please enter 1 or 2.");
+                    scanner.next(); // Clear the invalid input
+                }
+            }
+            
+            
                         
         if (confirmChoice == 2) {
                  // Gees back to attack selection
@@ -481,28 +633,67 @@ public void worldTwo() {
         
             switch (action) {
                 case 1 -> {
-                    player.specialSkill1(enemy);
-                    System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[0] + "\n" +
-                            player.getName() + " deals " + player.getSkillDamage(1) + " damage to " + enemy.getName() + "! "));
+                    if (player instanceof Alice) {
+                        player.specialSkill1(enemy);
+                        System.out.println(Text.centerText(player.getName() + " uses " + aliceSkills[0] + "\n" +
+                                player.getName() + " deals " + player.getSkillDamage(1) + " damage to " + enemy.getName() + "! "));
+                    } else if (player instanceof SnowWhite) {
+                        player.specialSkill1(enemy);
+                        System.out.println(Text.centerText(player.getName() + " uses " + snowWhiteSkills[0] + "\n" +
+                                player.getName() + " deals " + player.getSkillDamage(1) + " damage to " + enemy.getName() + "! "));
+                    } else {
+                        player.specialSkill1(enemy);
+                        System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[0] + "\n" +
+                                player.getName() + " deals " + player.getSkillDamage(1) + " damage to " + enemy.getName() + "! "));
+                    }
                     usedInvisibilityLastTurn = false; // Reset invisibility usage
                 }
                 case 2 -> {
-                    player.specialSkill2(enemy);
-                    System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[1] + "\n" +
-                            player.getName() + " deals " + player.getSkillDamage(2) + " damage to " + enemy.getName() + "! "));
-                    usedInvisibilityLastTurn = false; // Reset invisibility usage
+                    if (player instanceof Alice) {
+                        player.specialSkill2(enemy);
+                        System.out.println(Text.centerText(player.getName() + " uses " + aliceSkills[1] + "\n" +
+                                player.getName() + " deals " + player.getSkillDamage(2) + " damage to " + enemy.getName() + "! "));
+                        usedInvisibilityLastTurn = true; // Reset invisibility usage
+
+                            } else if (player instanceof SnowWhite) {
+                        player.specialSkill2(enemy);
+                        System.out.println(Text.centerText(player.getName() + " uses " + snowWhiteSkills[1] + "\n" +
+                                player.getName() + " deals " + player.getSkillDamage(2) + " damage to " + enemy.getName() + "! "));
+                                usedInvisibilityLastTurn = false; // Reset invisibility usage
+
+                            } else {
+                        player.specialSkill2(enemy);
+                        System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[1] + "\n" +
+                                player.getName() + " deals " + player.getSkillDamage(2) + " damage to " + enemy.getName() + "! "));
+                                usedInvisibilityLastTurn = false; // Reset invisibility usage
+
+                            }
                 }
                 case 3 -> {
-                    player.specialSkill3(enemy);
-                    System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[2] + "\n" +
-                            player.getName() + " cannot be attacked for one turn!"));
-                    usedInvisibilityLastTurn = true; // Set invisibility usage
+                    if (player instanceof Alice) {
+                        player.specialSkill3(enemy);
+                        System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[1] + "\n" +
+                        player.getName() + " deals " + player.getSkillDamage(2) + " damage to " + enemy.getName() + "! "));
+                        usedInvisibilityLastTurn = false; // Reset invisibility usage
+                    } else if (player instanceof SnowWhite) {
+                        player.specialSkill3(enemy);
+                        System.out.println(Text.centerText(player.getName() + " uses " + snowWhiteSkills[2] + "\n" +
+                                player.getName() + " cannot be attacked for one turn!"));
+                                usedInvisibilityLastTurn = true; // Set invisibility usage
+                            } else {
+                        player.specialSkill3(enemy);
+                        System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[2] + "\n" +
+                                player.getName() + " cannot be attacked for one turn!"));
+                                usedInvisibilityLastTurn = true; // Set invisibility usage
+
+                            }
                 }
                 default -> {
                     System.out.println(Text.centerText("Invalid action!"));
                     continue; // Skip the rest of the loop
                 }
             }
+            
         }
     
             displayEnemyStatus();
@@ -550,6 +741,20 @@ public void worldTwo() {
                     System.out.println(Text.centerText(player.getName() + "'s invisibility wore off..."));
                 }
                 ((Cinderella) player).endTurn(); // Reset invisibility status
+            }
+
+            if (player instanceof Alice) {
+                if (usedInvisibilityLastTurn) {
+                    System.out.println(Text.centerText(player.getName() + " lands on the ground. "));
+                }
+                ((Alice) player).endTurn(); // Reset invisibility status
+            }
+
+            if (player instanceof SnowWhite) {
+                if (usedInvisibilityLastTurn) {
+                    System.out.println(Text.centerText(player.getName() + "'s shield wore off..."));
+                }
+              //  ((SnowWhite) player).endTurn(); // Reset invisibility status
             }
         }
 

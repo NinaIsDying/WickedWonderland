@@ -21,6 +21,19 @@ public class Dialogue {
         wrapText("An eerie call echoes through the trees, reverberating through the stillness of the forest.")
         + "\n~~Please enter any key to continue~~",
     };
+
+    static String[] introSnowWhite = {
+        wrapText("Snow White stands at the edge of the Enchanted Forest.\nThe once vibrant trees are now blackened, their twisted branches like claws reaching out for her.")
+        + "\n~~Please enter any key to continue~~",
+    };
+
+    static String[] introAlice = {
+        wrapText("'Alice... Alice! Wake up, Alice!\nThe soft whispers of a familiar voice tug at her consciousness, pulling her from the depths of slumber. As her eyelids flutter open, a strange world unfolds before her. A vibrant landscape that seems to ripple with color and chaos. Peculiar creatures dart in and out of her vision, their eyes glinting with mischief as they scurry about.\n~~Please enter any key to continue~~"),
+    };
+    
+    static String[] introAliceContinue = {
+        wrapText("As Alice regains her composure, she blinks in astonishment. Before her stand two ornate teacups, both labeled 'Drink Me'.\nTheir porcelain surfaces glisten enticingly, reflecting the whimsical light of this bizarre realm. A flutter of excitement dances in her chest. What mysteries could these teacups hold? With a mixture of trepidation and curiosity, Alice wonders, will she dare to take a sip and plunge into the unknown?"),
+    };
     
 
     
@@ -42,10 +55,7 @@ public class Dialogue {
         wrapText("Rejuvinating Sip") 
     };
 
-    static String[] introSnowWhite = {
-        wrapText("Snow White stands at the edge of the Enchanted Forest.\nThe once vibrant trees are now blackened, their twisted branches like claws reaching out for her.")
-        + "\n~~Please enter any key to continue~~",
-    };
+
 
         
     static final String CINDERELLA_ATTACKS = 
@@ -55,21 +65,17 @@ public class Dialogue {
     
     static final String SNOW_WHITE_ATTACKS = 
     wrapText("1. Poisoned Apple Strike--[Mana -  0][Damage - 30]") +
-    wrapText("\n2. Enchanted Healing---[Mana - 30][Damage - 50]") +
+    wrapText("\n2. Enchanted Healing---[Mana - 20][Damage - 40]") +
     wrapText("\n3. Forest's Aid--------[Mana - 50][Damage -  80]");
     
 
     static final String ALICE_ATTACKS = 
-    wrapText("1. Tea Party Confusion---[Mana - 10][Damage - 30]" +
-          "\n2. Wonderland Jump--------[Mana - 15][Damage - 50]" +
-          "\n3. Rejuvenating Sip-------[Mana - 50][Damage -  0]");
+    wrapText("1. Tea Party Confusion---[Mana - 10][Damage - 30]") +
+    wrapText("\n2. Wonderland Jump--------[Mana - 30][Damage - 50]") +
+    wrapText("\n3. Rejuvenating Sip-------[Mana - 50][Damage -  0]");
 
 
-    static String[] introAlice = {
-        wrapText("Alice finds herself in the heart of Mad Wonderland.\nThe colors around her swirl in a chaotic dance, and peculiar creatures scurry about, \nwhispering secrets.")
-        + "A mischievous grin appears on her face as she grips her curiosity \ntightly, ready to embrace the madness that lies ahead."
-        + "\n~~Please enter any key to continue~~",
-    };
+
 
     static String[] battleStart = {
         wrapText("Prepare for battle!")
@@ -89,18 +95,38 @@ public class Dialogue {
                 + ("2. WORLD TWO: Mad Wonderland--------------------------------------Alice\n") +
                   ("3. WORLD THREE: Not So White----------------------------------Snow White");
 
-            public static final String VICTORY_TEXT_1 = 
+              public static final String CINDERELLA_VICTORY_TEXT_1 = 
                   wrapText("As the dark creature slowly retreats back into the shadows, Cinderella hears a strange sound behind her. Upon further observation, she finds that it is indeed a Golden Pumpkin Carriage awaiting her. Looks like not all her friends have turned against her, after all. Cinderella boards the carriage and it carries her deep into the woods.");
               
-              public static final String VICTORY_TEXT_2 = 
+              public static final String CINDERELLA_VICTORY_TEXT_2 = 
                   wrapText("With a final, defiant flourish, Cinderella watches as the Fairy Godmother's magic dissipates like mist in the morning sun. The oppressive darkness lifts, revealing a path bathed in light. A sense of freedom floods her heart as she realizes that she has reclaimed her destiny. No longer bound by enchantments, she takes a deep breath, ready to embrace the adventures that await her. The world feels anew, full of possibilities, as she steps forward into her future with unwavering resolve.");
               
-              public static final String ENTRANCE_TEXT_1 = 
+              public static final String CINDERELLA_ENTRANCE_TEXT_1 = 
                   wrapText("The air shimmers with magic and the scene shifts into a twilight glade, where beams of moonlight filter through the tree. A soft rustle breaks the silence, and a figure steps into view: the Fairy Godmother, her gown sparkling with stardust, her wand flickering like a tiny star. With a warm yet mischievous smile, she raises her wand, the air crackling with anticipation.");
               
-              public static final String ENTRANCE_TEXT_2 = 
+              public static final String CINDERELLA_ENTRANCE_TEXT_2 = 
                   wrapText("Cinderella's bruised yet tired feet finally step onto the steps of the magnificent palace. At least.. that's what she thinks. The palace is covered in vines and cracks. It is almost unrecognizable, the place she once called home. Now she must face whatever lies beyond the ivy-covered palace doors.");
               
+                  public static final String ALICE_VICTORY_TEXT_1 = 
+                  wrapText("As the last Twisted Teacup shatters, its fragments sparkle like shattered dreams in the air. Alice stands tall amidst the chaos, her heart racing with exhilaration. The chaotic creatures retreat, leaving her with the lingering taste of courage and the scent of magic. She takes a deep breath, feeling the pulse of Wonderland surge around her, ready for the next challenge that awaits.");
+              
+              public static final String ALICE_VICTORY_TEXT_2 = 
+                  wrapText("With a swift and cunning maneuver, Alice outsmarts the Mad Hatter, who disappears into the swirling madness of his own creation. The air thickens with tension, but Alice remains unshaken, her resolve as sharp as the tea cups that once threatened her. As the last echoes of his laughter fade, she feels the weight of her journey lifting, revealing the path ahead—a journey filled with both peril and possibility.");
+               
+              public static final String ALICE_ENTRANCE_TEXT_1 = 
+                  wrapText("Alice finds herself in the heart of the Mad Hatter's teaparty, a scene both whimsical and foreboding. The table is laden with peculiar treats and bizarre drinks, all dancing in a haze of enchantment. A cacophony of laughter rings in her ears, but there’s an unsettling undertone that makes her wary. Every creature seems to have a story, and every cup has a secret to tell.");
+              
+              public static final String ALICE_ENTRANCE_TEXT_2 = 
+                  wrapText("With a resolute heart, Alice steps deeper into the tangled woods where the path grows darker. The White Rabbit's silhouette flits between the trees, leading her toward her ultimate challenge. She steels herself, for she knows that the Rabbit’s cunning nature may hide traps along the way, each step a test of her newfound bravery.");
+                     
+                  public static final String TWISTED_TEACUPS_ENTRANCE = 
+                  wrapText("As you approach, Twisted Teacups whirls into view, its chipped porcelain glimmering under the flickering lights. The air is thick with the scent of burnt sugar and cinnamon, creating an oddly inviting atmosphere. Its haunting melody echoes eerily, a sinister invitation to join the chaos. \"Round and round we go... Will you last, or will you shatter like the rest?\"");
+
+              
+              public static final String TWISTED_TEACUPS_EXIT = 
+                  wrapText("Twisted Teacups begins to crack, pieces falling with an echoing clink.\n" +
+                  "\"Spinning... into... oblivion... See you at the next tea party...\"");
+                  
               public static final String JAQ_AND_GUS_ENTRANCE = 
                   wrapText("From the shadows, two once-loyal rats, Jaq and Gus, emerge, their eyes wild and frantic. 'Cinderella! You've twisted our fate!' Jaq shrieks, his voice filled with madness. 'No more kindness for you!' Gus echoes, a maniacal grin stretching across his face. 'We've lost everything because of you!' With a sudden burst of fury, they charge forward, their small forms brimming with chaotic energy, ready to unleash their twisted revenge.");
               
@@ -165,6 +191,18 @@ public class Dialogue {
                   "Cinderella returned the hug tightly, her heart racing with a mix of joy and relief.\"We're free, Henry. We can start anew,\" she replied, feeling the warmth of his presence flooding her with hope. As they held each other, the echoes of their past struggles faded away, replaced by the promise of a brighter future together.\n" + 
                   "\n" + 
                   "With the curse lifted and the palace bathed in light, the crowd erupted into cheers, celebrating their newfound freedom. In that moment, surrounded by those she had fought to save, Cinderella realized that love and courage could overcome even the darkest of curses. Together with Prince Henry, they stood amidst their friends and family, ready to reclaim their lives and build a future filled with love, laughter, and endless possibilities.");
+
+                  public static final String ALICE_ENDING = wrapText("With a final, resounding clash, Alice emerged victorious over the White Rabbit, whose frantic demeanor gave way to a look of bewildered defeat. As the dust settled, she stood amidst the remnants of the chaotic battle, the once-cursed timepiece shattered at her feet. A triumphant wave of energy surged through Wonderland, washing away the remnants of the dark enchantment that had bound the realm in a never-ending cycle of madness.\n" + 
+                  "\n" + 
+                  "As the brilliant light enveloped her, Alice felt a profound sense of liberation. The air, once heavy with despair, now shimmered with hope and joy. The peculiar inhabitants of Wonderland began to emerge from their hiding places, their eyes wide with astonishment as they witnessed the transformation taking place around them. Color returned to the landscape, flowers bloomed in vibrant hues, and the oppressive weight of time slipped away.\n" + 
+                  "\n" + 
+                  "The Cheshire Cat appeared beside her, his grin wider than ever. \"You've done it, Alice! You've freed Wonderland from its cursed loop!\" he exclaimed, his voice filled with delight. Alice beamed, knowing that her actions had not only liberated herself but also restored the joy and whimsy that had been lost.\n" + 
+                  "\n" + 
+                  "As she surveyed the joyful chaos, laughter erupted from the creatures around her. The Mad Hatter, the March Hare, and the Dormouse danced in exuberance, celebrating their newfound freedom. The once-muted colors of Wonderland sparkled under the sun, and Alice realized that this was not just a victory over darkness but a rebirth of everything she held dear.\n" + 
+                  "\n" + 
+                  "In that moment, surrounded by the jubilant faces of her friends, Alice understood the true power of courage and determination. She had faced her fears, battled the madness, and emerged not just as a hero, but as a part of Wonderland itself. With her heart swelling with pride, she took a deep breath, ready to embrace the adventures that awaited her.\n" + 
+                  "\n" + 
+                  "With the curse shattered and the future bright, Alice stepped forward into the heart of Wonderland, her spirit soaring with endless possibilities. The world felt alive, and she knew this was just the beginning of a journey filled with magic, friendship, and uncharted wonders ahead.");
 
 
     public void displayDialogue(String[] dialogue) {

@@ -1,11 +1,11 @@
 import java.util.Random;
 
-public class MadHatter extends Enemy {
+public class TwistedTeacups extends Enemy {
     private int mana;
     private static final int MAX_MANA = 150;
 
-    public MadHatter() {
-        super("Mad Hatter", 200, 25);
+    public TwistedTeacups() {
+        super("Twisted Teacups", 100, 20);
         this.mana = MAX_MANA;
     }
 
@@ -30,25 +30,25 @@ public class MadHatter extends Enemy {
     }
 
     private void useFirstSkill(Character player) {
-        System.out.println(Text.centerText(80, name + " invites you to a wild tea party!\n" + name + " deals " + (getAttackPower() + 30) + " damage to " + player.getName()));
-        player.receiveDamage(getAttackPower() + 30);
+        System.out.println(Text.centerText(80, name + " spins wildly, creating a whirlwind of chaos!\n" + name + " deals " + getAttackPower() + " damage to " + player.getName()));
+        player.receiveDamage(getAttackPower());
     }
 
     private void useSecondSkill(Character player) {
-        if (mana >= 10) {
-            System.out.println(Text.centerText(80, name + " uses Hatter's Healing and recovers 20 HP!"));
-            heal(20); // Assuming the Enemy class has a heal method
-            mana -= 10;
+        if (mana >= 30) {
+            System.out.println(Text.centerText(80, name + " unleashes a torrent of scalding tea!\n" + name + " deals " + (getAttackPower() + 15) + " damage to " + player.getName()));
+            player.receiveDamage(getAttackPower() + 15); // More damage
+            mana -= 30; // Reduce mana for using this attack
         } else {
-            useFirstSkill(player); // Default to first skill if not enough mana
+            useFirstSkill(player); // Default to first skill if no mana
         }
     }
 
     private void useThirdSkill(Character player) {
-        if (mana >= 20) {
-            System.out.println(Text.centerText(80, name + " uses Madness Inducer!\n" + name + " confuses you, dealing " + (getAttackPower() + 40) + " damage!"));
-            player.receiveDamage(getAttackPower() + 40);
-            mana -= 20;
+        if (mana >= 50) {
+            System.out.println(Text.centerText(80, name + " throws a wave of enchanted teacups!\n" + name + " deals " + (getAttackPower() + 25) + " damage to " + player.getName()));
+            player.receiveDamage(getAttackPower() + 25); // Even more damage
+            mana -= 50; // Reduce mana for using this attack
         } else {
             useSecondSkill(player); // Default to second skill if not enough mana
         }

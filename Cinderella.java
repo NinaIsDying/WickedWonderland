@@ -29,8 +29,8 @@ public class Cinderella extends Character {
 
     public int getSkillDamage(int num) {
         switch(num) {
-            case 1: return 30;
-            case 2: return 50;
+            case 1: return 30 + attackPower;
+            case 2: return 50 + attackPower;
             default: return 0; 
         }
     }
@@ -38,14 +38,14 @@ public class Cinderella extends Character {
     @Override
     public void specialSkill1(Enemy enemy) {
         useMana(0);
-        enemy.receiveDamage(30 + attackPower);
+        enemy.receiveDamage(getSkillDamage(1));
     }
 
     @Override
     public void specialSkill2(Enemy enemy) {
         restoreHealth(20);
         useMana(20);
-        enemy.receiveDamage(50 +attackPower);
+        enemy.receiveDamage(getSkillDamage(2));
     }
 
     @Override
