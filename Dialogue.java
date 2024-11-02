@@ -74,6 +74,13 @@ public class Dialogue {
     static String[] battleStart = {
         wrapText("Prepare for battle!")
     };
+    
+    static String WELCOME_TEXT = 
+        wrapText("WELCOME TO WICKED WONDERLAND! \n\n" + 
+                 "1. Start Game                 \n" + 
+                 "2. Exit                       \n" + 
+                "Choose an option:");
+    
 
     static final String chooseWorlds = 
         wrapText("C H O O S E               - Y O U R -               C H A R A C T E R")
@@ -82,7 +89,7 @@ public class Dialogue {
                 + ("2. WORLD TWO: Mad Wonderland--------------------------------------Alice\n") +
                   ("3. WORLD THREE: Not So White----------------------------------Snow White");
 
-                  public static final String VICTORY_TEXT_1 = 
+            public static final String VICTORY_TEXT_1 = 
                   wrapText("As the dark creature slowly retreats back into the shadows, Cinderella hears a strange sound behind her. Upon further observation, she finds that it is indeed a Golden Pumpkin Carriage awaiting her. Looks like not all her friends have turned against her, after all. Cinderella boards the carriage and it carries her deep into the woods.");
               
               public static final String VICTORY_TEXT_2 = 
@@ -94,8 +101,11 @@ public class Dialogue {
               public static final String ENTRANCE_TEXT_2 = 
                   wrapText("Cinderella's bruised yet tired feet finally step onto the steps of the magnificent palace. At least.. that's what she thinks. The palace is covered in vines and cracks. It is almost unrecognizable, the place she once called home. Now she must face whatever lies beyond the ivy-covered palace doors.");
               
-              public static final String DARK_CREATURE_ENTRANCE = 
-                  wrapText("A ghastly creature emerges from the darkness, its eyes gleaming with malice... Intruder... your fate is sealed within these shadowed walls. Only despair awaits.");
+              public static final String JAQ_AND_GUS_ENTRANCE = 
+                  wrapText("From the shadows, two once-loyal rats, Jaq and Gus, emerge, their eyes wild and frantic. 'Cinderella! You've twisted our fate!' Jaq shrieks, his voice filled with madness. 'No more kindness for you!' Gus echoes, a maniacal grin stretching across his face. 'We've lost everything because of you!' With a sudden burst of fury, they charge forward, their small forms brimming with chaotic energy, ready to unleash their twisted revenge.");
+              
+              public static final String JAQ_AND_GUS_EXIT = 
+                  wrapText("With maniacal laughter, Jaq and Gus retreat into the darkness, their eyes still gleaming with madness. 'You think this is over?' Jaq cackles, his voice echoing ominously. 'We'll find you again, Cinderella!' Gus adds, his tone sinister. 'You'll pay for what you've done!' As they disappear, their laughter lingers in the air, a haunting reminder of their fractured loyalty and the chaos that now defines them.");
               
               // Entrance dialogue for Prince Henry
               public static final String PRINCE_HENRY_ENTRANCE = 
@@ -108,10 +118,6 @@ public class Dialogue {
               // Entrance dialogue for the Fairy Godmother
               static final String FAIRY_GODMOTHER_ENTRANCE = 
                   wrapText("With a wave of her hand, the air crackles with dark magic... \"You thought I was your savior, but I am your curse! Time stands still at my command!\"");
-              
-              // Entrance dialogue for the Cheshire Cat
-              static final String CHESHIRE_CAT_ENTRANCE = 
-                  wrapText("A grin appears in the shadows, followed by the Cheshire Cat materializing... \"Oh, a curious little player! Care to make a deal? But beware, the truth can be quite... elusive!\"");
               
               // Entrance dialogue for the Evil Queen
               static final String EVIL_QUEEN_ENTRANCE = 
@@ -130,17 +136,9 @@ public class Dialogue {
               static final String MAD_HATTER_EXIT = 
                   wrapText("As the twisted teacups spin away, a chaotic laugh echoes... \"Do come again for tea! Maybe next time, you won't survive!\"");
               
-              // Exit dialogue for Dark Creatures
-              static final String DARK_CREATURE_EXIT = 
-                  wrapText("With a hiss, the dark beings retreat into the shadows... \"Remember, fear is your eternal companion... until we meet again!\"");
-              
               // Exit dialogue for the Fairy Godmother
               static final String FAIRY_GODMOTHER_EXIT = 
                   wrapText("With a wave, she vanishes in a swirl of dark magic... \"The clock will strike again, and next time, you may not escape!\"");
-              
-              // Exit dialogue for the Cheshire Cat
-              static final String CHESHIRE_CAT_EXIT = 
-                  wrapText("The Cheshire Cat's grin lingers as he fades into the mist... \"You can find me at the crossroads of reality and dreams... if you dare!\"");
               
               // Exit dialogue for the Evil Queen
               static final String EVIL_QUEEN_EXIT = 
@@ -157,7 +155,17 @@ public class Dialogue {
               // Exit dialogue for Snow White (as the final boss)
               static final String SNOW_WHITE_EXIT = 
                   wrapText("As Snow White fades, her voice echoes with a chilling finality... \"You may have defeated me, but darkness will always find a way to reign!\"");
-              
+            
+                  static final String CINDERELLA_ENDING = wrapText("As Cinderella stood amidst the grand hall of the palace, the air shimmered with a newfound energy. The oppressive weight of darkness began to lift, and she watched in awe as the thick ivy that had clung to the walls slowly unraveled, revealing the ornate tapestries and shimmering chandeliers that had long been hidden. The sunlight poured through the stained glass windows, casting vibrant hues across the room, breathing life back into the once-dilapidated space.\n" + 
+                  "\n" + 
+                  "One by one, the figures around her began to stir, their eyes fluttering open as if awakening from a deep slumber. Gasps of disbelief and wonder filled the air as courtiers, servants, and even the enchanted creatures of the palace found themselves free from the curse that had bound them for so long. Cinderella's heart swelled with joy as she witnessed the smiles and laughter returning to their faces, a testament to the power of love and sacrifice.\n" + 
+                  "\n" + 
+                  "And then, from the crowd, Prince Henry stepped forward, his expression a mix of gratitude and relief. With tears glistening in his eyes, he approached Cinderella, and without hesitation, he enveloped her in a warm embrace. \"Thank you, Cinderella,\" he whispered, his voice thick with emotion. \"You've broken the curse not just for me, but for all of us. I thought I had lost you forever.\"\n" + 
+                  "\n" + 
+                  "Cinderella returned the hug tightly, her heart racing with a mix of joy and relief.\"We're free, Henry. We can start anew,\" she replied, feeling the warmth of his presence flooding her with hope. As they held each other, the echoes of their past struggles faded away, replaced by the promise of a brighter future together.\n" + 
+                  "\n" + 
+                  "With the curse lifted and the palace bathed in light, the crowd erupted into cheers, celebrating their newfound freedom. In that moment, surrounded by those she had fought to save, Cinderella realized that love and courage could overcome even the darkest of curses. Together with Prince Henry, they stood amidst their friends and family, ready to reclaim their lives and build a future filled with love, laughter, and endless possibilities.");
+
 
     public void displayDialogue(String[] dialogue) {
         for (String line : dialogue) {

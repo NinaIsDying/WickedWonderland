@@ -38,7 +38,7 @@ public class Cinderella extends Character {
     @Override
     public void specialSkill1(Enemy enemy) {
         useMana(0);
-        enemy.receiveDamage(100 + attackPower);
+        enemy.receiveDamage(30 + attackPower);
     }
 
     @Override
@@ -90,4 +90,6 @@ public class Cinderella extends Character {
     public int getMaxHealth() {
         return maxHealth;
     }
+
+    
 }

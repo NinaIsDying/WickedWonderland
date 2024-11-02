@@ -74,8 +74,8 @@ public class GameController extends Dialogue implements GameInterface {
         
         while (!validChoice) {
             try {
-                System.out.println(Text.centerText("WELCOME TO WICKED WONDERLAND!\n1. Start Game\n2. Exit\nChoose an option: "));
-                System.out.print("                                                                  ->");
+                System.out.println(Text.centerText(40,WELCOME_TEXT));
+                System.out.print("                                                                                      ->");
                 int choice = scanner.nextInt();
                 scanner.nextLine();  // Consume newline
                 
@@ -162,14 +162,14 @@ public class GameController extends Dialogue implements GameInterface {
             System.out.print("                                                                  ->");
             scanner.nextLine();  // Wait for input before proceeding
             
-            System.out.println(Text.centerBox(DARK_CREATURE_ENTRANCE));
+            System.out.println(Text.centerBox(JAQ_AND_GUS_ENTRANCE));
             System.out.print("                                                                  ->");
                 scanner.nextLine();
             continueAdventure = battleSequence(CINDERELLA_ATTACKS);  // Use Cinderella's attack options
 
             if (continueAdventure) {
                 // Display Pre-Battle Narration
-                System.out.println(Text.centerBox(DARK_CREATURE_EXIT));
+                System.out.println(Text.centerBox(JAQ_AND_GUS_EXIT));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
                 System.out.println(Text.centerBox(VICTORY_TEXT_1));
@@ -200,13 +200,13 @@ public class GameController extends Dialogue implements GameInterface {
                 System.out.println(Text.centerBox(VICTORY_TEXT_2));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
+
+                shop.purchaseItem(player);
+             
                 System.out.println(Text.centerBox(ENTRANCE_TEXT_2));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
                 
-
-                shop.purchaseItem(player);
-             
                 System.out.println(Text.centerBox("Now face the final challenge... Prince Henry awaits!"));
                 enemy = new PrinceHenry();  // Boss fight
 
@@ -226,93 +226,143 @@ public class GameController extends Dialogue implements GameInterface {
                 System.out.print("                                                                  ->");
                 scanner.nextLine();  // Wait for input before proceeding
 
-                System.out.println(Text.centerText("Congratulations! You have defeated Prince Henry and completed Cinderella's story."));
+                System.out.println(Text.centerText(120, CINDERELLA_ENDING));
+                System.out.println(Text.centerBox("You've completed Cinderella's story and broke the curse!\n"));
+                System.out.print("                                                                  ->");
+                scanner.nextLine();  // Wait for input before proceeding
                 System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
                 System.out.print("                                                                  ->");
                 int choice = scanner.nextInt();
-                scanner.nextLine();
-
                 if (choice == 1) {
                     isReplay = true;
                     showMenu();  // Return to main menu
                 } else {
                     System.out.println(Text.centerText("Thank you for playing!"));
-                    break;
+                    System.exit(0);
                 }
             } else {
-                System.out.println(Text.centerText("You have been defeated. Restarting game..."));
-                isReplay = true;
-                showMenu();  // Restart from menu
-            }
-        }
-    }
-
-    // World Two - Placeholder for Alice's world
-    @Override
-    public void worldTwo() {
-        boolean continueAdventure = true;
-
-        while (continueAdventure) {
-            roundCounter = 0;
-            enemy = new Minion();  // Example enemy for Alice's world
-            System.out.println(Text.centerBox("Entering Alice: Mad Wonderland..."));
-
-            // Display Pre-Battle Narration
-   
-
-            displayDialogue(introAlice);  // Display Alice's intro dialogue
-            System.out.print("                                                                  ->");
-            scanner.nextLine(); // Wait for input before proceeding
-            continueAdventure = battleSequence(ALICE_ATTACKS);  // Pass Alice's attacks
-
-            if (continueAdventure) {
-                // Display Post-Battle Narration after minion defeat
-                randomEvent.displayPostBattleNarration(currentWorld);
-                System.out.print("                                                                  ->");
-                scanner.nextLine();  // Wait for input before proceeding
-
-                shop.purchaseItem(player);
-
-                randomEvent.displayRandomEvent(player);
-
-
-                enemy = new Minion();  // Example minion for Alice's world
-                continueAdventure = battleSequence(ALICE_ATTACKS);
-            }
-
-            if (continueAdventure) {
-          
-                shop.purchaseItem(player);
-
-                System.out.println(Text.centerText("Now face the final challenge... The Queen of Hearts awaits!"));
-                enemy = new MadHatter();  // Boss fight
-                continueAdventure = battleSequence(ALICE_ATTACKS);  // Boss battle
-            }
-
-            if (continueAdventure) {
-                // Display Post-Battle Narration after boss fight
-                randomEvent.displayPostBattleNarration(currentWorld);
-                System.out.print("                                                                  ->");
-                scanner.nextLine();  // Wait for input before proceeding
-
-                System.out.println(Text.centerText("Congratulations! You have defeated the Queen of Hearts and completed Alice's story."));
                 System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
+                System.out.print("                                                                  ->");
                 int choice = scanner.nextInt();
-                scanner.nextLine();
-
                 if (choice == 1) {
+                    isReplay = true;
                     showMenu();  // Return to main menu
                 } else {
                     System.out.println(Text.centerText("Thank you for playing!"));
-                    break;
+                    System.exit(0);
                 }
-            } else {
-                System.out.println(Text.centerText("You have been defeated. Restarting game..."));
-                isReplay = true;
-                showMenu();
             }
         }
     }
+
+    // World Two - Alice: Mad Wonderland
+@Override
+public void worldTwo() {
+    boolean continueAdventure = true;
+
+    while (continueAdventure) {
+        roundCounter = 0;
+        enemy = new CardSoldier();  // Initial enemy for Alice's world
+        System.out.println(Text.centerBox("Entering Alice: Mad Wonderland..."));
+        System.out.print("                                                                  ->");
+        scanner.nextLine();  // Wait for input before proceeding
+
+        // Introduction Dialogue for Alice's Story
+        displayDialogue(introAlice);
+        System.out.print("                                                                  ->");
+        scanner.nextLine();  // Wait for input before proceeding
+
+        displayDialogue(introAliceContinue);
+        System.out.print("                                                                  ->");
+        scanner.nextLine();  // Wait for input before proceeding
+
+        System.out.println(Text.centerBox(WHITE_RABBIT_ENTRANCE));
+        System.out.print("                                                                  ->");
+        scanner.nextLine();
+        continueAdventure = battleSequence(ALICE_ATTACKS);  // Use Alice's attack options
+
+        if (continueAdventure) {
+            // Pre-Battle Narration for Second Fight
+            System.out.println(Text.centerBox(WHITE_RABBIT_EXIT));
+            System.out.print("                                                                  ->");
+            scanner.nextLine();
+            System.out.println(Text.centerBox(VICTORY_TEXT_1));
+            System.out.print("                                                                  ->");
+            scanner.nextLine();
+
+            shop.purchaseItem(player);     
+            randomEvent.displayRandomEvent(player);  // After defeating Card Soldier, trigger random event
+
+            // Battle with the Cheshire Cat
+            enemy = new CheshireCat();
+            System.out.println(Text.centerBox(CHESHIRE_CAT_ENTRANCE));
+            System.out.print("                                                                  ->");
+            scanner.nextLine();
+            continueAdventure = battleSequence(ALICE_ATTACKS);
+
+        }
+
+        if (continueAdventure) {
+            // Pre-Boss Narration
+            System.out.println(Text.centerBox(CHESHIRE_CAT_EXIT));
+            System.out.print("                                                                  ->");
+            scanner.nextLine();
+
+            System.out.println(Text.centerBox(VICTORY_TEXT_2));
+            System.out.print("                                                                  ->");
+            scanner.nextLine();
+
+            shop.purchaseItem(player);
+
+            // Alice's Final Battle with the Queen of Hearts
+            System.out.println(Text.centerBox(WHITE_RABBIT_ENTRANCE));
+            System.out.print("                                                                  ->");
+            scanner.nextLine();
+
+            System.out.println(Text.centerBox("Now face the final challenge... The Queen of Hearts awaits!"));
+            enemy = new WhiteRabbit();  // Boss fight for Alice's world
+
+            continueAdventure = battleSequence(ALICE_ATTACKS);  // Boss battle with Alice's skills
+        }
+
+        if (continueAdventure) {
+            // Post-Battle Narration for Alice's Story Completion
+            System.out.println(Text.centerBox(WHITE_RABBIT_EXIT));
+            System.out.print("                                                                  ->");
+            scanner.nextLine();
+            randomEvent.displayPostBattleNarration(currentWorld);
+            System.out.print("                                                                  ->");
+            scanner.nextLine();  // Wait for input before proceeding
+
+            System.out.println(Text.centerText(120, ALICE_ENDING));
+            System.out.println(Text.centerBox("You've completed Alice's story and freed Wonderland!\n"));
+            System.out.print("                                                                  ->");
+            scanner.nextLine();  // Wait for input before proceeding
+            System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
+            System.out.print("                                                                  ->");
+            int choice = scanner.nextInt();
+            if (choice == 1) {
+                isReplay = true;
+                showMenu();  // Return to main menu
+            } else {
+                System.out.println(Text.centerText("Thank you for playing!"));
+                System.exit(0);
+            }
+        } else {
+            System.out.println(Text.centerText("Do you want to play again?\n1. Yes\n2. No"));
+            System.out.print("                                                                  ->");
+            int choice = scanner.nextInt();
+            if (choice == 1) {
+                isReplay = true;
+                showMenu();  // Return to main menu
+            } else {
+                System.out.println(Text.centerText("Thank you for playing!"));
+                System.exit(0);
+            }
+        }
+    }
+}
+
 
     
     // World Three - Snow White's storyline
@@ -406,8 +456,8 @@ public class GameController extends Dialogue implements GameInterface {
             displayEnemyStatus();
             displayPlayerStatus(); 
     
-            System.out.println(Text.centerText("CHOOSE YOUR ATTACK:\n" + attackOptions));
-            System.out.print("                                                            Choose Attack->");
+            System.out.println(Text.centerText(60,"CHOOSE YOUR ATTACK:\n" + attackOptions));
+            System.out.print("                                                                      Choose Attack->");
             int action = scanner.nextInt();
             System.err.println();
                 
@@ -420,8 +470,8 @@ public class GameController extends Dialogue implements GameInterface {
             String skillDescription = SkillBoxes.getSkillDescription(currentWorld, action);
             System.out.println(Text.centerText(skillDescription));
 
-            System.out.println(Text.centerText("1. Confirm Attack | 2. Go Back"));
-            System.out.print("                                                            Choose Option-> ");
+            System.out.println(Text.centerText(40,"1. Confirm Attack | 2. Go Back"));
+            System.out.print("                                                                                Choose Option-> ");
             int confirmChoice = scanner.nextInt();
                         
         if (confirmChoice == 2) {
@@ -468,6 +518,9 @@ public class GameController extends Dialogue implements GameInterface {
                 }
                 displayEnemyStatus();
                 displayPlayerStatus(); 
+                //dont let program immediately go to next round
+                System.out.println(Text.centerText(40,"Press Enter"));
+                scanner.nextLine();
              
             }
             //updates round counter after enemy attacks.
@@ -500,9 +553,7 @@ public class GameController extends Dialogue implements GameInterface {
             }
         }
 
-        //dont let program immediately go to next round
-        System.out.println(Text.centerText("Press Enter"));
-        scanner.nextLine();
+     
 
         return true;
     }

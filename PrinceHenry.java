@@ -21,12 +21,10 @@ public class PrinceHenry extends Enemy {
         int skillChoice = random.nextInt(4); // Updated to include the invincibility skill
 
         if (isInvincible) {
-            System.out.println(Text.centerText(80, name + " is invincible this turn! No damage taken."));
             invincibilityDuration--; // Decrement duration
             if (invincibilityDuration <= 0) {
                 isInvincible = false; // Reset invincibility after the turn
             }
-            return; // Skip attack if invincible
         }
 
         if (mana == 0) {

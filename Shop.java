@@ -141,28 +141,36 @@
  
      // Process item purchase
      private void processPurchase(Character player, Item item) {
-         player.decreaseGold(item.getPrice());
+         player.adjustGold(item.getPrice());
  
          switch (item.getEffect()) {
              case "heal" -> {
+                if(player.getHealth() == player.getMaxHealth()){
+                    System.out.println(Text.centerText("Health is already full! Purchase failed"));
+                    break;
+                }
                  if (item.getValue() == Integer.MAX_VALUE) {
                      player.setHealth(player.getMaxHealth()); // Full health restoration
                      System.out.println(Text.centerText("You bought an Elixir of Vitality! Your health is now: " + player.getHealth()));
                  } else {
-                     player.heal(item.getValue());
+                     player.restoreHealth(item.getValue());
                      System.out.println(Text.centerText("You bought a Health Potion! Your health is now: " + player.getHealth()));
                  }
              }
              case "attackBoost" -> {
-                 player.increaseAttack(item.getValue());
+                 player.setAttackPower( player.attackPower += item.getValue());
                  System.out.println(Text.centerText("You bought an Attack Boost! Your attack power increased by " + item.getValue()));
              }
              case "restoreMana" -> {
+                if(player.getMana() == player.getMaxMana()){
+                    System.out.println(Text.centerText("Mana is already full! Purchase failed"));
+                    break;
+                }
                  if (item.getValue() == Integer.MAX_VALUE) {
                      player.setMana(player.getMaxMana()); // Full mana restoration
                      System.out.println(Text.centerText("You bought an Essence of Clarity! Your mana is now: " + player.getMana()));
                  } else {
-                     player.increaseMana(item.getValue());
+                     player.restoreHealth(item.getValue());
                      System.out.println(Text.centerText("You bought a Mana Potion! Your mana is now: " + player.getMana()));
                  }
              }
