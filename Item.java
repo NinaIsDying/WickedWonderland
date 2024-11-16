@@ -13,13 +13,15 @@ public class Item {
     private int price;
     private String effect;  // Can be 'heal' or 'attackBoost'
     private int value;      // Represents how much health or attack to boost
+    private String description;
 
     // Constructor
-    public Item(String name, int price, String effect, int value) {
+    public Item(String name, int price, String effect, int value, String description) {
         this.name = name;
         this.price = price;
         this.effect = effect;
         this.value = value;
+        this.description = description;
     }
 
     // Getters
@@ -41,6 +43,6 @@ public class Item {
 
     // Display item info
     public String displayItem() {
-        return name + " - " + price + " gold";
+        return name + " (" + price + " Gold) " + description;
     }
 }

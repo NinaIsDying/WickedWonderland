@@ -1,6 +1,8 @@
+import java.util.Random;
+
 public class SnowWhite extends Character {
     private int attackPower = 0;
-    private final int maxHealth = 400; 
+    private int maxHealth = 400; 
     private boolean damageReductionActive;
     private final int damageReductionPercentage = 20; // Damage reduction set to 20%
     private int lastSkillDamage; // Variable to store the damage of the last skill used
@@ -9,54 +11,97 @@ public class SnowWhite extends Character {
         super("Snow White", 400, 200);
         this.damageReductionActive = false; // Damage reduction starts inactive
         this.lastSkillDamage = 0; // Initialize lastSkillDamage
+        this.maxHealth = health; 
+        this.maxMana = mana;
     }
 
-    public int getLastSkillDamage() {
+    @Override
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    @Override
+    public int getLastSkillDamage(int par) {
         return lastSkillDamage; // Getter for last skill damage
     }
 
+    @Override
     public int getSkillDamage(int num) {
-        switch(num) {
-            case 1: 
-                lastSkillDamage = 30 + attackPower; // Set lastSkillDamage when skill 1 is used
-                return lastSkillDamage;
-            case 2: 
-                lastSkillDamage = 40 + attackPower; // Set lastSkillDamage when skill 2 is used
-                return lastSkillDamage; // Increased damage for skill 2
-            default: 
-                return 0; 
+        switch (num) {
+            case 1:  // Glass Shard Strike
+                return 50 + attackPower;  // Max damage for Glass Shard Strike
+            case 2:  // Enchanted Resilience
+                return 60 + attackPower;  // Max damage for Enchanted Resilience
+            case 3:  // Midnight Escape
+                return 0 + attackPower;   // No damage for Midnight Escape
+            default:
+                return 0;  // Invalid skill
         }
     }
     
-    @Override
-    public void specialSkill1(Enemy enemy) {
-   
-        useMana(0);
-        int damage = getSkillDamage(1); // Get the damage value for skill 1
-        enemy.receiveDamage(damage); // Deal damage to the enemy
-    }
+        @Override
+        public void specialSkill1(Enemy enemy) {
 
-    @Override
-    public void specialSkill2(Enemy enemy) {
-        if(getMana() <=0){
-            System.out.println(Text.centerText(name + " has no more mana!"));
-            return;
-        }
-        useMana(30);
-        restoreHealth(20);
-        int damage = getSkillDamage(2); // Get the damage value for skill 2
-        enemy.receiveDamage(damage); // Deal damage to the enemy
-    }
+            
+            int minDamage = 25; // Minimum damage for Skill 1
+            int maxDamage = 40+getAttackPower(); // Maximum damage for Skill 1
+            int damage = new Random().nextInt(maxDamage - minDamage + 1) + minDamage; // Random damage generation
+            useMana(0);  // Use no mana for this skill
+           
+            
+            // Display the damage dealt
+            System.out.println(Text.centerText(name + " uses Poisoned Apple Strike\n" +
+                    name + " deals " + damage + " damage to " + enemy.getName() + "!"));
+            
+            if (damage > 40) { // Critical damage threshold
+                System.out.println(Text.centerText("CRITICAL DAMAGE!"));
+            }
 
-    @Override
-    public void specialSkill3(Enemy enemy) {
-        if(getMana() <=0){
-            System.out.println(Text.centerText(name + " has no more mana!"));
-            return;
+            enemy.receiveDamage(damage);  // Deal the damage to the enemy
+            setLastSkillDamage(damage);  // Store damage for display
         }
-        activateDamageReduction(); // Activate the damage reduction for this turn
-        useMana(50);
-    }
+        
+        @Override
+        public void specialSkill2(Enemy enemy) {
+            if (getMana() <= 30) {
+                System.out.println(Text.centerText(name + " has insufficient mana!"));
+                return;
+            }
+            
+            int minDamage = 45; // Minimum damage for Skill 2
+            int maxDamage = 60+getAttackPower(); // Maximum damage for Skill 2
+            int damage = new Random().nextInt(maxDamage - minDamage + 1) + minDamage; // Random damage generation
+            restoreHealth(20);  // Restore health
+            useMana(30);  // Deduct mana
+         
+            // Display the damage dealt
+            System.out.println(Text.centerText(name + " uses Enchanted Healing\n" +
+                    name + " deals " + damage + " damage to " + enemy.getName() + "!"));
+            
+            if (damage > 50) { // Critical damage threshold
+                System.out.println(Text.centerText("CRITICAL DAMAGE!"));
+            }
+
+            enemy.receiveDamage(damage);  // Deal the damage to the enemy
+            setLastSkillDamage(damage);  // Store damage for display
+            
+        }
+        
+        @Override
+        public void specialSkill3(Enemy enemy) {
+            if (getMana() <= 50) {
+                System.out.println(Text.centerText(name + " has insufficient mana!"));
+                return;
+            }
+            
+            activateDamageReduction();  // Activate the damage reduction effect for this turn
+            useMana(50);  // Deduct mana for this skill
+            
+            // Display skill use
+            System.out.println(Text.centerText(name + " uses Forest's Aid\n" +
+                    name + " activates damage reduction for the next turn!"));
+        }
+        
 
     public void activateDamageReduction() {
         this.damageReductionActive = true; // Set the damage reduction to active
@@ -74,6 +119,7 @@ public class SnowWhite extends Character {
     }
 
     // Call this method when taking damage
+    @Override
     public void receiveDamage(int damage) {
         int finalDamage = applyDamageReduction(damage); // Apply damage reduction if active
         setHealth(getHealth() - finalDamage); // Update health after taking damage
@@ -103,5 +149,11 @@ public class SnowWhite extends Character {
     public void endTurn() {
         deactivateDamageReduction(); // Deactivate after the turn
     }
+    @Override
+    public void increaseMaxHealth(int amount) {
+        maxHealth += amount;
+        health = Math.min(health, maxHealth); // Ensure current health doesn't exceed new max
+    }
+
     
 }

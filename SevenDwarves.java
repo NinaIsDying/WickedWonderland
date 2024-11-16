@@ -40,8 +40,9 @@ public class SevenDwarves extends Enemy {
 
     private void useGrumpySkill(Character player) {
         if (mana >= 5) {
-            System.out.println(Text.centerText(80, "Grumpy throws a tantrum!\n" + "Grumpy deals " + (getAttackPower() + 5) + " damage to " + player.getName()));
-            player.receiveDamage(getAttackPower() + 5);
+            int damage = getRandomDamage(getAttackPower() + 5, getAttackPower() + 10); // Randomize damage
+            System.out.println(Text.centerText(80, "Grumpy throws a tantrum!\n" + "Grumpy deals " + damage + " damage to " + player.getName()));
+            player.receiveDamage(damage);
             mana -= 5;
             setMana(mana);
         } else {
@@ -51,8 +52,9 @@ public class SevenDwarves extends Enemy {
 
     private void useHappySkill(Character player) {
         if (mana >= 10) {
-            System.out.println(Text.centerText(80, "Happy sings a cheerful song!\n" + "Happy deals " + (getAttackPower() + 10) + " damage to " + player.getName()));
-            player.receiveDamage(getAttackPower() + 10);
+            int damage = getRandomDamage(getAttackPower() + 10, getAttackPower() + 15); // Randomize damage
+            System.out.println(Text.centerText(80, "Happy sings a cheerful song!\n" + "Happy deals " + damage + " damage to " + player.getName()));
+            player.receiveDamage(damage);
             mana -= 10;
             setMana(mana);
         } else {
@@ -67,16 +69,18 @@ public class SevenDwarves extends Enemy {
     }
 
     private void useSneezySkill(Character player) {
-        System.out.println(Text.centerText(80, "Sneezy sneezes a powerful sneeze!\n" + "Sneezy deals " + (getAttackPower() + 15) + " damage to " + player.getName()));
-        player.receiveDamage(getAttackPower() + 15);
+        int damage = getRandomDamage(getAttackPower() + 15, getAttackPower() + 20); // Randomize damage
+        System.out.println(Text.centerText(80, "Sneezy sneezes a powerful sneeze!\n" + "Sneezy deals " + damage + " damage to " + player.getName()));
+        player.receiveDamage(damage);
         mana -= 10;
         setMana(mana);
     }
 
     private void useBashfulSkill(Character player) {
         if (mana >= 15) {
-            System.out.println(Text.centerText(80, "Bashful throws a bashful attack!\n" + "Bashful deals " + (getAttackPower() + 20) + " damage to " + player.getName()));
-            player.receiveDamage(getAttackPower() + 20);
+            int damage = getRandomDamage(getAttackPower() + 20, getAttackPower() + 25); // Randomize damage
+            System.out.println(Text.centerText(80, "Bashful throws a bashful attack!\n" + "Bashful deals " + damage + " damage to " + player.getName()));
+            player.receiveDamage(damage);
             mana -= 15;
             setMana(mana);
         } else {
@@ -85,10 +89,17 @@ public class SevenDwarves extends Enemy {
     }
 
     private void useDopeySkill(Character player) {
-        System.out.println(Text.centerText(80, "Dopey confuses the enemy!\n" + player.getName() + " trips, receiving " + (getAttackPower()+10) + " damage."));
-        player.receiveDamage(getAttackPower() + 10);
+        int damage = getRandomDamage(getAttackPower() + 10, getAttackPower() + 15); // Randomize damage
+        System.out.println(Text.centerText(80, "Dopey confuses the enemy!\n" + player.getName() + " trips, receiving " + damage + " damage."));
+        player.receiveDamage(damage);
         mana -= 10;
         setMana(mana);
+    }
+
+    // Method to generate a random damage value within the given range
+    private int getRandomDamage(int minDamage, int maxDamage) {
+        Random random = new Random();
+        return random.nextInt(maxDamage - minDamage + 1) + minDamage;
     }
 
     public int getMana() {

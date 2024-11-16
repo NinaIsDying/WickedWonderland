@@ -11,10 +11,11 @@ public class TwistedTeacups extends Enemy {
 
     @Override
     public void attack(Character player) {
-        if (player.isInvisible()) { // Check if Alice is invisible
-            System.out.println(Text.centerText(90, name + " attempts to attack, but " +  player.getName() + " is in the air and cannot be attacked!"));
-            return; // Exit the method if Alice is invisible
+        if (player.isInvisible()) {
+            System.out.println(Text.centerText(90, name + " attempts to attack, but " + player.getName() + " is in the air and cannot be attacked!"));
+            return;
         }
+
         Random random = new Random();
         int skillChoice = random.nextInt(3);
 
@@ -37,22 +38,22 @@ public class TwistedTeacups extends Enemy {
     private void useSecondSkill(Character player) {
         if (mana >= 30) {
             System.out.println(Text.centerText(80, name + " unleashes a torrent of scalding tea!\n" + name + " deals " + (getAttackPower() + 15) + " damage to " + player.getName()));
-            player.receiveDamage(getAttackPower() + 15); // More damage
-            mana -= 30; // Reduce mana for using this attack
+            player.receiveDamage(getAttackPower() + 15);
+            mana -= 30;
             setMana(mana);
         } else {
-            useFirstSkill(player); // Default to first skill if no mana
+            useFirstSkill(player);
         }
     }
 
     private void useThirdSkill(Character player) {
         if (mana >= 50) {
             System.out.println(Text.centerText(80, name + " throws a wave of enchanted teacups!\n" + name + " deals " + (getAttackPower() + 25) + " damage to " + player.getName()));
-            player.receiveDamage(getAttackPower() + 25); // Even more damage
-            mana -= 50; // Reduce mana for using this attack
+            player.receiveDamage(getAttackPower() + 25);
+            mana -= 50;
             setMana(mana);
         } else {
-            useSecondSkill(player); // Default to second skill if not enough mana
+            useSecondSkill(player);
         }
     }
 

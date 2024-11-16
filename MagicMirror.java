@@ -24,37 +24,38 @@ public class MagicMirror extends Enemy {
             switch (skillChoice) {
                 case 0 -> useFirstSkill(player);
                 case 1 -> useSecondSkill();
-                case 2 -> useThirdSkill(player, player.getLastSkillDamage()); // Reflective glare using last skill damage
+                case 2 -> useThirdSkill(player);
             }
         }
     }
 
     private void useFirstSkill(Character player) {
-        System.out.println(Text.centerText(80, name + " uses Reflective Glare!\n" + name + " reflects " + player.getLastSkillDamage() + " damage back to " + player.getName()));
-        player.receiveDamage(player.getLastSkillDamage()); // Reflecting damage based on last skill used
-        mana -= 20; // Cost of using the skill
+        int damage = player.getLastSkillDamage(1);
+        System.out.println(Text.centerText(80, name + " uses Reflective Glare!\n" + name + " reflects " + damage + " damage back to " + player.getName()));
+        player.receiveDamage(damage);
+        mana -= 20;
+        setMana(mana);
     }
 
     private void useSecondSkill() {
         if (mana >= 10) {
-            int healAmount = 30;
-            System.out.println(Text.centerText(80, name + " uses Cursed Blessing and heals for " + healAmount + " HP!"));
-            heal(healAmount); // Assuming the Enemy class has a heal method
+            System.out.println(Text.centerText(80, name + " uses Mirror's Blessing to heal!"));
+            heal(20); // Assuming the Enemy class has a heal method
             mana -= 10;
+            setMana(mana);
         } else {
             useFirstSkill(null); // Default to first skill if not enough mana
         }
     }
 
-    // Skill 3: Mirror of Deception - Makes the player attack themselves
-    private void useThirdSkill(Character player, int lastSkillDamage) {
-        if (mana >= 20) {
-            int selfDamage = lastSkillDamage; // Use the last skill damage for self-damage
-            System.out.println(Text.centerText(100, name + " uses Mirror of Deception!\n" + player.getName() + " is forced to attack themselves, dealing " + selfDamage + " damage!"));
-            player.receiveDamage(selfDamage);
-            mana -= 20; // Cost of using the skill
+    private void useThirdSkill(Character player) {
+        if (mana >= 30) {
+            System.out.println(Text.centerText(80, name + " uses Mirror's Embrace!\n" + name + " creates a protective barrier, reducing incoming damage for 1 turn!"));
+            player.receiveDamage(player.getLastSkillDamage(1) - 15); // Damage reduced by 15
+            mana -= 30;
+            setMana(mana);
         } else {
-            useFirstSkill(player); // Default to first skill if not enough mana
+            useSecondSkill(); // Default to second skill if not enough mana
         }
     }
 
