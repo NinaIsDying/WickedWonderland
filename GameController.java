@@ -82,7 +82,7 @@ public class GameController extends Dialogue implements GameInterface {
                         choice = scanner.nextInt();
                         break;
                          } catch (InputMismatchException e) {
-                        System.out.println("Invalid input! Please enter a valid world choice.");
+                        System.out.println(Text.centerText("Invalid input! Please enter a valid world choice."));
                         scanner.next(); // Clear the invalid input
                     }
                 }
@@ -125,7 +125,7 @@ public class GameController extends Dialogue implements GameInterface {
                         worldChoice = scanner.nextInt();
                         break;
                          } catch (InputMismatchException e) {
-                        System.out.println("Invalid input! Please enter a valid world choice.");
+                        System.out.println(Text.centerText("Invalid input! Please enter a valid world choice."));
                         scanner.next(); // Clear the invalid input
                     }
                 }
@@ -259,10 +259,10 @@ public class GameController extends Dialogue implements GameInterface {
                         if (choice == 1 || choice == 2) { // Check if choice is valid (1 or 2)
                             validInput = true; // Exit loop if input is valid
                         } else {
-                            System.out.println("Invalid input! Please enter 1 or 2."); // Prompt for valid input
+                            System.out.println(Text.centerText("Invalid input! Please enter 1 or 2.")); // Prompt for valid input
                         }
                     } catch (InputMismatchException e) {
-                        System.out.println("Invalid input! Please enter a valid integer."); // Prompt for valid input
+                        System.out.println(Text.centerText("Invalid input! Please enter a valid integer.")); // Prompt for valid input
                         scanner.next(); // Clear the invalid input
                     }
                 }
@@ -288,10 +288,10 @@ public class GameController extends Dialogue implements GameInterface {
                         if (choice == 1 || choice == 2) { // Check if choice is valid (1 or 2)
                             validInput = true; // Exit loop if input is valid
                         } else {
-                            System.out.println("Invalid input! Please enter 1 or 2."); // Prompt for valid input
+                            System.out.println(Text.centerText("Invalid input! Please enter 1 or 2.")); // Prompt for valid input
                         }
                     } catch (InputMismatchException e) {
-                        System.out.println("Invalid input! Please enter a valid integer."); // Prompt for valid input
+                        System.out.println(Text.centerText("Invalid input! Please enter a valid integer.")); // Prompt for valid input
                         scanner.next(); // Clear the invalid input
                     }
                 }
@@ -413,10 +413,10 @@ public class GameController extends Dialogue implements GameInterface {
                         if (choice == 1 || choice == 2) { // Check if choice is valid (1 or 2)
                             validInput = true; // Exit loop if input is valid
                         } else {
-                            System.out.println("Invalid input! Please enter 1 or 2."); // Prompt for valid input
+                            System.out.println(Text.centerText("Invalid input! Please enter 1 or 2.")); // Prompt for valid input
                         }
                     } catch (InputMismatchException e) {
-                        System.out.println("Invalid input! Please enter a valid integer."); // Prompt for valid input
+                        System.out.println(Text.centerText("Invalid input! Please enter a valid integer.")); // Prompt for valid input
                         scanner.next(); // Clear the invalid input
                     }
                 }
@@ -441,10 +441,10 @@ public class GameController extends Dialogue implements GameInterface {
                         if (choice == 1 || choice == 2) { // Check if choice is valid (1 or 2)
                             validInput = true; // Exit loop if input is valid
                         } else {
-                            System.out.println("Invalid input! Please enter 1 or 2."); // Prompt for valid input
+                            System.out.println(Text.centerText("Invalid input! Please enter 1 or 2.")); // Prompt for valid input
                         }
                     } catch (InputMismatchException e) {
-                        System.out.println("Invalid input! Please enter a valid integer."); // Prompt for valid input
+                        System.out.println(Text.centerText("Invalid input! Please enter a valid integer.")); // Prompt for valid input
                         scanner.next(); // Clear the invalid input
                     }
                 }
@@ -560,10 +560,10 @@ public class GameController extends Dialogue implements GameInterface {
                         if (choice == 1 || choice == 2) { // Check if choice is valid (1 or 2)
                             validInput = true; // Exit loop if input is valid
                         } else {
-                            System.out.println("Invalid input! Please enter 1 or 2."); // Prompt for valid input
+                            System.out.println(Text.centerText("Invalid input! Please enter 1 or 2.")); // Prompt for valid input
                         }
                     } catch (InputMismatchException e) {
-                        System.out.println("Invalid input! Please enter a valid integer."); // Prompt for valid input
+                        System.out.println(Text.centerText("Invalid input! Please enter a valid integer.")); // Prompt for valid input
                         scanner.next(); // Clear the invalid input
                     }
                 }
@@ -588,10 +588,10 @@ public class GameController extends Dialogue implements GameInterface {
                         if (choice == 1 || choice == 2) { // Check if choice is valid (1 or 2)
                             validInput = true; // Exit loop if input is valid
                         } else {
-                            System.out.println("Invalid input! Please enter 1 or 2."); // Prompt for valid input
+                            System.out.println(Text.centerText("Invalid input! Please enter 1 or 2.")); // Prompt for valid input
                         }
                     } catch (InputMismatchException e) {
-                        System.out.println("Invalid input! Please enter a valid integer."); // Prompt for valid input
+                        System.out.println(Text.centerText("Invalid input! Please enter a valid integer.")); // Prompt for valid input
                         scanner.next(); // Clear the invalid input
                     }
                 }
@@ -614,11 +614,39 @@ public class GameController extends Dialogue implements GameInterface {
         return random.nextInt(max - min + 1) + min; 
     }
 
+    // Adjusts gold amount based on specific enemy min-max range
+    private int getEnemyGoldMin() {
+        if (enemy instanceof JacAndGus || enemy instanceof TwistedTeacups || enemy instanceof SevenDwarves) {
+            return 50;
+        } else if (enemy instanceof FairyGodMother || enemy instanceof MagicMirror || enemy instanceof MadHatter) {
+            return 100;
+        } else if (enemy instanceof PrinceHenry || enemy instanceof DarkSnowWhite || enemy instanceof WhiteRabbit) {
+            return 150;
+        } else {
+            // Default value if enemy type is not recognized
+            return 50;
+        }
+    }
+    
+    private int getEnemyGoldMax() {
+        if (enemy instanceof JacAndGus || enemy instanceof TwistedTeacups || enemy instanceof SevenDwarves) {
+            return 100;
+        } else if (enemy instanceof FairyGodMother || enemy instanceof MagicMirror || enemy instanceof MadHatter) {
+            return 150;
+        } else if (enemy instanceof PrinceHenry || enemy instanceof DarkSnowWhite || enemy instanceof WhiteRabbit) {
+            return 200;
+        } else {
+            // Default value if enemy type is not recognized
+            return 150;
+        }
+    }
+
+
     // Battle sequence method with customizable attack options
     @Override
     public boolean battleSequence(String attackOptions) {        
         boolean firstLineDisplayed = false;
-        int goldAmount = generateRandomGold(50, 150);
+        int goldAmount = generateRandomGold(getEnemyGoldMin(), getEnemyGoldMax());
         roundCounter = 1;
         boolean usedInvisibilityLastTurn = false; // Track if invisibility was used last turn
     
@@ -649,10 +677,10 @@ public class GameController extends Dialogue implements GameInterface {
                     if (action >= 1 && action <= 3) {
                         validInput = true; // Exit loop if input is valid
                     } else {
-                        System.out.println("Invalid input! Please enter 1, 2, or 3."); // Prompt for valid input
+                        System.out.println(Text.centerText("Invalid input! Please enter 1, 2, or 3.")); // Prompt for valid input
                     }
                 } catch (InputMismatchException e) {
-                    System.out.println("Invalid input! Please enter a valid integer (1, 2, or 3)."); // Prompt for valid input
+                    System.out.println(Text.centerText("Invalid input! Please enter a valid integer (1, 2, or 3).")); // Prompt for valid input
                     scanner.next(); // Clear the invalid input
                 }
             }
@@ -681,86 +709,64 @@ public class GameController extends Dialogue implements GameInterface {
                     if (confirmChoice == 1 || confirmChoice == 2) {
                         validInput = true; // Exit loop if input is valid
                     } else {
-                        System.out.println("Invalid input! Please enter 1 or 2.");
+                        System.out.println(Text.centerText("Invalid input! Please enter 1 or 2."));
                     }
                 } catch (InputMismatchException e) {
-                    System.out.println("Invalid input! Please enter 1 or 2.");
+                    System.out.println(Text.centerText("Invalid input! Please enter 1 or 2."));
                     scanner.next(); // Clear the invalid input
                 }
             }
             
             
-                        
-        if (confirmChoice == 2) {
-                 // Gees back to attack selection
+            if (confirmChoice == 2) {
+                // Goes back to attack selection
                 continue;
-        } else if (confirmChoice == 1) {   
-        
-            switch (action) {
-                case 1 -> {
-                    if (player instanceof Alice) {
-                        player.specialSkill1(enemy);
-                        System.out.println(Text.centerText(player.getName() + " uses " + aliceSkills[0] + "\n" +
-                                player.getName() + " deals " + player.getSkillDamage(1) + " damage to " + enemy.getName() + "! "));
-                    } else if (player instanceof SnowWhite) {
-                        player.specialSkill1(enemy);
-                        System.out.println(Text.centerText(player.getName() + " uses " + snowWhiteSkills[0] + "\n" +
-                                player.getName() + " deals " + player.getSkillDamage(1) + " damage to " + enemy.getName() + "! "));
-                    } else {
-                        player.specialSkill1(enemy);
-                        System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[0] + "\n" +
-                                player.getName() + " deals " + player.getSkillDamage(1) + " damage to " + enemy.getName() + "! "));
+            } else if (confirmChoice == 1) {
+                switch (action) {
+                    case 1 -> {
+                        if (player instanceof Alice) {
+                            player.specialSkill1(enemy);  // Apply Alice's skill
+                            usedInvisibilityLastTurn = false;  // Reset invisibility status
+                        } else if (player instanceof SnowWhite) {
+                            player.specialSkill1(enemy);  // Apply Snow White's skill
+                            usedInvisibilityLastTurn = false;
+                        } else { // Cinderella
+                            player.specialSkill1(enemy);  // Apply Cinderella's skill
+                            usedInvisibilityLastTurn = false;
+                        }
                     }
-                    usedInvisibilityLastTurn = false; // Reset invisibility usage
-                }
-                case 2 -> {
-                    if (player instanceof Alice) {
-                        player.specialSkill2(enemy);
-                        System.out.println(Text.centerText(player.getName() + " uses " + aliceSkills[1] + "\n" +
-                                player.getName() + " deals " + player.getSkillDamage(2) + " damage to " + enemy.getName() + "! "));
-                        usedInvisibilityLastTurn = true; // Reset invisibility usage
-
-                            } else if (player instanceof SnowWhite) {
-                        player.specialSkill2(enemy);
-                        System.out.println(Text.centerText(player.getName() + " uses " + snowWhiteSkills[1] + "\n" +
-                                player.getName() + " deals " + player.getSkillDamage(2) + " damage to " + enemy.getName() + "! "));
-                                usedInvisibilityLastTurn = false; // Reset invisibility usage
-
-                            } else {
-                        player.specialSkill2(enemy);
-                        System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[1] + "\n" +
-                                player.getName() + " deals " + player.getSkillDamage(2) + " damage to " + enemy.getName() + "! "));
-                                usedInvisibilityLastTurn = false; // Reset invisibility usage
-
-                            }
-                }
-                case 3 -> {
-                    if (player instanceof Alice) {
-                        player.specialSkill3(enemy);
-                        System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[1] + "\n" +
-                        player.getName() + " deals " + player.getSkillDamage(2) + " damage to " + enemy.getName() + "! "));
-                        usedInvisibilityLastTurn = false; // Reset invisibility usage
-                    } else if (player instanceof SnowWhite) {
-                        player.specialSkill3(enemy);
-                        System.out.println(Text.centerText(player.getName() + " uses " + snowWhiteSkills[2] + "\n" +
-                        player.getName() + " gains a shield, reducing all damage for 20%."));
-                        usedInvisibilityLastTurn = false; // Reset invisibility usage
-                     } else {
-                        player.specialSkill3(enemy);
-                        System.out.println(Text.centerText(player.getName() + " uses " + cinderellaSkills[2] + "\n" +
-                        player.getName() + " cannot be attacked for one turn!"));
-                        usedInvisibilityLastTurn = true; // Set invisibility usage
-
-                            }
-                }
-                default -> {
-                    System.out.println(Text.centerText("Invalid action!"));
-                    continue; // Skip the rest of the loop
+                    case 2 -> {
+                        if (player instanceof Alice) {
+                            player.specialSkill2(enemy);  // Apply Alice's skill
+                            usedInvisibilityLastTurn = true;  // Alice goes invisible after using Skill 2
+                        } else if (player instanceof SnowWhite) {
+                            player.specialSkill2(enemy);  // Apply Snow White's skill
+                            usedInvisibilityLastTurn = false;  // Snow White doesn't go invisible after Skill 2
+                        } else { // Cinderella
+                            player.specialSkill2(enemy);  // Apply Cinderella's skill
+                            usedInvisibilityLastTurn = false;  // Cinderella doesn't go invisible after Skill 2
+                        }
+                    }
+                    case 3 -> {
+                        if (player instanceof Alice) {
+                            player.specialSkill3(enemy);  // Apply Alice's skill
+                            usedInvisibilityLastTurn = false;
+                        } else if (player instanceof SnowWhite) {
+                            player.specialSkill3(enemy);  // Apply Snow White's skill
+                            usedInvisibilityLastTurn = false;
+                        } else { // Cinderella
+                            player.specialSkill3(enemy);  // Apply Cinderella's skill
+                            usedInvisibilityLastTurn = true;  // Cinderella gains invulnerability for the next turn
+                        }
+                    }
+                    default -> {
+                        System.out.println(Text.centerText("Invalid action!"));
+                        continue; // Skip the rest of the loop
+                    }
                 }
             }
             
-        }
-    
+            
             displayEnemyStatus();
             displayPlayerStatus(); 
             delay();
@@ -827,7 +833,6 @@ public class GameController extends Dialogue implements GameInterface {
                     System.out.println(Text.centerText(40,"Press Enter"));
                     scanner.nextLine();
                 }
-              //  ((SnowWhite) player).endTurn(); // Reset invisibility status
             }
         }
 
@@ -835,8 +840,6 @@ public class GameController extends Dialogue implements GameInterface {
 
         return true;
     }
-    
-    
     
     @Override
     public boolean journey() {

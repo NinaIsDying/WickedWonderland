@@ -33,11 +33,10 @@ public class DarkSnowWhite extends Enemy {
     }
 
     private void useFirstSkill(Character player) {
-            System.out.println(Text.centerText(80, name + " uses Poisoned Apple Strike!\n" + name + " commands birds to peck " + player.getName() + ", dealing 30 damage!"));
-            player.receiveDamage(30);
-            mana -= 0;
-            setMana(mana);
-
+        System.out.println(Text.centerText(80, name + " uses Poisoned Apple Strike!\n" + name + " commands birds to peck " + player.getName() + ", dealing 30 damage!"));
+        player.receiveDamage(30);
+        mana -= 0;
+        setMana(mana);
     }
 
     private void useSecondSkill(Character player) {

@@ -48,10 +48,9 @@ public class FairyGodMother extends Enemy {
         }
     }
 
-    // Skill 3: Mirror of Deception - Makes the player attack itself
     private void useThirdSkill(Character player) {
         if (mana >= 20) {
-            int selfDamage = (player.getSkillDamage(1) + player.getSkillDamage(2))/ 2; // Half the player's attack power which is the sum of all its attack damage
+            int selfDamage = (player.getSkillDamage(1) + player.getSkillDamage(2))/ 2; // Half the player's attack power
             System.out.println(Text.centerText(100, name + " uses Mirror of Deception!\n" + player.getName() + " is forced to attack themselves, dealing " + selfDamage + " damage!"));
             player.receiveDamage(selfDamage);
             mana -= 20;

@@ -5,16 +5,14 @@ public class JacAndGus extends Enemy {
     private static final int MAX_MANA = 100;
 
     public JacAndGus() {
-        super("Jaq and Gus", 100, 15);
+        super("Jaq and Gus", 100, 15); // Base health and attack power
         this.mana = MAX_MANA;
     }
 
     @Override
     public void attack(Character player) {
-    
-
         Random random = new Random();
-        int skillChoice = random.nextInt(3);
+        int skillChoice = random.nextInt(3); // Randomly choose a skill
 
         if (mana == 0) {
             useFirstSkill(player);
@@ -28,29 +26,37 @@ public class JacAndGus extends Enemy {
     }
 
     private void useFirstSkill(Character player) {
-        System.out.println(Text.centerText(80, name + " distracts you with a clever ruse!\n" + name + " deals " + getAttackPower() + " damage to " + player.getName()));
-        player.receiveDamage(getAttackPower());
+        // Calculate damage for the first skill
+        int damage = getAttackPower();
+        System.out.println(Text.centerText(80, name + " distracts you with a clever ruse!\n" + name + " deals " + damage + " damage to " + player.getName()));
+        player.receiveDamage(damage);
     }
 
     private void useSecondSkill(Character player) {
+        // Ensure there's enough mana for this skill
         if (mana >= 5) {
-            System.out.println(Text.centerText(80, name + " throws a flurry of tiny tools!\n" + name + " deals " + (getAttackPower() + 5) + " damage to " + player.getName()));
-            player.receiveDamage(getAttackPower() + 15); // More damage
-            mana -= 5;
+            int damage = getAttackPower() + 15; // Increased damage for the second skill
+            System.out.println(Text.centerText(80, name + " throws a flurry of tiny tools!\n" + name + " deals " + damage + " damage to " + player.getName()));
+            player.receiveDamage(damage);
+            mana -= 5; // Deduct mana cost for second skill
             setMana(mana);
         } else {
-            useFirstSkill(player); // Default to first skill if no mana
+            // Default to first skill if not enough mana
+            useFirstSkill(player);
         }
     }
 
     private void useThirdSkill(Character player) {
+        // Ensure there's enough mana for this skill
         if (mana >= 10) {
-            System.out.println(Text.centerText(80, name + " sets a trap!\n" + name + " deals " + (getAttackPower() + 10) + " damage to " + player.getName()));
-            player.receiveDamage(getAttackPower() + 20); // Even more damage
-            mana -= 10;
+            int damage = getAttackPower() + 20; // Increased damage for the third skill
+            System.out.println(Text.centerText(80, name + " sets a trap!\n" + name + " deals " + damage + " damage to " + player.getName()));
+            player.receiveDamage(damage);
+            mana -= 10; // Deduct mana cost for third skill
             setMana(mana);
         } else {
-            useSecondSkill(player); // Default to second skill if not enough mana
+            // Default to second skill if not enough mana
+            useSecondSkill(player);
         }
     }
 

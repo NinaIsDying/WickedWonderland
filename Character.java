@@ -41,6 +41,7 @@
         return name;
     }
 
+
     public int getHealth() {
         return health;
     }
@@ -187,7 +188,7 @@
     private int lastSkillDamage; 
 
 
-    public int getLastSkillDamage() {
+    public int getLastSkillDamage(int par) {
         return lastSkillDamage;
     }
 
