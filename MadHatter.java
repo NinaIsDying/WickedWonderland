@@ -3,57 +3,67 @@ import java.util.Random;
 public class MadHatter extends Enemy {
     private int mana;
     private static final int MAX_MANA = 150;
+    private int healingUsedCount; // Counter to track how many times healing is used
 
     public MadHatter() {
-        super("Mad Hatter", 200, 25);
+        super("Mad Hatter", 200, 25); // Enemy with initial health and attack power
         this.mana = MAX_MANA;
+        this.healingUsedCount = 0; // Initialize healing counter
     }
 
     @Override
     public void attack(Character player) {
-        if (player.isInvisible()) { // Check if Alice is invisible
-            System.out.println(Text.centerText(90, name + " attempts to attack, but " +  player.getName() + " is in the air and cannot be attacked!"));
-            return; // Exit the method if Alice is invisible
+        if (player.isInvisible()) {
+            System.out.println(Text.centerText(90, name + " attempts to attack, but " + player.getName() + " is in the air and cannot be attacked!"));
+            return;
         }
+
         Random random = new Random();
-        int skillChoice = random.nextInt(3);
+        int skillChoice = random.nextInt(10); // Decide which skill to use (0-9)
 
         if (mana == 0) {
-            useFirstSkill(player);
+            useFirstSkill(player); // Default to first skill if no mana
         } else {
-            switch (skillChoice) {
-                case 0 -> useFirstSkill(player);
-                case 1 -> useSecondSkill(player);
-                case 2 -> useThirdSkill(player);
+            if (skillChoice < 7) { // 70% chance for the first skill
+                useFirstSkill(player);
+            } else if (skillChoice < 9) { // 20% chance for the third skill
+                if (mana >= 60) useThirdSkill(player);
+                else useFirstSkill(player);
+            } else { // 10% chance for the second skill
+                if (mana >= 20 && healingUsedCount < 2) {
+                    useSecondSkill(player); // Use healing only if allowed
+                } else {
+                    useFirstSkill(player);
+                }
             }
         }
     }
 
     private void useFirstSkill(Character player) {
-        System.out.println(Text.centerText(80, name + " invites you to a wild tea party!\n" + name + " deals " + (getAttackPower() + 30) + " damage to " + player.getName()));
-        player.receiveDamage(getAttackPower() + 30);
+        int damage = randomizeDamage(25, 35); // Min: 10, Max: 35
+        System.out.println(Text.centerText(80, name + " invites you to a wild tea party!\n" + name + " deals " + damage + " damage to " + player.getName()));
+        player.receiveDamage(damage);
     }
 
     private void useSecondSkill(Character player) {
-        if (mana >= 10) {
-            System.out.println(Text.centerText(80, name + " uses Hatter's Healing and recovers 20 HP!"));
-            heal(20); // Assuming the Enemy class has a heal method
-            mana -= 10;
-            setMana(mana);
-        } else {
-            useFirstSkill(player); // Default to first skill if not enough mana
-        }
+        System.out.println(Text.centerText(80, name + " uses Hatter's Healing and recovers 10 HP!"));
+        heal(10);
+        mana -= 15; // Mana cost for healing
+        setMana(mana);
+        healingUsedCount++; // Increment healing usage counter
     }
 
     private void useThirdSkill(Character player) {
-        if (mana >= 20) {
-            System.out.println(Text.centerText(80, name + " uses Madness Inducer!\n" + name + " confuses you, dealing " + (getAttackPower() + 40) + " damage!"));
-            player.receiveDamage(getAttackPower() + 40);
-            mana -= 20;
-            setMana(mana);
-        } else {
-            useSecondSkill(player); // Default to second skill if not enough mana
-        }
+        int damage = randomizeDamage(35, 45); // Min: 20, Max: 45
+        System.out.println(Text.centerText(80, name + " uses Madness Inducer!\n" + name + " confuses you, dealing " + damage + " damage!"));
+        player.receiveDamage(damage);
+        mana -= 30; // Mana cost for this skill
+        setMana(mana);
+    }
+
+    private int randomizeDamage(int min, int max) {
+        Random random = new Random();
+        return random.nextInt((max - min) + 1) + min; // Random number between min and max (inclusive)
     }
 
     public int getMana() {
@@ -62,9 +72,5 @@ public class MadHatter extends Enemy {
 
     public void setMana(int mana) {
         this.mana = mana;
-    }
-
-    public static int getMaxMana() {
-        return MAX_MANA;
     }
 }

@@ -6,14 +6,14 @@ public class PrinceHenry extends Enemy {
     private boolean isInvincible;
     private int invincibilityDuration;
     private int shieldHealth;
-    private final int maxShieldHealth = 100;
+    private final int maxShieldHealth = 55;
 
     public PrinceHenry() {
-        super("Prince Henry", 350, 10);
+        super("Prince Henry", 300, 10);
         this.mana = MAX_MANA;
         this.isInvincible = false;
         this.invincibilityDuration = 0;
-        this.shieldHealth = 100;
+        this.shieldHealth = 55;
     }
 
     @Override

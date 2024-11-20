@@ -12,16 +12,13 @@ public class Shop {
 
     private void initializeShop() {
         // Add regular items with descriptions in brackets
-        itemsForSale.add(new Item("Health Potion", 30, "heal", 50, "------------------ [Restores 50 health]")); 
-        itemsForSale.add(new Item("Attack Boost", 100, "attackBoost", 10, "------------------ [Increases attack power by 10]"));
-        itemsForSale.add(new Item("Mana Potion", 30, "restoreMana", 50, "------------------ [Restores 50 mana]"));
+        itemsForSale.add(new Item("Health Potion", 50, "heal", 50, " ----------------- [Restores 50 health]")); 
+        itemsForSale.add(new Item("Mana Potion", 50, "restoreMana", 50, " ------------------ [Restores 50 mana]"));
 
         // New options to increase max health and max mana with descriptions
-        itemsForSale.add(new Item("Elixir of Vitality", 75, "heal", Integer.MAX_VALUE, "------------------ [Fully restores health]"));
-        itemsForSale.add(new Item("Essence of Clarity", 75, "restoreMana", Integer.MAX_VALUE, "------------------ [Fully restores mana]"));
-        itemsForSale.add(new Item("Ultimate Elixir", 150, "ultimate", Integer.MAX_VALUE, "------------------ [Fully restores both health and mana]"));
-        itemsForSale.add(new Item("Max Health Boost", 120, "increaseMaxHealth", 50, "------------------ [Increases max health by 50]"));
-        itemsForSale.add(new Item("Max Mana Boost", 100, "increaseMaxMana", 30, "------------------ [Increases max mana by 30]"));
+        itemsForSale.add(new Item("Elixir of Vitality", 100, "heal", Integer.MAX_VALUE, " ----------- [Fully restores health]"));
+        itemsForSale.add(new Item("Essence of Clarity", 100, "restoreMana", Integer.MAX_VALUE, " ------------ [Fully restores mana]"));
+        itemsForSale.add(new Item("Ultimate Elixir", 200, "ultimate", Integer.MAX_VALUE, " ------ [Fully restores both health and mana]"));
     }
 
     public void displayShop(Character player) {
@@ -34,7 +31,7 @@ public class Shop {
             shopContent.append((i + 1)).append(". ").append(itemsForSale.get(i).displayItem()).append("\n");
         }
         shopContent.append((itemsForSale.size() + 1)).append(". Exit Shop");
-        shopContent.append("\nWhat would you like to buy?");
+        shopContent.append("\n\nWhat would you like to buy? [Enter 1 - 5] [Enter 6 to Exit]");
 
         System.out.println(Text.centerText(shopContent.toString()));
     }
@@ -89,7 +86,8 @@ public class Shop {
                         validItemChoice = true;
                         return true;
                     } else {
-                        System.out.println(Text.centerText("You don't have enough gold."));
+                        System.out.println(Text.centerText("You don't have enough gold. Please choose another item.  [Enter 1 - 5] [Enter 6 to Exit]"));
+                        displayShop(player);
                     }
                 } else if (choice == itemsForSale.size() + 1) {
                     System.out.println(Text.centerText("Exiting the shop."));
@@ -122,51 +120,57 @@ public class Shop {
     }
 
     private void processPurchase(Character player, Item item) {
-        player.adjustGold(-item.getPrice());
-
+        // Only deduct gold after successfully processing the item effect
+        boolean purchaseSuccessful = false;
+    
         switch (item.getEffect()) {
             case "heal" -> {
                 if (player.getHealth() == player.getMaxHealth()) {
                     System.out.println(Text.centerText("Health is already full! Purchase failed."));
-                    break;
-                }
-                if (item.getValue() == Integer.MAX_VALUE) {
-                    player.restoreFullHealth();
-                    System.out.println(Text.centerText("You bought an Elixir of Vitality! Your health is now full."));
                 } else {
-                    player.restoreHealth(item.getValue());
+                    if (item.getValue() == Integer.MAX_VALUE) {
+                        player.restoreFullHealth();
+                        System.out.println(Text.centerText("You bought an Elixir of Vitality! Your health is now full."));
+                    } else {
+                        player.restoreHealth(item.getValue());
+                        System.out.println(Text.centerText("You bought a Health Potion! Your health is now: " + player.getHealth()));
+                    }
+                    purchaseSuccessful = true;
                 }
             }
-            case "attackBoost" -> {
-                player.setAttackPower(player.getAttackPower() + item.getValue());
-                System.out.println(Text.centerText("You bought an Attack Boost! Your attack power increased by " + item.getValue()));
-            }
+    
             case "restoreMana" -> {
                 if (player.getMana() == player.getMaxMana()) {
-                    System.out.println(Text.centerText("Mana is already full! Purchase failed"));
-                    break;
-                }
-                if (item.getValue() == Integer.MAX_VALUE) {
-                    player.restoreFullMana();
-                    System.out.println(Text.centerText("You bought an Essence of Clarity! Your mana is now full."));
+                    System.out.println(Text.centerText("Mana is already full! Purchase failed."));
                 } else {
-                    player.adjustMana(item.getValue());
-                    System.out.println(Text.centerText("You bought a Mana Potion! Your mana is now: " + player.getMana()));
+                    if (item.getValue() == Integer.MAX_VALUE) {
+                        player.restoreFullMana();
+                        System.out.println(Text.centerText("You bought an Essence of Clarity! Your mana is now full."));
+                    } else {
+                        player.adjustMana(item.getValue());
+                        System.out.println(Text.centerText("You bought a Mana Potion! Your mana is now: " + player.getMana()));
+                    }
+                    purchaseSuccessful = true;
                 }
             }
+    
             case "ultimate" -> {
-                player.restoreFullHealth();
-                player.restoreFullMana();
-                System.out.println(Text.centerText("You bought an Ultimate Elixir! Your health and mana are now full."));
-            }
-            case "increaseMaxHealth" -> {
-                player.increaseMaxHealth(item.getValue());
-                System.out.println(Text.centerText("Your max health increased by " + item.getValue() + ". Current max health: " + player.getMaxHealth()));
-            }
-            case "increaseMaxMana" -> {
-                player.increaseMaxMana(item.getValue());
-                System.out.println(Text.centerText("Your max mana increased by " + item.getValue() + ". Current max mana: " + player.getMaxMana()));
+                // This could handle cases where both health and mana are restored
+                if (player.getHealth() == player.getMaxHealth() && player.getMana() == player.getMaxMana()) {
+                    System.out.println(Text.centerText("Both health and mana are already full! Purchase failed."));
+                } else {
+                    player.restoreFullHealth();
+                    player.restoreFullMana();
+                    System.out.println(Text.centerText("You bought the Ultimate Elixir! Both health and mana are now full."));
+                    purchaseSuccessful = true;
+                }
             }
         }
+    
+        // Only deduct gold if the purchase was successful
+        if (purchaseSuccessful) {
+            player.adjustGold(-item.getPrice());
+        }
     }
+    
 }

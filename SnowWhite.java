@@ -8,12 +8,33 @@ public class SnowWhite extends Character {
     private int lastSkillDamage; // Variable to store the damage of the last skill used
 
     public SnowWhite() {
-        super("Snow White", 400, 200);
+        super("Snow White",400, 200);
         this.damageReductionActive = false; // Damage reduction starts inactive
         this.lastSkillDamage = 0; // Initialize lastSkillDamage
         this.maxHealth = health; 
         this.maxMana = mana;
     }
+
+  
+    public static final String[] snowWhiteSkills =  {
+        ("Poisoned Apple Strike"),
+        ("Enchanted Healing"),
+        ("Forest's Aid") 
+    };
+
+    @Override
+    public void restoreHealth(int amount) {
+        if (health >= maxHealth) {
+            System.out.println(Text.centerText("Health is already full.")); // No restoration needed
+        } else {
+            health += amount; 
+            if (health > maxHealth) {
+                health = maxHealth; // Cap health at maxHealth
+                System.out.println(Text.centerText("Health restored to full. "));
+            } 
+        }
+    }
+
 
     @Override
     public void setMaxHealth(int maxHealth) {
@@ -31,9 +52,9 @@ public class SnowWhite extends Character {
             case 1:  // Glass Shard Strike
                 return 50 + attackPower;  // Max damage for Glass Shard Strike
             case 2:  // Enchanted Resilience
-                return 60 + attackPower;  // Max damage for Enchanted Resilience
+                return 60;  // Max damage for Enchanted Resilience
             case 3:  // Midnight Escape
-                return 0 + attackPower;   // No damage for Midnight Escape
+                return 0;
             default:
                 return 0;  // Invalid skill
         }
@@ -43,8 +64,8 @@ public class SnowWhite extends Character {
         public void specialSkill1(Enemy enemy) {
 
             
-            int minDamage = 25; // Minimum damage for Skill 1
-            int maxDamage = 40+getAttackPower(); // Maximum damage for Skill 1
+            int minDamage = 25+getAttackPower(); // Minimum damage for Skill 1
+            int maxDamage = 50; // Maximum damage for Skill 1
             int damage = new Random().nextInt(maxDamage - minDamage + 1) + minDamage; // Random damage generation
             useMana(0);  // Use no mana for this skill
            
@@ -53,7 +74,7 @@ public class SnowWhite extends Character {
             System.out.println(Text.centerText(name + " uses Poisoned Apple Strike\n" +
                     name + " deals " + damage + " damage to " + enemy.getName() + "!"));
             
-            if (damage > 40) { // Critical damage threshold
+            if (damage > 45) { // Critical damage threshold
                 System.out.println(Text.centerText("CRITICAL DAMAGE!"));
             }
 
@@ -68,7 +89,7 @@ public class SnowWhite extends Character {
                 return;
             }
             
-            int minDamage = 45; // Minimum damage for Skill 2
+            int minDamage = 40; // Minimum damage for Skill 2
             int maxDamage = 60+getAttackPower(); // Maximum damage for Skill 2
             int damage = new Random().nextInt(maxDamage - minDamage + 1) + minDamage; // Random damage generation
             restoreHealth(20);  // Restore health
@@ -78,7 +99,7 @@ public class SnowWhite extends Character {
             System.out.println(Text.centerText(name + " uses Enchanted Healing\n" +
                     name + " deals " + damage + " damage to " + enemy.getName() + "!"));
             
-            if (damage > 50) { // Critical damage threshold
+            if (damage > 55) { // Critical damage threshold
                 System.out.println(Text.centerText("CRITICAL DAMAGE!"));
             }
 
