@@ -52,22 +52,20 @@ public class Dialogue {
     };
 
 
-
-        
     public static final String CINDERELLA_ATTACKS = 
-    wrapText("1. Glass Shard Strike-----[Mana -  0][Damage - 25 to 50]")+
-    wrapText("\n2. Enchanted Resilience---[Mana - 30][Damage - 45 to 60]") +
+    wrapText("1. Glass Shard Strike-----[Mana -  0][ MAX Damage - 50]")+
+    wrapText("\n2. Enchanted Resilience---[Mana - 30][MAX Damage - 60]") +
     wrapText("\n3. Midnight Escape--------[Mana - 50][Damage -  0]");
     
     public static final String SNOW_WHITE_ATTACKS = 
-    wrapText("1. Poisoned Apple Strike--[Mana -  0][Damage - 25 to 40]") +
-    wrapText("\n2. Enchanted Healing---[Mana - 20][Damage - 45 to 60]") +
+    wrapText("1. Poisoned Apple Strike--[Mana -  0][MAX Damage - 40]") +
+    wrapText("\n2. Enchanted Healing---[Mana - 20][MAX Damage -  60]") +
     wrapText("\n3. Forest's Aid--------[Mana - 50][Damage -  0]");
     
 
     public static final String ALICE_ATTACKS = 
-    wrapText("1. Tea Party Confusion---[Mana - 0][Damage - 25 to 40]") +
-    wrapText("\n2. Wonderland Jump--------[Mana - 30][Damage - 45 to 60]") +
+    wrapText("1. Tea Party Confusion---[Mana - 0][MAX Damage - 30]") +
+    wrapText("\n2. Wonderland Jump--------[Mana - 30]MAX [Damage - 40]") +
     wrapText("\n3. Rejuvenating Sip-------[Mana - 50][Damage -  0]");
 
 

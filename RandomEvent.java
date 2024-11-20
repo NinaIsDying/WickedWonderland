@@ -35,7 +35,7 @@ public class RandomEvent {
             }
             case 3 -> askRiddleDecision(player, "RANDOM EVENT: What has keys but can't open locks?", "piano", 15, "mana");
             case 4 -> askItemDecision(player, events[4], 20, "health");
-            case 5 -> askRiddleDecision(player, "RANDOM EVENT: I’m tall when I’m young, and I’m short when I’m old. What am I?", "candle", 10, "mana");
+            case 5 -> askRiddleDecision(player, "RANDOM EVENT: I'm tall when I'm young, and I'm short when I'm old. What am I?", "candle", 10, "mana");
             case 6 -> {
                 player.adjustGold(40); // Gain 40 gold coins
                 System.out.println(Text.centerText("RANDOM EVENT: You found hidden coins and gained 40 gold!"));
@@ -47,44 +47,80 @@ public class RandomEvent {
     }
     
     private void askItemDecision(Character player, String prompt, int reward, String rewardType) {
-        System.out.println(Text.centerText(prompt + " (Y/N): "));
-        System.out.print("                                                                  ->");
-        String decision = scanner.nextLine().trim().toLowerCase();
-        if (decision.equals("y")) {
-            if (rewardType.equals("health")) {
-                player.restoreHealth(reward);
-                System.out.println(Text.centerText("You gained " + reward + " health points!"));
-            } else if (rewardType.equals("mana")) {
-                player.adjustMana(reward);
-                System.out.println(Text.centerText("You gained " + reward + " mana points!"));
+        String decision;
+        do {
+            System.out.println(Text.centerText(prompt + " (Y/N): "));
+            System.out.print("                                                                  ->");
+            decision = scanner.nextLine().trim().toLowerCase();
+    
+            if (decision.equalsIgnoreCase("y")) {
+                if (rewardType.equalsIgnoreCase("health")) {
+                    if (player.getHealth() == player.getMaxHealth()) {
+                        System.out.println(Text.centerText("Your health is already full! No health was gained."));
+                    } else {
+                        player.adjustHealth(reward);
+                        if (player.getHealth() > player.getMaxHealth()) {
+                            player.setHealth(player.getMaxHealth()); // Ensure health does not exceed max
+                        }
+                        System.out.println(Text.centerText("You gained " + reward + " health points! Current health: " + player.getHealth()));
+                    }
+                } else if (rewardType.equalsIgnoreCase("mana")) {
+                    if (player.getMana() == player.getMaxMana()) {
+                        System.out.println(Text.centerText("Your mana is already full! No mana was gained."));
+                    } else {
+                        player.adjustMana(reward);
+                        if (player.getMana() > player.getMaxMana()) {
+                            player.setMana(player.getMaxMana()); // Ensure mana does not exceed max
+                        }
+                        System.out.println(Text.centerText("You gained " + reward + " mana points! Current Mana: " + player.getMana()));
+                    }
+                }
+                break; // Exit the loop once valid input is handled
+            } else if (decision.equalsIgnoreCase("n")) {
+                System.out.println(Text.centerText("You chose not to take the item and continue on your way."));
+                break; // Exit the loop
+            } else {
+                System.out.println(Text.centerText("Invalid input. Please enter 'Y' or 'N'."));
             }
-        } else {
-            System.out.println(Text.centerText("You chose not to take the item and continue on your way."));
-        }
+        } while (true);
     }
     
+    
     private void askRiddleDecision(Character player, String riddle, String correctAnswer, int reward, String rewardType) {
-        System.out.println(Text.centerText("Would you like to answer a riddle to gain a reward? (y/n): "));
-        System.out.print("                                                                  ->");
-        String decision = scanner.nextLine().trim().toLowerCase();
-        if (decision.equals("y")) {
+        String decision;
+        do {
+            System.out.println(Text.centerText("Would you like to answer a riddle to gain a reward? (Y/N): "));
             System.out.print("                                                                  ->");
-            handleRiddleEvent(player, riddle, correctAnswer, reward, rewardType);
-        } else {
-            System.out.println(Text.centerText("You chose not to answer the riddle and continue on your way."));
-        }
+            decision = scanner.nextLine().trim().toLowerCase();
+
+            if (decision.equalsIgnoreCase("y")) {
+                handleRiddleEvent(player, riddle, correctAnswer, reward, rewardType);
+                break; // Exit the loop once valid input is handled
+            } else if (decision.equalsIgnoreCase("n")) {
+                System.out.println(Text.centerText("You chose not to answer the riddle and continue on your way."));
+                break; // Exit the loop
+            } else {
+                System.out.println(Text.centerText("Invalid input. Please enter 'Y' or 'N'."));
+            }
+        } while (true);
     }
     
     private void handleRiddleEvent(Character player, String riddle, String correctAnswer, int reward, String rewardType) {
         System.out.println(Text.centerText(riddle));
         String answer = scanner.nextLine().trim().toLowerCase();
-        if (answer.equals(correctAnswer)) {
-            if (rewardType.equals("health")) {
+        if (answer.equalsIgnoreCase(correctAnswer)) {
+            if (rewardType.equalsIgnoreCase("health")) {
                 player.restoreHealth(reward);
-                System.out.println(Text.centerText("Correct! You gained " + reward + " health points!"));
-            } else if (rewardType.equals("mana")) {
+                if(player.getHealth()== player.getMaxHealth()){
+                    return;
+                }
+                System.out.println(Text.centerText("Correct! You gained " + reward + " health points! Current health: " + player.getHealth()));
+            } else if (rewardType.equalsIgnoreCase("mana")) {
                 player.adjustMana(reward);
-                System.out.println(Text.centerText("Correct! You gained " + reward + " mana points!"));
+                if(player.getMana()== player.getMaxMana()){
+                    return;
+                }
+                System.out.println(Text.centerText("Correct! You gained " + reward + " mana points! Current Mana: " + player.getMana()));
             }
         } else {
             System.out.println(Text.centerText("Incorrect! You do not gain any rewards."));

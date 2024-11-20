@@ -70,10 +70,8 @@
             health += amount; 
             if (health > maxHealth) {
                 health = maxHealth; // Cap health at maxHealth
-                System.out.println(Text.centerText("Health restored to full. Current health: " + health));
-            } else {
-                System.out.println(Text.centerText("Health restored by " + amount + ". Current health: " + health));
-            }
+                System.out.println(Text.centerText("Health restored to full. "));
+            } 
         }
     }
 
@@ -198,3 +196,4 @@
 
 
 }
+

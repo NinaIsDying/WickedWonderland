@@ -11,6 +11,7 @@ public class GameController extends Dialogue implements GameInterface {
     private String currentWorld;  // To track which world the player is in
     private final Shop shop;
     private static final Random random = new Random();
+    
 
 
     // Constructor
@@ -34,10 +35,12 @@ public class GameController extends Dialogue implements GameInterface {
             String op = scanner.nextLine();  // Wait for input to proceed
     
             // Programmer shortcut to skip to choose world
-            if(op.equals("Skip") || op.equals("skip") ) {
+            if(op.equalsIgnoreCase("skip") ) {
                 chooseWorld();
                 break;
             }
+
+
         }
     }
 
@@ -163,6 +166,7 @@ public class GameController extends Dialogue implements GameInterface {
 
     // World One - Cinderella's storyline
     public void worldOne() {
+        
         boolean continueAdventure = true;
 
         while (continueAdventure) {
@@ -644,7 +648,8 @@ public class GameController extends Dialogue implements GameInterface {
 
     // Battle sequence method with customizable attack options
     @Override
-    public boolean battleSequence(String attackOptions) {        
+    public boolean battleSequence(String attackOptions) {   
+ 
         boolean firstLineDisplayed = false;
         int goldAmount = generateRandomGold(getEnemyGoldMin(), getEnemyGoldMax());
         roundCounter = 1;
@@ -799,14 +804,17 @@ public class GameController extends Dialogue implements GameInterface {
             // Check enemy health status after player attack
             if (!enemy.isAlive()) {
                 System.out.println(Text.centerText(enemy.getName() + " has been defeated!\nYou can continue your adventure!"));
-                player.adjustGold(goldAmount); // Award rand gold amt for winning
+                player.adjustGold(goldAmount); // Award random gold amount for winning
                 System.out.println(Text.centerBox("You received " + goldAmount + " gold for defeating " + enemy.getName() + "! "));
+                player.setAttackPower(player.getAttackPower() + 5); // Increase base damage by 10
+                System.out.println(Text.centerText("An billowing breeze wafts through the air. It fills you with encouragement.\nYour base attack power has increased by 5!"));
                 System.out.print("                                                                  ->");
                 scanner.nextLine();
                 scanner.nextLine();
 
                 return true;
             }
+
     
             // At the end of the round, reset invisibility
             if (player instanceof Cinderella) {

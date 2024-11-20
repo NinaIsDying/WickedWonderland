@@ -17,7 +17,7 @@ public class TwistedTeacups extends Enemy {
         }
 
         Random random = new Random();
-        int skillChoice = random.nextInt(3);
+        int skillChoice = random.nextInt(3); // Randomly pick a skill (0-2)
 
         if (mana == 0) {
             useFirstSkill(player);
@@ -31,14 +31,16 @@ public class TwistedTeacups extends Enemy {
     }
 
     private void useFirstSkill(Character player) {
-        System.out.println(Text.centerText(80, name + " spins wildly, creating a whirlwind of chaos!\n" + name + " deals " + getAttackPower() + " damage to " + player.getName()));
-        player.receiveDamage(getAttackPower());
+        int damage = randomizeDamage(30, 35); // Min: 15, Max: 25
+        System.out.println(Text.centerText(80, name + " spins wildly, creating a whirlwind of chaos!\n" + name + " deals " + damage + " damage to " + player.getName()));
+        player.receiveDamage(damage);
     }
 
     private void useSecondSkill(Character player) {
         if (mana >= 30) {
-            System.out.println(Text.centerText(80, name + " unleashes a torrent of scalding tea!\n" + name + " deals " + (getAttackPower() + 15) + " damage to " + player.getName()));
-            player.receiveDamage(getAttackPower() + 15);
+            int damage = randomizeDamage(35, 45); // Min: 25, Max: 35
+            System.out.println(Text.centerText(80, name + " unleashes a torrent of scalding tea!\n" + name + " deals " + damage + " damage to " + player.getName()));
+            player.receiveDamage(damage);
             mana -= 30;
             setMana(mana);
         } else {
@@ -48,13 +50,19 @@ public class TwistedTeacups extends Enemy {
 
     private void useThirdSkill(Character player) {
         if (mana >= 50) {
-            System.out.println(Text.centerText(80, name + " throws a wave of enchanted teacups!\n" + name + " deals " + (getAttackPower() + 25) + " damage to " + player.getName()));
-            player.receiveDamage(getAttackPower() + 25);
+            int damage = randomizeDamage(35, 50); // Min: 35, Max: 50
+            System.out.println(Text.centerText(80, name + " throws a wave of enchanted teacups!\n" + name + " deals " + damage + " damage to " + player.getName()));
+            player.receiveDamage(damage);
             mana -= 50;
             setMana(mana);
         } else {
             useSecondSkill(player);
         }
+    }
+
+    private int randomizeDamage(int min, int max) {
+        Random random = new Random();
+        return random.nextInt((max - min) + 1) + min; // Random damage between min and max (inclusive)
     }
 
     public int getMana() {
